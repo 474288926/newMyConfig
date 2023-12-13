@@ -1,14 +1,14 @@
-import { defineConfig } from "vite";
-import vue from "@vitejs/plugin-vue";
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
 // 如果编辑器提示 path 模块找不到，则可以安装一下 @types/node -> npm i @types/node -D
-import { resolve } from "path";
+import { resolve } from 'path'
 // 配置自动导入element ui组件
-import AutoImport from "unplugin-auto-import/vite";
-import Components from "unplugin-vue-components/vite";
-import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 // 配置自动导入element icon
-import Icons from "unplugin-icons/vite";
-import IconsResolver from "unplugin-icons/resolver";
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -18,33 +18,47 @@ export default defineConfig({
       resolvers: [
         ElementPlusResolver(),
         IconsResolver({
-          prefix: "Icon",
-        }),
-      ],
+          prefix: 'Icon'
+        })
+      ]
     }),
     Components({
       resolvers: [
         ElementPlusResolver(),
         IconsResolver({
-          prefix: "icon",
-          enabledCollections: ["ep"],
-        }),
-      ],
+          prefix: 'icon',
+          enabledCollections: ['ep']
+        })
+      ]
     }),
     Icons({
-      autoInstall: true,
-    }),
+      autoInstall: true
+    })
   ],
   resolve: {
     alias: {
-      "@": resolve(__dirname, "src"), // 设置 `@` 指向 `src` 目录
-    },
+      '@': resolve(__dirname, 'src') // 设置 `@` 指向 `src` 目录
+    }
   },
-  base: "./", // 设置打包路径
+  base: './', // 设置打包路径
+  build: {
+    assetsDir: './',
+    // 小于此阈值的导入或引用资源将内联为 base64 编码，以避免额外的 http 请求。设置为 0 可以完全禁用此项
+    assetsInlineLimit: 4096,
+    // chunk 大小警告的限制
+    chunkSizeWarningLimit: 500,
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: process.env.NODE_ENV === 'production',
+        drop_debugger: process.env.NODE_ENV === 'production'
+      }
+    }
+  },
   server: {
     port: 4000, // 设置服务启动端口号
     open: true, // 设置服务启动时是否自动打开浏览器
-    cors: true, // 允许跨域
+    cors: true // 允许跨域
 
     // 设置代理，根据我们项目实际情况配置
     // proxy: {
@@ -55,5 +69,5 @@ export default defineConfig({
     //     rewrite: (path) => path.replace('/api/', '/')
     //   }
     // }
-  },
-});
+  }
+})
