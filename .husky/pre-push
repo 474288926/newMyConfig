@@ -1,0 +1,4 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+# mac  M1笔记本貌似有插件系统兼容问题无法使用
+# npm run test
