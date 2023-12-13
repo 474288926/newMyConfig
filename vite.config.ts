@@ -2,10 +2,39 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 // 如果编辑器提示 path 模块找不到，则可以安装一下 @types/node -> npm i @types/node -D
 import { resolve } from "path";
+// 配置自动导入element ui组件
+import AutoImport from "unplugin-auto-import/vite";
+import Components from "unplugin-vue-components/vite";
+import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
+// 配置自动导入element icon
+import Icons from "unplugin-icons/vite";
+import IconsResolver from "unplugin-icons/resolver";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    AutoImport({
+      resolvers: [
+        ElementPlusResolver(),
+        IconsResolver({
+          prefix: "Icon",
+        }),
+      ],
+    }),
+    Components({
+      resolvers: [
+        ElementPlusResolver(),
+        IconsResolver({
+          prefix: "icon",
+          enabledCollections: ["ep"],
+        }),
+      ],
+    }),
+    Icons({
+      autoInstall: true,
+    }),
+  ],
   resolve: {
     alias: {
       "@": resolve(__dirname, "src"), // 设置 `@` 指向 `src` 目录

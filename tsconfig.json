@@ -15,7 +15,7 @@
     "jsx": "preserve",
     "sourceMap": true,
     "esModuleInterop": true,
-    // "types": ["vite/client", "jest", "node"],
+    "types": ["element-plus/global"],
 
     /* Linting */
     "strict": true,
