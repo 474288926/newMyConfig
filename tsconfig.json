@@ -13,6 +13,9 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    // "types": ["vite/client", "jest", "node"],
 
     /* Linting */
     "strict": true,
@@ -20,7 +23,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     // @声明
-    "baseUrl": ".",
+    "baseUrl": "src",
     "paths": {
       "@/*": ["./*"]
     }
