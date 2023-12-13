@@ -4,11 +4,7 @@ module.exports = {
     es2021: true,
     node: true
   },
-  extends: [
-    // "standard-with-typescript",
-    'airbnb-base',
-    'plugin:vue/vue3-essential'
-  ],
+  extends: ['airbnb-base', 'plugin:vue/vue3-essential'],
   overrides: [
     {
       env: {
@@ -21,9 +17,17 @@ module.exports = {
     }
   ],
   parserOptions: {
-    ecmaVersion: 'latest',
+    ecmaVersion: 12,
+    parser: '@typescript-eslint/parser',
     sourceType: 'module'
   },
-  plugins: ['vue'],
-  rules: {}
+  plugins: ['vue', '@typescript-eslint'],
+  rules: {
+    'no-console': 'off', // 关闭 no-console 规则
+    'comma-dangle': ['error', 'never'],
+    semi: ['error', 'never'],
+    'import/no-unresolved': 'off',
+    'import/extensions': 'off',
+    'vue/multi-word-component-names': 'off'
+  }
 }

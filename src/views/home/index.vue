@@ -25,9 +25,10 @@
 </template>
 
 <script setup lang="ts">
-import { useCounterStore } from '@/store/counter/index'
-import { inject } from 'vue'
 import { useMouse } from '@vueuse/core'
+import { inject } from 'vue'
+import { useCounterStore } from '@/store/counter/index'
+
 // "x" and "y" are refs
 const { x, y } = useMouse()
 const counter = useCounterStore()
