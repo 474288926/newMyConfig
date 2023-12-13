@@ -25,15 +25,15 @@
 </template>
 
 <script setup lang="ts">
-import { useCounterStore } from "@/store/counter/index";
-import { inject } from "vue";
-import { useMouse } from "@vueuse/core";
+import { useCounterStore } from '@/store/counter/index'
+import { inject } from 'vue'
+import { useMouse } from '@vueuse/core'
 // "x" and "y" are refs
-const { x, y } = useMouse();
-const counter = useCounterStore();
-const router = inject("router");
-console.log("router:", router);
-const searchInput: string = "";
+const { x, y } = useMouse()
+const counter = useCounterStore()
+const router = inject('router')
+console.log('router:', router)
+const searchInput: string = '123'
 </script>
 
 <style scoped></style>
