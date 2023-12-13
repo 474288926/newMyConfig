@@ -27,7 +27,7 @@
 <script setup lang="ts">
 import { useMouse } from '@vueuse/core'
 import { inject } from 'vue'
-import { useCounterStore } from '@/store/counter/index'
+import useCounterStore from '@/store/counter/index.ts'
 
 // "x" and "y" are refs
 const { x, y } = useMouse()
