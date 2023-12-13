@@ -9,6 +9,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 // 配置自动导入element icon
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
+import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -33,6 +34,50 @@ export default defineConfig({
     }),
     Icons({
       autoInstall: true
+    }),
+    VitePWA({
+      includeAssets: ['vite.svg'],
+      manifest: {
+        name: 'Your App',
+        short_name: 'App',
+        start_url: './index.html',
+        icons: [
+          {
+            src: 'PWA-LOGO.png',
+            sizes: '192x192',
+            type: 'image/png'
+          }
+        ],
+        background_color: '#ffffff',
+        theme_color: '#000000',
+        display: 'standalone'
+      },
+      registerType: 'autoUpdate',
+      workbox: {
+        runtimeCaching: [
+          {
+            urlPattern: /someInterface/i, // 接口缓存 此处填你想缓存的接口正则匹配
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'interface-cache'
+            }
+          },
+          {
+            urlPattern: /(.*?)\.(js|css|ts)/, // js /css /ts静态资源缓存
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'js-css-cache'
+            }
+          },
+          {
+            urlPattern: /(.*?)\.(png|jpe?g|svg|gif|bmp|psd|tiff|tga|eps)/, // 图片缓存
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'image-cache'
+            }
+          }
+        ]
+      }
     })
   ],
   resolve: {

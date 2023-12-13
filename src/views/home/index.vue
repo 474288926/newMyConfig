@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 import { useMouse } from '@vueuse/core'
-import { inject } from 'vue'
+import { inject, ref } from 'vue'
 import useCounterStore from '@/store/counter/index.ts'
 
 // "x" and "y" are refs
@@ -34,7 +34,7 @@ const { x, y } = useMouse()
 const counter = useCounterStore()
 const router = inject('router')
 console.log('router:', router)
-const searchInput: string = '123'
+const searchInput = ref<string>('123')
 </script>
 
 <style scoped></style>
