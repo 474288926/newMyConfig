@@ -44,7 +44,7 @@ export default defineConfig({
         icons: [
           {
             src: 'PWA-LOGO.png',
-            sizes: '192x192',
+            sizes: '144x144',
             type: 'image/png'
           }
         ],
