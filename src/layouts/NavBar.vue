@@ -19,20 +19,33 @@ const { list, height } = toRefs(props)
 // 使用 ref 创建 modifiedList
 const modifiedList = ref<Array<NavItemTypes>>([])
 
-watch(list, (newVal) => {
-  // 在每个具有 children 属性的项上添加 toggle 属性
-  const updatedList = newVal.map((item) => {
-    if (item.children && item.children.length > 0) {
-      return {
-        ...item,
-        toggle: false
-      }
+const setListToggle = (lis: any, level: number = 0) =>
+  lis.reduce((per: any, cur: any) => {
+    if (cur.children && cur.children.length > 0) {
+      return [
+        ...per,
+        {
+          ...cur,
+          toggle: false,
+          level,
+          children: setListToggle(cur.children, level + 1)
+        }
+      ]
     }
-    return item
-  })
-  // 更新 modifiedList
-  modifiedList.value = updatedList
-})
+    return [...per, { ...cur, level }]
+  }, [])
+
+watch(
+  list,
+  (newVal) => {
+    // 在每个具有 children 属性的项上添加 toggle 属性
+    const updatedList = setListToggle(newVal)
+    // 更新 modifiedList
+    modifiedList.value = updatedList
+    console.log(modifiedList.value)
+  },
+  { deep: true, immediate: true }
+)
 </script>
 
 <style scoped></style>

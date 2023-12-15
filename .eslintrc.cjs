@@ -29,6 +29,7 @@ module.exports = {
     semi: ['error', 'never'],
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
-    'vue/multi-word-component-names': 'off'
+    'vue/multi-word-component-names': 'off',
+    'implicit-arrow-linebreak': 'off'
   }
 }
