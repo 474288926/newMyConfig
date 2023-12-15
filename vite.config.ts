@@ -2,39 +2,44 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 // 如果编辑器提示 path 模块找不到，则可以安装一下 @types/node -> npm i @types/node -D
 import { resolve } from 'path'
-// 配置自动导入element ui组件
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-// 配置自动导入element icon
-import Icons from 'unplugin-icons/vite'
-import IconsResolver from 'unplugin-icons/resolver'
+// VitePWA
 import { VitePWA } from 'vite-plugin-pwa'
+/**
+ * @desc:由于按需加载组件无法使用component组件渲染，作者也无支持此功能计划，建议使用全局导入，所以注释掉按需导入
+ */
+// 配置自动导入element ui组件
+// import AutoImport from 'unplugin-auto-import/vite'
+// import Components from 'unplugin-vue-components/vite'
+// import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+// 配置自动导入element icon
+// import Icons from 'unplugin-icons/vite'
+// import IconsResolver from 'unplugin-icons/resolver'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
-    AutoImport({
-      resolvers: [
-        ElementPlusResolver(),
-        IconsResolver({
-          prefix: 'Icon'
-        })
-      ]
-    }),
-    Components({
-      resolvers: [
-        ElementPlusResolver(),
-        IconsResolver({
-          prefix: 'icon',
-          enabledCollections: ['ep']
-        })
-      ]
-    }),
-    Icons({
-      autoInstall: true
-    }),
+    // AutoImport({
+    //   resolvers: [
+    //     ElementPlusResolver(),
+    //     IconsResolver({
+    //       prefix: 'Icon'
+    //     })
+    //   ]
+    // }),
+    // Components({
+    //   resolvers: [
+    //     ElementPlusResolver(),
+    //     IconsResolver({
+    //       prefix: 'icon',
+    //       enabledCollections: ['ep']
+    //     })
+    //   ],
+    //   dts: 'src/components.d.ts'
+    // }),
+    // Icons({
+    //   autoInstall: true
+    // }),
     VitePWA({
       includeAssets: ['vite.svg'],
       manifest: {
