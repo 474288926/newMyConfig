@@ -6,7 +6,7 @@
       :style="{ left: navSize.width + 'px' }"
     ></header>
     <nav ref="nav" class="fixed left-0 top-0 w-52 h-screen z-10">
-      <header class="logo" :style="{ height: headerSize.height + 1 + 'px' }"></header>
+      <logo :style="{ height: headerSize.height + 1 + 'px' }"></logo>
       <NavBar :height="headerSize.height" :list="navList" />
     </nav>
     <main
@@ -29,6 +29,7 @@ import { reactive, ref, watch } from 'vue'
 import { useElementSize } from '@vueuse/core'
 import useRoutrStore from '@/store/router/index'
 import NavBar from '@/layouts/NavBar.vue'
+import Logo from '@/layouts/Logo.vue'
 // 定义元素大小的类型
 interface Size {
   width: number
@@ -55,8 +56,4 @@ const { navList } = useRoutrStore()
 console.log(navList)
 </script>
 
-<style scoped>
-.logo {
-  border-bottom: 1px solid #ccc;
-}
-</style>
+<style scoped></style>
