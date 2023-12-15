@@ -23,6 +23,7 @@ module.exports = {
   },
   plugins: ['vue', '@typescript-eslint'],
   rules: {
+    'max-len': ['error', { code: 200 }],
     'no-console': 'off', // 关闭 no-console 规则
     'comma-dangle': ['error', 'never'],
     semi: ['error', 'never'],
