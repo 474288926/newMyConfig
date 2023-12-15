@@ -11,7 +11,7 @@ const refactoringArrays = <T>(list: Array<T>): Array<T> =>
         icon: cur.meta.icon || '',
         children: refactoringArrays(cur.children)
       }
-      return [...per, newCur]
+      return [...per, newCur.children.length === 1 ? newCur.children[0] : newCur]
     }
     return [...per, { title: cur.meta.title, url: cur.path, icon: cur.meta.icon }]
   }, [])
