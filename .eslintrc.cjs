@@ -4,7 +4,12 @@ module.exports = {
     es2021: true,
     node: true
   },
-  extends: ['airbnb-base', 'plugin:vue/vue3-essential'],
+  extends: [
+    'airbnb-base',
+    'plugin:vue/vue3-essential',
+    'eslint:recommended',
+    'prettier'
+  ],
   overrides: [
     {
       env: {
@@ -21,8 +26,9 @@ module.exports = {
     parser: '@typescript-eslint/parser',
     sourceType: 'module'
   },
-  plugins: ['vue', '@typescript-eslint'],
+  plugins: ['vue', '@typescript-eslint', 'prettier'],
   rules: {
+    'prettier/prettier': 'error',
     'max-len': ['error', { code: 200 }],
     'no-console': 'off', // 关闭 no-console 规则
     'comma-dangle': ['error', 'never'],

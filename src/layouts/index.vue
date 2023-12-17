@@ -27,7 +27,8 @@
 <script setup lang="ts">
 import { reactive, ref, watch } from 'vue'
 import { useElementSize } from '@vueuse/core'
-import useRoutrStore from '@/store/router/index'
+import { storeToRefs } from 'pinia'
+import useRouterStore from '@/store/router/index'
 import NavBar from '@/layouts/NavBar.vue'
 import Logo from '@/layouts/Logo.vue'
 // 定义元素大小的类型
@@ -52,8 +53,8 @@ const watchElementSize = (element: HTMLElement | null, sizeRef: Size) => {
 // 使用 watchElementSize 进行监听
 watch(nav, () => watchElementSize(nav.value, navSize))
 watch(header, () => watchElementSize(header.value, headerSize))
-const { navList } = useRoutrStore()
-console.log(navList)
+const store = useRouterStore()
+const { navList } = storeToRefs(store)
 </script>
 
 <style scoped></style>

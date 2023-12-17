@@ -1,9 +1,10 @@
 <template>
-  <div v-for="item in list" :key="item.url">
+  <div v-for="item in list" :key="item.path">
     <div
       class="p-2 flex flex-nowrap items-center w-full cursor-pointer"
       @click="toPath(item)"
       :style="{ 'padding-left': 8 * (item.level || 0) + 'px' }"
+      :class="[item.action ? 'bg-slate-200' : 'bg-white']"
     >
       <el-icon v-if="item.icon" :size="16" class="flex-shrink-0 mr-1">
         <component :is="item.icon"> </component>
@@ -29,9 +30,10 @@ import NavItem from '@/layouts/NavItem.vue'
 
 export interface NavItemTypes {
   title: string
-  url: string
+  path: string
   icon?: string
   toggle?: boolean
+  action?: boolean
   level?: number
   children?: Array<NavItemTypes>
 }
@@ -45,7 +47,7 @@ const toPath = (val: any) => {
     Object.assign(val, { toggle: !val.toggle })
   } else {
     console.log(val)
-    router.push(val.url)
+    router.push(val.path)
   }
 }
 </script>

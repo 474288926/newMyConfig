@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import layout from '@/layouts/index.vue'
+import useRouterStore from '@/store/router/index'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -60,6 +61,11 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes
+})
+router.afterEach((to, from) => {
+  const { setNavList } = useRouterStore()
+  setNavList()
+  console.log(to, from, '跳转成功:')
 })
 
 export default router
