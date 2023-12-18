@@ -1,5 +1,7 @@
 <template>
-  <div class="glitch-container"></div>
+  <div>
+    <!-- <div class="glitch-container"></div> -->
+  </div>
 </template>
 
 <script setup lang="ts"></script>

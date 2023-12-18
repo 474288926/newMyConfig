@@ -7,6 +7,7 @@
       :default-active="router.currentRoute.value.path || ''"
       active-text-color="#ffd04b"
       router
+      :collapse="isCollapse"
       background-color="rgb(39 39 42 / var(--tw-bg-opacity))"
       class="el-menu-vertical-demo"
       text-color="#fff"
@@ -25,9 +26,10 @@ import NavItem, { NavItemTypes } from '@/layouts/NavItem.vue'
 const props = defineProps<{
   list: Array<NavItemTypes>
   height: number
+  isCollapse: boolean
 }>()
 const router: any = inject('router')
-const { list, height } = toRefs(props)
+const { list, height, isCollapse } = toRefs(props)
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }

@@ -2,21 +2,53 @@
   <div class="relative max-w-screen min-h-screen">
     <header
       ref="header"
-      class="fixed top-0 right-0 left-52 h-32 z-10 shadow-md bg-white flex items-end p-2"
+      class="fixed top-0 right-0 left-52 z-10 shadow-md bg-white flex items-end p-2"
       :style="{ left: navSize.width + 'px' }"
     >
-      <BreadCrumbs :list="breadList" />
+      <div class="flex items-center mr-auto transition-all">
+        <el-icon
+          class="mr-4"
+          :class="[!isCollapse ? 'rotate-90' : '-rotate-90']"
+          color="#494A4D"
+          size="20"
+          @click="isCollapse = !isCollapse"
+        >
+          <Download />
+        </el-icon>
+        <BreadCrumbs :list="breadList" />
+      </div>
+      <el-popover placement="bottom">
+        <template #reference>
+          <div class="flex items-center gap-4 cursor-pointer group">
+            <el-avatar
+              :size="50"
+              src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+            />
+            <div class="flex items-center gap-2 transition-all">
+              <span>admin</span>
+              <el-icon class="transition-all group-hover:rotate-180" size="12">
+                <ArrowDownBold />
+              </el-icon>
+            </div>
+          </div>
+        </template>
+        <div class="cursor-pointer flex items-center gap-2">
+          <el-icon><Right /></el-icon>
+          <span>{{ '退出登陆' }}</span>
+        </div>
+      </el-popover>
     </header>
     <nav
       ref="nav"
-      class="fixed left-0 top-0 w-52 h-screen z-100 text-white text-sm bg-zinc-800"
+      class="fixed left-0 top-0 h-screen z-100 text-white text-sm bg-zinc-800 transition-all"
+      :class="[isCollapse ? 'w-14' : 'w-52']"
     >
       <logo :style="{ height: headerSize.height + 1 + 'px' }"></logo>
-      <NavBar :height="headerSize.height" :list="navList" />
+      <NavBar :height="headerSize.height" :list="navList" :isCollapse="isCollapse" />
     </nav>
     <main
       class="p-4 rounded-md overflow-auto absolute right-0 bg-slate-100 bottom-0"
-      :style="{ left: navSize.width + 'px', top: headerSize.height + 'px' }"
+      :style="{ left: navSize.width + 'px', top: headerSize.height + 16 + 'px' }"
     >
       <router-view v-slot="{ Component }">
         <transition>
@@ -61,6 +93,7 @@ watch(nav, () => watchElementSize(nav.value, navSize))
 watch(header, () => watchElementSize(header.value, headerSize))
 const store = useRouterStore()
 const { navList, breadList } = storeToRefs(store)
+const isCollapse = ref<boolean>(false)
 </script>
 
 <style scoped></style>

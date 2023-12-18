@@ -1,21 +1,23 @@
 <template>
-  <div v-for="item in list" :key="item.path">
+  <template v-for="item in list" :key="item.path">
     <el-sub-menu v-if="item.children && item.children.length > 0" :index="item.path">
       <template #title>
-        <el-icon v-if="item.icon" :size="16" class="mr-1">
+        <el-icon v-if="item.icon" :size="16">
           <component :is="item.icon"> </component>
         </el-icon>
-        <div>{{ item.title }}</div>
+        <span>{{ item.title }}</span>
       </template>
       <nav-item :list="item.children"></nav-item>
     </el-sub-menu>
     <el-menu-item v-else :index="item.path">
-      <el-icon v-if="item.icon" :size="16" class="mr-1">
+      <el-icon v-if="item.icon" :size="16">
         <component :is="item.icon"> </component>
       </el-icon>
-      <div>{{ item.title }}</div>
+      <template #title>
+        {{ item.title }}
+      </template>
     </el-menu-item>
-  </div>
+  </template>
 </template>
 
 <script setup lang="ts">

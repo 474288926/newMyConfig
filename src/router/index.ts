@@ -82,7 +82,8 @@ const routes: Array<RouteRecordRaw> = [
         path: '/test/test21',
         name: 'test21',
         meta: {
-          title: '测试21-1'
+          title: '测试21-1',
+          icon: 'bell'
         },
         component: () => import('@/views/test/index.vue')
       }
