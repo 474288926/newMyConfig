@@ -6,7 +6,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     redirect: '/home',
-    meta: { title: '首页', icon: 'House' },
+    meta: { title: '首页', icon: 'house' },
     component: layout,
     children: [
       {
@@ -14,7 +14,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'home',
         meta: {
           title: '首页',
-          icon: 'House'
+          icon: 'house'
         },
         component: () => import('@/views/home/index.vue')
       }
@@ -57,7 +57,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/test/test4',
         name: 'test4',
         meta: {
-          title: '特别长的测试测试测试测试4',
+          title: '特别长的测',
           icon: 'Lock'
         },
         component: () => import('@/views/test/index1.vue')
