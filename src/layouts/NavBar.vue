@@ -8,7 +8,7 @@
       active-text-color="#ffd04b"
       router
       :collapse="isCollapse"
-      background-color="rgb(39 39 42 / var(--tw-bg-opacity))"
+      background-color="rgb(39 39 42)"
       class="el-menu-vertical-demo"
       text-color="#fff"
       @open="handleOpen"

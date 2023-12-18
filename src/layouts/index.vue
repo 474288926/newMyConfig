@@ -7,15 +7,17 @@
     >
       <div class="flex items-end border-b p-2 border-b-gray-200">
         <div class="flex items-center mr-auto transition-all">
-          <el-icon
-            class="mr-4"
-            :class="[!isCollapse ? 'rotate-90' : '-rotate-90']"
-            color="#494A4D"
-            size="20"
-            @click="isCollapse = !isCollapse"
-          >
-            <Download />
-          </el-icon>
+          <div class="mr-4 hidden sm:flex items-center">
+            <el-icon
+              :class="[!isCollapse ? 'rotate-90' : '-rotate-90']"
+              color="#494A4D"
+              size="20"
+              @click="isCollapse = !isCollapse"
+            >
+              <Download />
+            </el-icon>
+          </div>
+
           <BreadCrumbs :list="breadList" />
         </div>
         <el-popover placement="bottom">
@@ -25,7 +27,7 @@
                 :size="50"
                 src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
               />
-              <div class="flex items-center gap-2 transition-all">
+              <div class="items-center gap-2 transition-all hidden sm:flex">
                 <span>admin</span>
                 <el-icon class="transition-all group-hover:rotate-180" size="12">
                   <ArrowDownBold />
@@ -46,7 +48,9 @@
       class="fixed left-0 top-0 h-screen z-100 text-white text-sm bg-zinc-800 transition-all"
       :class="[isCollapse ? 'w-14' : 'w-52']"
     >
-      <logo :style="{ height: headerSize.height + 1 + 'px' }"></logo>
+      <div :style="{ height: headerSize.height + 1 + 'px' }">
+        <logo v-if="!isCollapse"></logo>
+      </div>
       <NavBar :height="headerSize.height" :list="navList" :isCollapse="isCollapse" />
     </nav>
     <main
@@ -65,7 +69,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, watch } from 'vue'
+import { onMounted, onUnmounted, reactive, ref, watch } from 'vue'
 import { useElementSize } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
 import useRouterStore from '@/store/router/index'
@@ -98,28 +102,33 @@ watch(header, () => watchElementSize(header.value, headerSize))
 const store = useRouterStore()
 const { navList, breadList, routerList } = storeToRefs(store)
 const isCollapse = ref<boolean>(false)
+// 获取屏幕大小的函数
+function getScreenSize() {
+  if (window.innerWidth < 640) {
+    return 'sm'
+  }
+  if (window.innerWidth < 768) {
+    return 'md'
+  }
+  return 'lg'
+}
+
+// 定义窗口大小变化时的处理函数
+function handleResize() {
+  if (getScreenSize() === 'sm' && !isCollapse.value) {
+    isCollapse.value = true
+  }
+}
+
+// 在组件挂载时添加窗口大小变化的监听器
+onMounted(() => {
+  window.addEventListener('resize', handleResize)
+})
+
+// 在组件销毁时移除窗口大小变化的监听器
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+})
 </script>
 
-<style scoped>
-:deep().el-tabs--card > .el-tabs__header {
-  border-bottom: none;
-}
-:deep().el-tabs__nav {
-  gap: 0.5rem !important;
-  border: none !important;
-}
-:deep().el-tabs__item {
-  border: 1px solid #e9e9e9 !important;
-  border-radius: 4px;
-  height: 34px;
-}
-:deep().el-tabs--card > .el-tabs__header .el-tabs__item.is-active.is-closable {
-  background-color: var(--el-color-primary-light-9);
-}
-:deep().el-tabs__header {
-  margin: 0 !important;
-}
-:deep().el-tabs--card > .el-tabs__header {
-  height: auto !important;
-}
-</style>
+<style scoped></style>
