@@ -7,7 +7,7 @@
 <style lang="scss" scoped>
 $containerWidth: 208px;
 $containerHeight: 129px;
-$img: '@/assets/img/logo.jpeg';
+$img: '@/assets/img/logo.png;';
 
 @function randomNum($max, $min: 0, $u: 1) {
   @return calc(#{$min + random() * $max} * #{$u});

@@ -5,7 +5,10 @@
       class="fixed top-0 right-0 left-52 h-32 z-10 shadow-md bg-white"
       :style="{ left: navSize.width + 'px' }"
     ></header>
-    <nav ref="nav" class="fixed left-0 top-0 w-52 h-screen z-10">
+    <nav
+      ref="nav"
+      class="fixed left-0 top-0 w-52 h-screen z-100 text-white text-sm bg-zinc-800"
+    >
       <logo :style="{ height: headerSize.height + 1 + 'px' }"></logo>
       <NavBar :height="headerSize.height" :list="navList" />
     </nav>

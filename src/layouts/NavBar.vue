@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { toRefs, watch } from 'vue'
+import { toRefs } from 'vue'
 import NavItem, { NavItemTypes } from '@/layouts/NavItem.vue'
 
 const props = defineProps<{
@@ -16,11 +16,6 @@ const props = defineProps<{
   height: number
 }>()
 const { list, height } = toRefs(props)
-console.log('list:', list.value)
-
-watch(list, (newVal) => {
-  console.log(123, newVal)
-})
 </script>
 
 <style scoped></style>
