@@ -46,17 +46,59 @@ const useRouterStore = defineStore('router', () => {
     refactoringArrays(router.options.routes, router.currentRoute.value.path)
   )
   const breadList = ref<any>([])
+  const routerList = ref<any>([
+    {
+      path: '/home',
+      name: 'home',
+      meta: {
+        title: '首页',
+        icon: 'house'
+      }
+    }
+  ])
+  const activeRouteUrl = ref<string>('')
   const setNavList = () => {
     navList.value = refactoringArrays(navList.value, router.currentRoute.value.path)
   }
   const setBreadList = <T>(urls: Array<T>) => {
     breadList.value = urls
   }
+  const setRouterList = <T>(val: Array<T>) => {
+    routerList.value = [
+      ...routerList.value,
+      ...val.reduce((per: any, cur: any) => {
+        const is = routerList.value.some((item: any) => item.path === cur.path)
+        if (!is) {
+          return [...per, cur]
+        }
+        return [...per]
+      }, [])
+    ]
+  }
+  const delRouterList = (url: string) => {
+    const length = routerList.value.findIndex((x: any) => x.path === url)
+    routerList.value = routerList.value.filter((x: any) => x.path !== url)
+    if (url === activeRouteUrl.value) {
+      if (routerList.value.length > length - 1) {
+        return routerList.value[length - 1]
+      }
+      return routerList.value[routerList.value.length]
+    }
+    return ''
+  }
+  const setActiveRouteUrl = (url: string) => {
+    activeRouteUrl.value = url
+  }
   return {
     navList,
     setNavList,
     breadList,
-    setBreadList
+    setBreadList,
+    routerList,
+    setRouterList,
+    activeRouteUrl,
+    setActiveRouteUrl,
+    delRouterList
   }
 })
 

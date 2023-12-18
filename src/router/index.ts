@@ -94,10 +94,14 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes
 })
-router.afterEach((to, from) => {
-  const { setNavList, setBreadList } = useRouterStore()
+router.afterEach(async (to, from) => {
+  const { path, meta, matched } = to
+  const { setNavList, setBreadList, setRouterList, setActiveRouteUrl } =
+    useRouterStore()
   setNavList()
-  setBreadList(to.matched)
+  setBreadList(matched)
+  setRouterList([{ path, meta }])
+  setActiveRouteUrl(path)
   console.log(to, from, '跳转成功:')
 })
 

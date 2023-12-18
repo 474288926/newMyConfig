@@ -39,7 +39,7 @@
           </div>
         </el-popover>
       </div>
-      <Tabs />
+      <Tabs :list="routerList" />
     </header>
     <nav
       ref="nav"
@@ -96,7 +96,7 @@ const watchElementSize = (element: HTMLElement | null, sizeRef: Size) => {
 watch(nav, () => watchElementSize(nav.value, navSize))
 watch(header, () => watchElementSize(header.value, headerSize))
 const store = useRouterStore()
-const { navList, breadList } = storeToRefs(store)
+const { navList, breadList, routerList } = storeToRefs(store)
 const isCollapse = ref<boolean>(false)
 </script>
 
