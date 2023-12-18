@@ -122,6 +122,7 @@ function handleResize() {
 
 // 在组件挂载时添加窗口大小变化的监听器
 onMounted(() => {
+  handleResize()
   window.addEventListener('resize', handleResize)
 })
 
