@@ -9,14 +9,12 @@ const refactoringArrays = <T>(
 ): Array<T> =>
   list.reduce((per: any, cur: any) => {
     if (cur.children && cur.children.length > 0) {
+      const is = cur.children.findIndex((item: any) => item.path === actionUrl)
       const newCur = {
         title: cur.meta?.title || cur.title,
         path: cur.path,
         icon: cur.meta?.icon || cur.icon,
-        toggle:
-          cur.children.findIndex((item: any) => item.path === actionUrl) !== -1
-            ? true
-            : !!cur.toggle,
+        toggle: is !== -1 ? true : !!cur.toggle,
         level,
         children: refactoringArrays(cur.children, actionUrl, level + 1)
       }
@@ -47,12 +45,18 @@ const useRouterStore = defineStore('router', () => {
   const navList = ref<Array<NavItemTypes>>(
     refactoringArrays(router.options.routes, router.currentRoute.value.path)
   )
+  const breadList = ref<any>([])
   const setNavList = () => {
     navList.value = refactoringArrays(navList.value, router.currentRoute.value.path)
   }
+  const setBreadList = <T>(urls: Array<T>) => {
+    breadList.value = urls
+  }
   return {
     navList,
-    setNavList
+    setNavList,
+    breadList,
+    setBreadList
   }
 })
 

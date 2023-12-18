@@ -2,9 +2,11 @@
   <div class="relative max-w-screen min-h-screen">
     <header
       ref="header"
-      class="fixed top-0 right-0 left-52 h-32 z-10 shadow-md bg-white"
+      class="fixed top-0 right-0 left-52 h-32 z-10 shadow-md bg-white flex items-end p-2"
       :style="{ left: navSize.width + 'px' }"
-    ></header>
+    >
+      <BreadCrumbs :list="breadList" />
+    </header>
     <nav
       ref="nav"
       class="fixed left-0 top-0 w-52 h-screen z-100 text-white text-sm bg-zinc-800"
@@ -34,6 +36,7 @@ import { storeToRefs } from 'pinia'
 import useRouterStore from '@/store/router/index'
 import NavBar from '@/layouts/NavBar.vue'
 import Logo from '@/layouts/Logo.vue'
+import BreadCrumbs from '@/layouts/BreadCrumbs.vue'
 // 定义元素大小的类型
 interface Size {
   width: number
@@ -57,7 +60,7 @@ const watchElementSize = (element: HTMLElement | null, sizeRef: Size) => {
 watch(nav, () => watchElementSize(nav.value, navSize))
 watch(header, () => watchElementSize(header.value, headerSize))
 const store = useRouterStore()
-const { navList } = storeToRefs(store)
+const { navList, breadList } = storeToRefs(store)
 </script>
 
 <style scoped></style>

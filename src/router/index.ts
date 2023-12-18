@@ -40,6 +40,14 @@ const routes: Array<RouteRecordRaw> = [
             meta: {
               title: '测试1-1-1'
             },
+            component: () => import('@/views/test/index1.vue')
+          },
+          {
+            path: '/test/test1/test33',
+            name: 'test33',
+            meta: {
+              title: '测试1-1-1-3'
+            },
             component: () => import('@/views/home/index.vue')
           }
         ]
@@ -67,7 +75,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/test22',
     redirect: '/test/test21',
-    meta: { title: '测试', icon: 'bell' },
+    meta: { title: '测试2222223', icon: 'bell' },
     component: layout,
     children: [
       {
@@ -86,8 +94,9 @@ const router = createRouter({
   routes
 })
 router.afterEach((to, from) => {
-  const { setNavList } = useRouterStore()
+  const { setNavList, setBreadList } = useRouterStore()
   setNavList()
+  setBreadList(to.matched)
   console.log(to, from, '跳转成功:')
 })
 
