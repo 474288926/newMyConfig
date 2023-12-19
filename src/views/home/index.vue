@@ -1,5 +1,5 @@
 <template>
-  <section class="flex flex-col gap-4">
+  <div class="flex flex-col gap-4">
     <div class="grid gap-4 xl:grid-cols-4 lg:grid-cols-2">
       <div
         class="h-40 flex-1 border border-b-gray-200 rounded-md bg-white text-sm p-5 flex flex-col"
@@ -111,7 +111,7 @@
         </div>
       </el-card>
     </div>
-  </section>
+  </div>
 </template>
 
 <script setup lang="ts">
