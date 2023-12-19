@@ -111,11 +111,77 @@
         </div>
       </el-card>
     </div>
+    <el-card shadow="never">
+      <template #header>
+        <div class="flex flex-row items-center gap-1">
+          <el-icon color="blue"><DataAnalysis /></el-icon>
+          <span class="font-semibold">经营建议</span>
+        </div>
+      </template>
+      <div
+        class="grid grid-cols-2 grid-rows-4 md:grid-cols-3 md:grid-rows-3 lg:grid-cols-4 lg:grid-rows-2"
+      >
+        <div
+          class="h-16 flex flex-row gap-2 items-center"
+          v-for="item in list1"
+          :key="item.name"
+        >
+          <div
+            class="group bg-blue-50 w-12 h-12 rounded-md flex justify-center items-center hover:bg-blue-400"
+          >
+            <el-icon :size="28"
+              ><component
+                :is="item.icon"
+                class="text-blue-400 group-hover:text-white"
+              ></component
+            ></el-icon>
+          </div>
+
+          <div class="flex flex-col gap-1">
+            <span class="text-sm font-normal">{{ item.name }}</span>
+            <span class="text-xs font-light">{{ item.desc }}</span>
+          </div>
+        </div>
+      </div>
+    </el-card>
+    <div class="grid grid-grid-1 lg:grid-cols-2 gap-4">
+      <el-card shadow="never">
+        <template #header>
+          <div class="flex flex-row items-center gap-1">
+            <el-icon color="blue"><DataLine /></el-icon>
+            <span class="font-semibold">流量概括</span>
+          </div>
+        </template>
+        <div ref="areaChart" class="w-full h-72"></div>
+        <template #footer>
+          <span>自上周以来</span
+          ><span class="text-green-400 tracking-wider">&nbsp;提升&nbsp;44%</span>
+        </template>
+      </el-card>
+      <el-card shadow="never">
+        <template #header>
+          <div class="flex flex-row items-center gap-1">
+            <el-icon color="blue"><TrendCharts /></el-icon>
+            <span class="font-semibold">授权数</span>
+          </div>
+        </template>
+        <div ref="areaChart1" class="w-full h-72"></div>
+        <template #footer>
+          <span>授权数：1612</span>
+        </template>
+      </el-card>
+    </div>
+    <footer
+      class="border border-gray-200 p-4 rounded-md bg-white text-center font-light text-sm"
+    >
+      Copyright <span class="font-normal">(c)</span> 2024 My New Vue3
+    </footer>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import * as echarts from 'echarts'
 import * as jsonData from '../../../package.json'
 
 const list = ref([
@@ -140,6 +206,109 @@ const list = ref([
     number: '44'
   }
 ])
+const list1 = ref<Array<any>>([
+  {
+    name: '工商建议',
+    desc: '工商建议快捷入口',
+    icon: 'bell'
+  },
+  {
+    name: '商标管理',
+    desc: '商标管理快捷入口',
+    icon: 'bell'
+  },
+  {
+    name: '专利查询',
+    desc: '专利查询快捷入口',
+    icon: 'bell'
+  },
+  {
+    name: '著作权查询',
+    desc: '著作权查询快捷入口',
+    icon: 'bell'
+  },
+  {
+    name: '证照查询',
+    desc: '证照查询快捷入口',
+    icon: 'bell'
+  },
+  {
+    name: '纳税提醒',
+    desc: '纳税提醒快捷入口',
+    icon: 'bell'
+  },
+  {
+    name: '违规查询',
+    desc: '违规查询快捷入口',
+    icon: 'bell'
+  },
+  {
+    name: '全部应用',
+    desc: '全部应用快捷入口',
+    icon: 'bell'
+  }
+])
+
+type EChartsOption = echarts.EChartsOption
+
+const areaChart = ref(null)
+const areaChart1 = ref(null)
+
+onMounted(() => {
+  const myChart = echarts.init(areaChart.value)
+
+  const option: EChartsOption = {
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [
+      {
+        data: [120, 932, 601, 1234, 870, 1330, 1889],
+        type: 'line',
+        smooth: true,
+        areaStyle: {
+          color: {
+            type: 'linear', // 设置为线性渐变
+            x: 0, // 渐变起始点
+            y: 0, // 渐变起始点
+            x2: 1, // 渐变结束点
+            y2: 0, // 渐变结束点
+            colorStops: [
+              { offset: 0, color: 'rgba(167, 217, 245, 0.7)' }, // 渐变起始颜色
+              { offset: 0.8, color: 'rgba(94, 191, 248, 0.7)' }, // 渐变中间颜色
+              { offset: 1, color: 'rgba(44, 172, 245, 0.7)' }
+            ]
+          }
+        }
+      }
+    ]
+  }
+  myChart.setOption(option)
+
+  const myChart1 = echarts.init(areaChart1.value)
+
+  const option1: EChartsOption = {
+    xAxis: {
+      type: 'category',
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [
+      {
+        data: [120, 200, 150, 80, 70, 110, 130],
+        type: 'bar'
+      }
+    ]
+  }
+  myChart1.setOption(option1)
+})
 </script>
 
 <style scoped></style>
