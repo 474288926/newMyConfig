@@ -18,11 +18,11 @@
           <span>自上周已来</span>
           <div
             class="rounded-full h-4 w-4 mx-1"
-            :class="[index === 1 ? 'bg-white' : 'bg-green-200']"
+            :class="[index === 0 ? 'bg-white' : 'bg-green-200']"
           >
             <el-icon
               style="padding: 2px"
-              :color="index === 1 ? 'rgb(96 165 250)' : 'rgb(94 180 55)'"
+              :color="index === 0 ? 'rgb(96 165 250)' : 'rgb(94 180 55)'"
               ><Top
             /></el-icon>
           </div>
