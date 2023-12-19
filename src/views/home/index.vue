@@ -154,8 +154,10 @@
         </template>
         <div ref="areaChart" class="w-full h-72"></div>
         <template #footer>
-          <span>自上周以来</span
-          ><span class="text-green-400 tracking-wider">&nbsp;提升&nbsp;44%</span>
+          <div class="text-sm font-light">
+            <span>自上周以来</span
+            ><span class="text-green-400 tracking-wider">&nbsp;提升&nbsp;44%</span>
+          </div>
         </template>
       </el-card>
       <el-card shadow="never">
@@ -167,7 +169,7 @@
         </template>
         <div ref="areaChart1" class="w-full h-72"></div>
         <template #footer>
-          <span>授权数：1612</span>
+          <span class="text-sm font-light">授权数：1612</span>
         </template>
       </el-card>
     </div>
