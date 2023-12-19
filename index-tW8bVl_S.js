@@ -1,1 +1,0 @@
-import{_ as s,a as t,o as n,c as a,f as e,b as o}from"./index-53TDi-x-.js";const r={},i=o("div",null,"test测试",-1);const u=s(r,[["render",function(s,o){const r=t("router-view");return n(),a("div",null,[i,e(r)])}]]);export{u as default};
