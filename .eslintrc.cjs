@@ -28,6 +28,7 @@ module.exports = {
   },
   plugins: ['vue', '@typescript-eslint', 'prettier'],
   rules: {
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'prettier/prettier': 'error',
     'max-len': ['error', { code: 200 }],
     'no-console': 'off', // 关闭 no-console 规则
