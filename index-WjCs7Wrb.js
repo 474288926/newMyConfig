@@ -1,1 +1,0 @@
-import{_ as s,a as e,b as t,c as a,g as r,e as n}from"./index-51RpZXiq.js";const o={},i={class:"relative"},c=n("div",null,"test测试",-1);const d=s(o,[["render",function(s,n){const o=e("router-view");return t(),a("div",i,[c,r(o)])}]]);export{d as default};
