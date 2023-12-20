@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="relative">
     <div>test测试</div>
     <router-view />
   </div>

@@ -58,7 +58,7 @@
       :style="{ left: navSize.width + 'px', top: headerSize.height + 'px' }"
     >
       <router-view v-slot="{ Component }">
-        <transition>
+        <transition name="slide" mode="out-in">
           <keep-alive>
             <component :is="Component" />
           </keep-alive>
@@ -132,4 +132,25 @@ onUnmounted(() => {
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.2s ease-in-out;
+}
+/* 进入 */
+.slide-enter-to {
+  left: 0;
+}
+
+.slide-enter-from {
+  left: 3%;
+}
+/* 离开 */
+.slide-leave-to {
+  opacity: 0;
+  left: -3%;
+}
+.slide-leave-from {
+  left: 0;
+}
+</style>
