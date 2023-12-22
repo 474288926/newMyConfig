@@ -1,0 +1,1 @@
+import{_ as s,b as e,e as t,g as a,f as r,c as n}from"./index-Nf4nSvMu.js";const o={},i={class:"relative"},c=r("div",null,"test测试",-1);const d=s(o,[["render",function(s,r){const o=e("router-view");return n(),t("div",i,[c,a(o)])}]]);export{d as default};
