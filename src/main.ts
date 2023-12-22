@@ -7,6 +7,7 @@ import router from '@/router/index'
 import pinia from '@/store/index'
 import '@/assets/css/index.css'
 import 'element-plus/dist/index.css'
+import importAll from '@/components/importAll'
 
 const app = createApp(App)
 app.component('VueVerifyCode', VueVerifyCode)
@@ -15,6 +16,7 @@ app.provide('router', router)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
+
 app.use(ElementPlus)
 
-app.use(router).use(pinia).mount('#app')
+app.use(router).use(pinia).use(importAll).mount('#app')
