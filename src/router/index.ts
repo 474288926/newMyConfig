@@ -1,8 +1,21 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import { inject } from 'vue'
 import layout from '@/layouts/index.vue'
 import useRouterStore from '@/store/router/index'
 
 const routes: Array<RouteRecordRaw> = [
+  {
+    path: '/login',
+    name: 'login',
+    meta: { title: '登陆', hidden: true },
+    component: () => import('@/views/login/index.vue')
+  },
+  {
+    path: '/register',
+    name: 'register',
+    meta: { title: '注册', hidden: true },
+    component: () => import('@/views/login/register.vue')
+  },
   {
     path: '/',
     redirect: '/home',
@@ -94,14 +107,28 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes
 })
+const whites = ['/login', '/register']
+router.beforeEach((to, from) => {
+  const Cookies: any = inject('Cookies')
+  console.log(123, to, from, Cookies.get('token'))
+  const isToken = Cookies.get('token')
+  console.log('white:', !whites.includes(to.path))
+  if (!isToken && !whites.includes(to.path)) {
+    return '/login'
+  }
+  return true
+})
+
 router.afterEach(async (to, from) => {
-  const { path, meta, matched } = to
-  const { setNavList, setBreadList, setRouterList, setActiveRouteUrl } =
-    useRouterStore()
-  setNavList()
-  setBreadList(matched)
-  setRouterList([{ path, meta }])
-  setActiveRouteUrl(path)
+  if (!whites.includes(to.path)) {
+    const { path, meta, matched } = to
+    const { setNavList, setBreadList, setRouterList, setActiveRouteUrl } =
+      useRouterStore()
+    setNavList()
+    setBreadList(matched)
+    setRouterList([{ path, meta }])
+    setActiveRouteUrl(path)
+  }
   console.log(to, from, '跳转成功:')
 })
 

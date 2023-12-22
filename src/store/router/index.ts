@@ -8,6 +8,9 @@ const refactoringArrays = <T>(
   level: number = 0
 ): Array<T> =>
   list.reduce((per: any, cur: any) => {
+    if (cur.meta?.hidden) {
+      return [...per]
+    }
     if (cur.children && cur.children.length > 0) {
       const is = cur.children.findIndex((item: any) => item.path === actionUrl)
       const newCur = {

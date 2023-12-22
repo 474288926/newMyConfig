@@ -35,7 +35,7 @@
               </div>
             </div>
           </template>
-          <div class="cursor-pointer flex items-center gap-2">
+          <div class="cursor-pointer flex items-center gap-2" @click="onQuit">
             <el-icon><Right /></el-icon>
             <span>{{ '退出登陆' }}</span>
           </div>
@@ -69,7 +69,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, reactive, ref, watch } from 'vue'
+import { inject, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
 import { useElementSize } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
 import useRouterStore from '@/store/router/index'
@@ -82,6 +82,8 @@ interface Size {
   width: number
   height: number
 }
+
+const router: any = inject('router')
 // 创建 refs 引用 DOM 元素
 const nav = ref(null)
 const header = ref(null)
@@ -130,6 +132,12 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize)
 })
+
+const Cookies: any = inject('Cookies')
+const onQuit = () => {
+  Cookies.remove('token')
+  router.replace('/login')
+}
 </script>
 
 <style scoped>
