@@ -23,9 +23,9 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     // @声明
-    "baseUrl": "src",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["src/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
