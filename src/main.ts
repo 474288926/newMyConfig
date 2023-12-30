@@ -28,8 +28,19 @@ registerSW({
   onOfflineReady() {
     console.log('处于离线状态')
   },
-  onRegisteredSW() {
+  onRegisteredSW(swScriptUrl, registration: any) {
     console.log('注册sw成功')
+    console.log('Service Worker 脚本 URL:', swScriptUrl)
+    console.log('Service Worker 注册信息:', registration)
+    // 检测是否有新版本
+    registration
+      .update()
+      .then(() => {
+        console.log('Service Worker 更新检查完成')
+      })
+      .catch((error: any) => {
+        console.error('Service Worker 更新检查失败:', error)
+      })
   },
   onRegisterError() {
     console.log('注册sw失败')
