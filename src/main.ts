@@ -10,6 +10,8 @@ import '@/assets/css/index.css'
 import 'element-plus/dist/index.css'
 import importAll from '@/components/importAll'
 
+if (typeof window !== 'undefined') import('./pwa')
+
 const app = createApp(App)
 app.component('VueVerifyCode', VueVerifyCode)
 app.provide('router', router)

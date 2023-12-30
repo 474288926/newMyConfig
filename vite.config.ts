@@ -95,7 +95,7 @@ export default defineConfig({
         theme_color: '#000000',
         display: 'standalone'
       },
-      injectRegister: 'inline',
+      // injectRegister: 'inline',
       registerType: 'autoUpdate',
       // 本地开启
       // devOptions: {
