@@ -1,7 +1,9 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import { inject } from 'vue'
+import NProgress from 'nprogress'
 import layout from '@/layouts/index.vue'
 import useRouterStore from '@/store/router/index'
+import 'nprogress/nprogress.css'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -90,6 +92,7 @@ const router = createRouter({
 })
 const whites = ['/login', '/register']
 router.beforeEach((to, from) => {
+  NProgress.start()
   const Cookies: any = inject('Cookies')
   console.log(123, to, from, Cookies.get('token'))
   const isToken = Cookies.get('token')
@@ -101,6 +104,7 @@ router.beforeEach((to, from) => {
 })
 
 router.afterEach(async (to, from) => {
+  NProgress.done()
   if (!whites.includes(to.path) && to.name !== 'NotFound') {
     const { path, meta, matched } = to
     const { setNavList, setBreadList, setRouterList, setActiveRouteUrl } =
