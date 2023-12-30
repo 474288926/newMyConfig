@@ -76,6 +76,12 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/iframe/element.vue')
       }
     ]
+  },
+  {
+    // 当用户访问任何未匹配的路由时，将跳转到404页面
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('@/views/404.vue')
   }
 ]
 const router = createRouter({
@@ -95,7 +101,7 @@ router.beforeEach((to, from) => {
 })
 
 router.afterEach(async (to, from) => {
-  if (!whites.includes(to.path)) {
+  if (!whites.includes(to.path) && to.name !== 'NotFound') {
     const { path, meta, matched } = to
     const { setNavList, setBreadList, setRouterList, setActiveRouteUrl } =
       useRouterStore()
