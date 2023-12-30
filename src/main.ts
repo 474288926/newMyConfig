@@ -10,17 +10,7 @@ import '@/assets/css/index.css'
 import 'element-plus/dist/index.css'
 import importAll from '@/components/importAll'
 
-const app = createApp(App)
-app.provide('router', router)
-app.provide('Cookies', Cookies)
-// eslint-disable-next-line no-restricted-syntax
-for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-  app.component(key, component)
-}
-
-app.use(ElementPlus)
-
-app.use(router).use(pinia).use(importAll).mount('#app')
+const app: any = createApp(App)
 registerSW({
   onNeedRefresh() {
     console.log('检测到新版本')
@@ -47,3 +37,26 @@ registerSW({
   },
   immediate: true
 })
+// 在应用启动时调用初始化函数
+async function initializeServiceWorker() {
+  const registration: any = await navigator.serviceWorker.getRegistration()
+  if (registration) {
+    console.log('initialize', registration)
+    registration.active.postMessage({ action: 'initialize' })
+  }
+}
+
+// 在应用程序挂载之前调用初始化函数
+app.beforeMount(() => {
+  initializeServiceWorker()
+})
+app.provide('router', router)
+app.provide('Cookies', Cookies)
+// eslint-disable-next-line no-restricted-syntax
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+  app.component(key, component)
+}
+
+app.use(ElementPlus)
+
+app.use(router).use(pinia).use(importAll).mount('#app')
