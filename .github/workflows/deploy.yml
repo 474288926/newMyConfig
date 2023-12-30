@@ -21,6 +21,21 @@ jobs:
       - name: Build
         run: npm run build # 打包
 
+      # 清理 Edge 浏览器缓存
+      - name: Clear Edge Browser Cache
+        run: |
+          msedge --headless --disable-gpu --remote-debugging-port=9222 --disable-software-rasterizer --disable-dev-shm-usage --no-sandbox --disable-setuid-sandbox --user-data-dir=/tmp --disk-cache-size=1 --disable-background-networking --disable-default-apps --disable-extensions --disable-sync --disable-translate --hide-scrollbars --metrics-recording-only --mute-audio --no-first-run --safebrowsing-disable-auto-update --enable-automation --disable-features=NetworkService,TranslateUI,BlinkGenPropertyTrees --disable-prompt-on-repost --disable-password-generation --disable-password-save --remote-debugging-address=0.0.0.0 --remote-debugging-port=9222 about:blank
+
+      # 清理 Chrome 浏览器缓存
+      - name: Clear Chrome Browser Cache
+        run: |
+          google-chrome --headless --disable-gpu --remote-debugging-port=9222 --disable-software-rasterizer --disable-dev-shm-usage --no-sandbox --disable-setuid-sandbox --user-data-dir=/tmp --disk-cache-size=1 --disable-background-networking --disable-default-apps --disable-extensions --disable-sync --disable-translate --hide-scrollbars --metrics-recording-only --mute-audio --no-first-run --safebrowsing-disable-auto-update --enable-automation --disable-features=NetworkService,TranslateUI,BlinkGenPropertyTrees --disable-prompt-on-repost --disable-password-generation --disable-password-save --remote-debugging-address=0.0.0.0 --remote-debugging-port=9222 about:blank
+
+      # 清理 Firefox 浏览器缓存
+      - name: Clear Firefox Browser Cache
+        run: |
+          firefox --headless --disable-gpu --remote-debugging-port=9222 --disable-software-rasterizer --disable-dev-shm-usage --no-sandbox --disable-setuid-sandbox --user-data-dir=/tmp --disk-cache-size=1 --disable-background-networking --disable-default-apps --disable-extensions --disable-sync --disable-translate --hide-scrollbars --metrics-recording-only --mute-audio --no-first-run --safebrowsing-disable-auto-update --enable-automation --disable-features=NetworkService,TranslateUI,BlinkGenPropertyTrees --disable-prompt-on-repost --disable-password-generation --disable-password-save --remote-debugging-address=0.0.0.0 --remote-debugging-port=9222 about:blank
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3 # 使用部署到 GitHub pages 的 action
         with:
