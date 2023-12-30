@@ -103,6 +103,7 @@ export default defineConfig({
       // },
       // 缓存配置
       workbox: {
+        cleanupOutdatedCaches: true,
         runtimeCaching: [
           {
             urlPattern: /someInterface/i, // 接口缓存 此处填你想缓存的接口正则匹配
