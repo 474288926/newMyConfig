@@ -7,11 +7,9 @@
     <title>Vite + Vue + TS</title>
     <script>
       // registerSW.js
-
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/newMyConfig/sw.js').then((registration) => {
           console.log('Service Worker 注册成功:', registration);
-
           // 检测新文件并更新缓存
           registration.onupdatefound = () => {
             const installingWorker = registration.installing;
