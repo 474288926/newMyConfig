@@ -30,7 +30,7 @@ onMounted(() => {
   points.push(new THREE.Vector3(-10, 0, 0))
   points.push(new THREE.Vector3(0, 10, 10))
   points.push(new THREE.Vector3(10, 0, 0))
-
+  console.log(123)
   const geometry = new THREE.BufferGeometry().setFromPoints(points)
   const line = new THREE.Line(geometry, material)
   scene.add(line)
