@@ -34,71 +34,46 @@ const routes: Array<RouteRecordRaw> = [
     ]
   },
   {
-    path: '/test',
-    redirect: '/test/test1',
-    meta: { title: '测试', icon: 'bell' },
+    path: '/iframe',
+    redirect: '/iframe/vue',
+    meta: { title: '内嵌网页', icon: 'bell' },
     component: layout,
     children: [
       {
-        path: '/test/test1',
-        name: 'test1',
+        path: '/iframe/vue',
+        name: 'vue',
         meta: {
-          title: '测试1-1'
-        },
-        component: () => import('@/views/test/index.vue'),
-        children: [
-          {
-            path: '/test/test1/test3',
-            name: 'test3',
-            meta: {
-              title: '测试1-1-1'
-            },
-            component: () => import('@/views/test/index1.vue')
-          },
-          {
-            path: '/test/test1/test33',
-            name: 'test33',
-            meta: {
-              title: '测试1-1-1-3'
-            },
-            component: () => import('@/views/home/index.vue')
-          }
-        ]
-      },
-      {
-        path: '/test/test2',
-        name: 'test2',
-        meta: {
-          title: '测试1-2',
+          title: 'vue',
           icon: 'Lock'
         },
-        component: () => import('@/views/test/index1.vue')
+        component: () => import('@/views/iframe/vue.vue')
       },
       {
-        path: '/test/test4',
-        name: 'test4',
+        path: '/iframe/pinia',
+        name: 'pinia',
         meta: {
-          title: '特别长的测',
+          title: 'pinia',
           icon: 'Lock'
         },
-        component: () => import('@/views/test/index1.vue')
-      }
-    ]
-  },
-  {
-    path: '/test22',
-    redirect: '/test/test21',
-    meta: { title: '测试2222223', icon: 'bell' },
-    component: layout,
-    children: [
+        component: () => import('@/views/iframe/pinia.vue')
+      },
       {
-        path: '/test/test21',
-        name: 'test21',
+        path: '/iframe/router',
+        name: 'router',
         meta: {
-          title: '测试21-1',
-          icon: 'bell'
+          title: 'router',
+          icon: 'Lock'
         },
-        component: () => import('@/views/test/index.vue')
+        component: () => import('@/views/iframe/router.vue')
+      },
+      {
+        path: '/iframe/element',
+        name: 'element',
+        meta: {
+          title: 'element',
+          icon: 'Lock'
+        },
+        component: () => import('@/views/iframe/element.vue')
       }
     ]
   }
