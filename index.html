@@ -6,13 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + Vue + TS</title>
     <script>
-        if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.register(
-            import.meta.env.MODE === 'production' ? '/sw.js' : '/dev-sw.js?dev-sw',
-            { type: import.meta.env.MODE === 'production' ? 'classic' : 'module' }
-          )
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register(
+          import.meta.env.MODE === 'production' ? '/sw.js' : '/dev-sw.js?dev-sw',
+          { type: import.meta.env.MODE === 'production' ? 'classic' : 'module' }
+        ).then(registration => {
+          // 注册成功后的逻辑
+          console.log('Service Worker registered with scope:', registration.scope);
+
+          // 手动检查并触发 Service Worker 更新
+          if (registration.waiting) {
+            updateServiceWorker(registration.waiting);
+          }
+
+          registration.addEventListener('updatefound', () => {
+            // 注册新的 Service Worker
+            const newWorker = registration.installing;
+
+            newWorker.addEventListener('statechange', () => {
+              // 在新 Service Worker 安装完成后触发更新
+              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                updateServiceWorker(newWorker);
+              }
+            });
+          });
+        }).catch(error => {
+          console.error('Service Worker registration failed:', error);
+        });
+      }
+
+      function updateServiceWorker(worker) {
+        console.log('Updating Service Worker');
+
+        // 在这里可以弹出提示，提醒用户有新的版本可用
+
+        // 发送消息通知 Service Worker 执行 skipWaiting
+        worker.postMessage({ action: 'skipWaiting' });
+      }
+
+      // 监听来自 Service Worker 的消息
+      navigator.serviceWorker.addEventListener('message', event => {
+        if (event.data.action === 'reload') {
+          // 在 Service Worker 要求页面重新加载时执行
+          window.location.reload();
         }
+      });
     </script>
+
   </head>
   <body>
     <div id="app"></div>
