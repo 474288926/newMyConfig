@@ -97,9 +97,12 @@ export default defineConfig({
       },
       injectRegister: 'auto',
       registerType: 'autoUpdate',
+      // 本地开启
+      // devOptions: {
+      //   enabled: true
+      // },
+      // 缓存配置
       workbox: {
-        clientsClaim: true,
-        skipWaiting: true,
         runtimeCaching: [
           {
             urlPattern: /someInterface/i, // 接口缓存 此处填你想缓存的接口正则匹配
