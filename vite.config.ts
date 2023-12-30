@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue'
 // 如果编辑器提示 path 模块找不到，则可以安装一下 @types/node -> npm i @types/node -D
 import { resolve } from 'path'
 // VitePWA
-import { VitePWA } from 'vite-plugin-pwa'
+// import { VitePWA } from 'vite-plugin-pwa'
 /**
  * @desc:由于按需加载组件无法使用component组件渲染，作者也无支持此功能计划，建议使用全局导入，所以注释掉按需导入
  */
@@ -18,7 +18,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue(),
+    vue()
     // AutoImport({
     //   resolvers: [
     //     ElementPlusResolver(),
@@ -40,98 +40,98 @@ export default defineConfig({
     // Icons({
     //   autoInstall: true
     // }),
-    VitePWA({
-      includeAssets: ['vite.svg'],
-      manifest: {
-        name: 'Your App',
-        short_name: 'App',
-        start_url: './index.html',
-        icons: [
-          {
-            src: 'pwa-144.png',
-            sizes: '144x144',
-            type: 'image/png'
-          },
-          {
-            src: 'pwa-192.png',
-            sizes: '192x192',
-            type: 'image/png'
-          },
-          {
-            src: 'pwa-512.png',
-            sizes: '512x512',
-            type: 'image/png'
-          },
-          {
-            src: 'pwa-512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'any'
-          },
-          {
-            src: 'pwa-512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'maskable'
-          }
-        ],
-        screenshots: [
-          {
-            src: 'pwa-512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            form_factor: 'wide',
-            label: 'Homescreen of Awesome App'
-          },
-          {
-            src: 'pwa-512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            form_factor: 'narrow',
-            label: 'Homescreen of Awesome App1'
-          }
-        ],
-        background_color: '#ffffff',
-        theme_color: '#000000',
-        display: 'standalone'
-      },
-      srcDir: '/dev-dist',
-      filename: 'sw.js',
-      injectRegister: 'auto',
-      registerType: 'autoUpdate',
-      // 本地开启
-      // devOptions: {
-      //   enabled: true
-      // },
-      // 缓存配置
-      workbox: {
-        cleanupOutdatedCaches: true,
-        globPatterns: ['**/*.{js,css,html,ico,png,svg}']
-        // runtimeCaching: [
-        //   {
-        //     urlPattern: /someInterface/i, // 接口缓存 此处填你想缓存的接口正则匹配
-        //     handler: 'CacheFirst',
-        //     options: {
-        //       cacheName: 'interface-cache'
-        //     }
-        //   },
-        //   {
-        //     urlPattern: /(.*?)\.(js|css|ts)/, // js /css /ts静态资源缓存
-        //     handler: 'CacheFirst',
-        //     options: {
-        //       cacheName: 'js-css-cache'
-        //     }
-        //   },
-        //   {
-        //     urlPattern: /(.*?)\.(png|jpe?g|svg|gif|bmp|psd|tiff|tga|eps)/, // 图片缓存
-        //     handler: 'CacheFirst',
-        //     options: {
-        //       cacheName: 'image-cache'
-        //     }
-        //   }
-        // ]
-      }
-    })
+    // VitePWA({
+    //   includeAssets: ['vite.svg'],
+    //   manifest: {
+    //     name: 'Your App',
+    //     short_name: 'App',
+    //     start_url: './index.html',
+    //     icons: [
+    //       {
+    //         src: 'pwa-144.png',
+    //         sizes: '144x144',
+    //         type: 'image/png'
+    //       },
+    //       {
+    //         src: 'pwa-192.png',
+    //         sizes: '192x192',
+    //         type: 'image/png'
+    //       },
+    //       {
+    //         src: 'pwa-512.png',
+    //         sizes: '512x512',
+    //         type: 'image/png'
+    //       },
+    //       {
+    //         src: 'pwa-512.png',
+    //         sizes: '512x512',
+    //         type: 'image/png',
+    //         purpose: 'any'
+    //       },
+    //       {
+    //         src: 'pwa-512.png',
+    //         sizes: '512x512',
+    //         type: 'image/png',
+    //         purpose: 'maskable'
+    //       }
+    //     ],
+    //     screenshots: [
+    //       {
+    //         src: 'pwa-512.png',
+    //         sizes: '512x512',
+    //         type: 'image/png',
+    //         form_factor: 'wide',
+    //         label: 'Homescreen of Awesome App'
+    //       },
+    //       {
+    //         src: 'pwa-512.png',
+    //         sizes: '512x512',
+    //         type: 'image/png',
+    //         form_factor: 'narrow',
+    //         label: 'Homescreen of Awesome App1'
+    //       }
+    //     ],
+    //     background_color: '#ffffff',
+    //     theme_color: '#000000',
+    //     display: 'standalone'
+    //   },
+    //   srcDir: '/dev-dist',
+    //   filename: 'sw.js',
+    //   injectRegister: 'auto',
+    //   registerType: 'autoUpdate',
+    //   // 本地开启
+    //   // devOptions: {
+    //   //   enabled: true
+    //   // },
+    //   // 缓存配置
+    //   workbox: {
+    //     cleanupOutdatedCaches: true,
+    //     globPatterns: ['**/*.{js,css,html,ico,png,svg}']
+    //     // runtimeCaching: [
+    //     //   {
+    //     //     urlPattern: /someInterface/i, // 接口缓存 此处填你想缓存的接口正则匹配
+    //     //     handler: 'CacheFirst',
+    //     //     options: {
+    //     //       cacheName: 'interface-cache'
+    //     //     }
+    //     //   },
+    //     //   {
+    //     //     urlPattern: /(.*?)\.(js|css|ts)/, // js /css /ts静态资源缓存
+    //     //     handler: 'CacheFirst',
+    //     //     options: {
+    //     //       cacheName: 'js-css-cache'
+    //     //     }
+    //     //   },
+    //     //   {
+    //     //     urlPattern: /(.*?)\.(png|jpe?g|svg|gif|bmp|psd|tiff|tga|eps)/, // 图片缓存
+    //     //     handler: 'CacheFirst',
+    //     //     options: {
+    //     //       cacheName: 'image-cache'
+    //     //     }
+    //     //   }
+    //     // ]
+    //   }
+    // })
   ],
   resolve: {
     alias: {
