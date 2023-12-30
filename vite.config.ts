@@ -95,39 +95,41 @@ export default defineConfig({
         theme_color: '#000000',
         display: 'standalone'
       },
-      // injectRegister: 'inline',
+      srcDir: '/dev-dist',
+      filename: 'sw.js',
+      injectRegister: 'auto',
       registerType: 'autoUpdate',
       // 本地开启
-      // devOptions: {
-      //   enabled: true
-      // },
+      devOptions: {
+        enabled: true
+      },
       // 缓存配置
       workbox: {
-        cleanupOutdatedCaches: true,
+        //   cleanupOutdatedCaches: true,
         globPatterns: ['**/*.{js,css,html,ico,png,svg}']
-        // runtimeCaching: [
-        //   {
-        //     urlPattern: /someInterface/i, // 接口缓存 此处填你想缓存的接口正则匹配
-        //     handler: 'CacheFirst',
-        //     options: {
-        //       cacheName: 'interface-cache'
+        //   runtimeCaching: [
+        //     {
+        //       urlPattern: /someInterface/i, // 接口缓存 此处填你想缓存的接口正则匹配
+        //       handler: 'CacheFirst',
+        //       options: {
+        //         cacheName: 'interface-cache'
+        //       }
+        //     },
+        //     {
+        //       urlPattern: /(.*?)\.(js|css|ts)/, // js /css /ts静态资源缓存
+        //       handler: 'CacheFirst',
+        //       options: {
+        //         cacheName: 'js-css-cache'
+        //       }
+        //     },
+        //     {
+        //       urlPattern: /(.*?)\.(png|jpe?g|svg|gif|bmp|psd|tiff|tga|eps)/, // 图片缓存
+        //       handler: 'CacheFirst',
+        //       options: {
+        //         cacheName: 'image-cache'
+        //       }
         //     }
-        //   },
-        //   {
-        //     urlPattern: /(.*?)\.(js|css|ts)/, // js /css /ts静态资源缓存
-        //     handler: 'CacheFirst',
-        //     options: {
-        //       cacheName: 'js-css-cache'
-        //     }
-        //   },
-        //   {
-        //     urlPattern: /(.*?)\.(png|jpe?g|svg|gif|bmp|psd|tiff|tga|eps)/, // 图片缓存
-        //     handler: 'CacheFirst',
-        //     options: {
-        //       cacheName: 'image-cache'
-        //     }
-        //   }
-        // ]
+        //   ]
       }
     })
   ],
