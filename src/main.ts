@@ -10,8 +10,6 @@ import '@/assets/css/index.css'
 import 'element-plus/dist/index.css'
 import importAll from '@/components/importAll'
 
-registerSW({ immediate: true })
-
 const app = createApp(App)
 app.provide('router', router)
 app.provide('Cookies', Cookies)
@@ -23,3 +21,18 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 app.use(ElementPlus)
 
 app.use(router).use(pinia).use(importAll).mount('#app')
+registerSW({
+  onNeedRefresh() {
+    console.log('检测到新版本')
+  },
+  onOfflineReady() {
+    console.log('处于离线状态')
+  },
+  onRegisteredSW() {
+    console.log('注册sw成功')
+  },
+  onRegisterError() {
+    console.log('注册sw失败')
+  },
+  immediate: true
+})
