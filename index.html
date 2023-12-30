@@ -5,9 +5,16 @@
     <link rel="icon" type="image/svg+xml" href="./vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + Vue + TS</title>
-    <script type="module" crossorigin src="./index-LpBOFs2_.js"></script>
-    <link rel="stylesheet" crossorigin href="./index-0tf1Zeg6.css">
-  <link rel="manifest" href="./manifest.webmanifest"></head>
+    <script>
+      if('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js', { scope: '/' })
+        })
+      }
+    </script>
+    <script type="module" crossorigin src="./index-dXd2qA0s.js"></script>
+    <link rel="stylesheet" crossorigin href="./index-sqdx-aQW.css">
+  <link rel="manifest" href="./manifest.webmanifest"><script id="vite-plugin-pwa:inline-sw">if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('./sw.js', { scope: './' })})}</script></head>
   <body>
     <div id="app"></div>
   </body>
