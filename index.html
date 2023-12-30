@@ -6,17 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + Vue + TS</title>
     <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.getRegistrations().then((registrations) => {
-          registrations.forEach((registration) => {
-            registration.update();
-          });
-        });
-      }
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register(
+            import.meta.env.MODE === 'production' ? '/sw.js' : '/dev-sw.js?dev-sw',
+            { type: import.meta.env.MODE === 'production' ? 'classic' : 'module' }
+          )
+        }
     </script>
-    <script type="module" crossorigin src="./index-opDULTEL.js"></script>
-    <link rel="stylesheet" crossorigin href="./index-kXJNN-N-.css">
-  <link rel="manifest" href="./manifest.webmanifest"></head>
+    <script type="module" crossorigin src="./index-D6GARQ2f.js"></script>
+    <link rel="stylesheet" crossorigin href="./index-MYOkkbwE.css">
+  <link rel="manifest" href="./manifest.webmanifest"><script id="vite-plugin-pwa:inline-sw">if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('./sw.js', { scope: './' })})}</script></head>
   <body>
     <div id="app"></div>
   </body>
