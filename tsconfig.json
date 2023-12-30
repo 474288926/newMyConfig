@@ -15,7 +15,12 @@
     "jsx": "preserve",
     "sourceMap": true,
     "esModuleInterop": true,
-    "types": ["element-plus/global", "node", "vite-plugin-pwa/vue"],
+    "types": [
+      "element-plus/global",
+      "node",
+      "vite-plugin-pwa/vue",
+      "vite-plugin-pwa/client"
+    ],
     "allowJs": true,
     /* Linting */
     "strict": true,
