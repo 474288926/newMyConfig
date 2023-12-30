@@ -95,9 +95,11 @@ export default defineConfig({
         theme_color: '#000000',
         display: 'standalone'
       },
+      injectRegister: 'auto',
       registerType: 'autoUpdate',
       workbox: {
-        cleanupOutdatedCaches: true,
+        clientsClaim: true,
+        skipWaiting: true,
         runtimeCaching: [
           {
             urlPattern: /someInterface/i, // 接口缓存 此处填你想缓存的接口正则匹配
