@@ -97,7 +97,7 @@ export default defineConfig({
       },
       // srcDir: '/dev-dist',
       filename: 'sw.js',
-      injectRegister: 'auto',
+      injectRegister: null,
       registerType: 'autoUpdate',
       // 本地开启
       // devOptions: {
@@ -106,8 +106,6 @@ export default defineConfig({
       // 缓存配置
       workbox: {
         cleanupOutdatedCaches: true,
-        clientsClaim: true,
-        skipWaiting: true,
         globPatterns: ['**/*.{js,css,html,ico,png,svg}']
         // runtimeCaching: [
         //   {
@@ -147,13 +145,13 @@ export default defineConfig({
     assetsInlineLimit: 4096,
     // chunk 大小警告的限制
     chunkSizeWarningLimit: 500,
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: process.env.NODE_ENV === 'production',
-        drop_debugger: process.env.NODE_ENV === 'production'
-      }
-    }
+    minify: 'terser'
+    // terserOptions: {
+    //   compress: {
+    //     drop_console: process.env.NODE_ENV === 'production',
+    //     drop_debugger: process.env.NODE_ENV === 'production'
+    //   }
+    // }
   },
   server: {
     port: 4000, // 设置服务启动端口号
