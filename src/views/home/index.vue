@@ -182,7 +182,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import * as echarts from 'echarts'
 import * as jsonData from '../../../package.json'
 
@@ -253,9 +253,9 @@ const list1 = ref<Array<any>>([
 
 type EChartsOption = echarts.EChartsOption
 
-const areaChart = ref(null)
+const areaChart: any = ref(null)
 const areaChart1 = ref(null)
-
+const resizeObserver: any = ref(null)
 onMounted(() => {
   const myChart = echarts.init(areaChart.value)
 
@@ -310,6 +310,27 @@ onMounted(() => {
     ]
   }
   myChart1.setOption(option1)
+
+  resizeObserver.value = new ResizeObserver((entries) => {
+    // entries 包含观察到的元素信息
+    entries.forEach((entry) => {
+      // 获取新的宽度和高度
+      const newWidth = entry.contentRect.width
+      const newHeight = entry.contentRect.height
+      // 在这里更新图表的大小
+      myChart.resize({ width: newWidth, height: newHeight })
+      myChart1.resize({ width: newWidth, height: newHeight })
+    })
+  })
+  // 开始观察容器元素
+  resizeObserver.value.observe(areaChart.value)
+})
+
+// 在组件销毁前停止观察
+onUnmounted(() => {
+  if (resizeObserver.value) {
+    resizeObserver.value.disconnect()
+  }
 })
 </script>
 
