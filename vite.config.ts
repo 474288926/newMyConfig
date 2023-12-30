@@ -95,7 +95,7 @@ export default defineConfig({
         theme_color: '#000000',
         display: 'standalone'
       },
-      srcDir: '/dev-dist',
+      srcDir: process.env.NODE_ENV === 'production' ? '/' : '/dev-dist',
       filename: 'sw.js',
       injectRegister: 'auto',
       registerType: 'autoUpdate',
