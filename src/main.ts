@@ -3,7 +3,6 @@ import ElementPlus from 'element-plus'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import VueVerifyCode from 'vue-verify-code'
 import Cookies from 'js-cookie'
-import { registerSW } from 'virtual:pwa-register'
 import App from '@/App.vue'
 import router from '@/router/index'
 import pinia from '@/store/index'
@@ -11,10 +10,6 @@ import '@/assets/css/index.css'
 import 'element-plus/dist/index.css'
 import importAll from '@/components/importAll'
 
-const updateSW = registerSW({
-  onNeedRefresh() {},
-  onOfflineReady() {}
-})
 const app = createApp(App)
 app.component('VueVerifyCode', VueVerifyCode)
 app.provide('router', router)
@@ -27,4 +22,3 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 app.use(ElementPlus)
 
 app.use(router).use(pinia).use(importAll).mount('#app')
-updateSW()
