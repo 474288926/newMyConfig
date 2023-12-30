@@ -28,9 +28,8 @@ onMounted(() => {
   const material = new THREE.LineBasicMaterial({ color: 0x0000ff })
   const points: any = []
   points.push(new THREE.Vector3(-10, 0, 0))
-  points.push(new THREE.Vector3(0, 10, 10))
+  points.push(new THREE.Vector3(0, 10, 60))
   points.push(new THREE.Vector3(10, 0, 0))
-  console.log(123)
   const geometry = new THREE.BufferGeometry().setFromPoints(points)
   const line = new THREE.Line(geometry, material)
   scene.add(line)
