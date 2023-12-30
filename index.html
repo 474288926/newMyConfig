@@ -6,16 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + Vue + TS</title>
     <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js', { scope: '/' })
-      })
-        navigator.serviceWorker.getRegistrations().then((registrations) => {
-          registrations.forEach((registration) => {
-            registration.update();
-          });
-        });
-      }
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register(
+            import.meta.env.MODE === 'production' ? '/sw.js' : '/dev-sw.js?dev-sw',
+            { type: import.meta.env.MODE === 'production' ? 'classic' : 'module' }
+          )
+        }
     </script>
   </head>
   <body>
