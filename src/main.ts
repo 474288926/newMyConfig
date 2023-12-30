@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
 import ElementPlus from 'element-plus'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-import VueVerifyCode from 'vue-verify-code'
 import Cookies from 'js-cookie'
 import { registerSW } from 'virtual:pwa-register'
 import App from '@/App.vue'
@@ -14,7 +13,6 @@ import importAll from '@/components/importAll'
 registerSW({ immediate: true })
 
 const app = createApp(App)
-app.component('VueVerifyCode', VueVerifyCode)
 app.provide('router', router)
 app.provide('Cookies', Cookies)
 // eslint-disable-next-line no-restricted-syntax
