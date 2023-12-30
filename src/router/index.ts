@@ -80,6 +80,23 @@ const routes: Array<RouteRecordRaw> = [
     ]
   },
   {
+    path: '/three',
+    redirect: '/three/vue',
+    meta: { title: 'three.js', icon: 'bell' },
+    component: layout,
+    children: [
+      {
+        path: '/three/drawline',
+        name: 'vue',
+        meta: {
+          title: 'drawline',
+          icon: 'Lock'
+        },
+        component: () => import('@/views/three/drawline.vue')
+      }
+    ]
+  },
+  {
     // 当用户访问任何未匹配的路由时，将跳转到404页面
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
