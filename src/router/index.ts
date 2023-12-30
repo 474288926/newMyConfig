@@ -43,7 +43,7 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '/iframe/vue',
-        name: 'vue',
+        name: 'v-u-e',
         meta: {
           title: 'vue',
           icon: 'Lock'
@@ -108,12 +108,10 @@ const router = createRouter({
   routes
 })
 const whites = ['/login', '/register']
-router.beforeEach((to, from) => {
+router.beforeEach((to) => {
   NProgress.start()
   const Cookies: any = inject('Cookies')
-  console.log(123, to, from, Cookies.get('token'))
   const isToken = Cookies.get('token')
-  console.log('white:', !whites.includes(to.path))
   if (!isToken && !whites.includes(to.path)) {
     return '/login'
   }
