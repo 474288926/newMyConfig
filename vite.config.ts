@@ -95,7 +95,7 @@ export default defineConfig({
         theme_color: '#000000',
         display: 'standalone'
       },
-      srcDir: '/dist',
+      srcDir: '/newMyConfig',
       filename: 'sw.js',
       // injectRegister: 'inline',
       registerType: 'autoUpdate',
