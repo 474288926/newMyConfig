@@ -21,6 +21,14 @@ registerSW({
     console.log('注册sw成功')
     console.log('Service Worker 脚本 URL:', swScriptUrl)
     console.log('Service Worker 注册信息:', registration)
+    // 在这里添加自定义的更新逻辑
+    registration.installing?.addEventListener('statechange', (event: any) => {
+      if (event.target?.state === 'installed') {
+        // 新 Service Worker 安装完成，触发更新
+        console.log('有新文件，触发更新')
+        event.target.postMessage({ action: 'skipWaiting' })
+      }
+    })
   },
   onRegisterError() {
     console.log('注册sw失败')
