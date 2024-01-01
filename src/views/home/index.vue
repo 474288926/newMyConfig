@@ -182,25 +182,27 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { inject, onMounted, onUnmounted, ref } from 'vue'
 import * as echarts from 'echarts'
 import * as jsonData from '../../../package.json'
+
+const gsap: any = inject('gsap')
 
 const list = ref([
   {
     name: '总销量',
     sum: '13777.12',
-    number: '44'
+    number: '10'
   },
   {
     name: '活跃用户',
     sum: '1135',
-    number: '44'
+    number: '22'
   },
   {
     name: '总成交',
     sum: '8645342',
-    number: '44'
+    number: '14'
   },
   {
     name: '订单',
@@ -257,6 +259,12 @@ const areaChart: any = ref(null)
 const areaChart1 = ref(null)
 const resizeObserver: any = ref(null)
 onMounted(() => {
+  list.value.forEach((item) => {
+    gsap.to(item, {
+      sum: (Math.random() * 10000).toFixed(2)
+      // onUpdate: () => console.log('item.sum:', item.sum)
+    })
+  })
   const myChart = echarts.init(areaChart.value)
 
   const option: EChartsOption = {
