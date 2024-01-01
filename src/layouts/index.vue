@@ -54,7 +54,7 @@
       <NavBar :height="headerSize.height" :list="navList" :isCollapse="isCollapse" />
     </nav>
     <main
-      class="p-4 rounded-md overflow-auto absolute right-0 bg-slate-100 bottom-0"
+      class="p-4 rounded-md overflow-auto absolute right-0 bg-slate-100 bottom-0 flex flex-col justify-between gap-4"
       :style="{ left: navSize.width + 'px', top: headerSize.height + 'px' }"
     >
       <router-view v-slot="{ Component }">
@@ -64,6 +64,11 @@
           </keep-alive>
         </transition>
       </router-view>
+      <footer
+        class="border border-gray-200 p-4 rounded-md bg-white text-center font-light text-sm"
+      >
+        Copyright <span class="font-normal">(c)</span> 2024 My New Vue3
+      </footer>
     </main>
   </div>
 </template>

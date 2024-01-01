@@ -173,11 +173,6 @@
         </template>
       </el-card>
     </div>
-    <footer
-      class="border border-gray-200 p-4 rounded-md bg-white text-center font-light text-sm"
-    >
-      Copyright <span class="font-normal">(c)</span> 2024 My New Vue3
-    </footer>
   </div>
 </template>
 
