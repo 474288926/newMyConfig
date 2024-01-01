@@ -3,6 +3,7 @@ import ElementPlus from 'element-plus'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import Cookies from 'js-cookie'
 import { registerSW } from 'virtual:pwa-register'
+import { gsap } from 'gsap'
 import App from '@/App.vue'
 import router from '@/router/index'
 import pinia from '@/store/index'
@@ -39,6 +40,7 @@ const app: any = createApp(App)
 // 在应用程序挂载之前调用初始化函数
 app.provide('router', router)
 app.provide('Cookies', Cookies)
+app.provide('gsap', gsap)
 // eslint-disable-next-line no-restricted-syntax
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)

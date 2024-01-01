@@ -19,6 +19,7 @@
     "@vueuse/core": "^10.7.0",
     "echarts": "^5.4.3",
     "element-plus": "^2.4.3",
+    "gsap": "^3.12.4",
     "js-cookie": "^3.0.5",
     "nprogress": "^0.2.0",
     "pinia": "^2.1.7",
