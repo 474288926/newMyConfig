@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import { ElNotification } from 'element-plus'
 import { inject } from 'vue'
 import NProgress from 'nprogress'
 import layout from '@/layouts/index.vue'
@@ -118,6 +119,22 @@ router.beforeEach((to) => {
   return true
 })
 
+function getDayPeriod() {
+  const now = new Date()
+  const currentHour = now.getHours()
+
+  if (currentHour >= 5 && currentHour < 12) {
+    return '早上'
+  }
+  if (currentHour >= 12 && currentHour < 18) {
+    return '中午/下午'
+  }
+  if (currentHour >= 18 && currentHour < 24) {
+    return '晚上'
+  }
+  return '深夜'
+}
+
 router.afterEach(async (to, from) => {
   NProgress.done()
   if (!whites.includes(to.path) && to.name !== 'NotFound') {
@@ -128,6 +145,12 @@ router.afterEach(async (to, from) => {
     setBreadList(matched)
     setRouterList([{ path, meta }])
     setActiveRouteUrl(path)
+  }
+  if (from.path === '/login' && to.path === '/home') {
+    ElNotification.success({
+      title: `${getDayPeriod()}好!`,
+      message: '欢迎登陆My Vue'
+    })
   }
   console.log(to, from, '跳转成功:')
 })
