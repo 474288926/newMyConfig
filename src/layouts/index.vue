@@ -5,7 +5,7 @@
       class="fixed top-0 right-0 left-52 z-10 shadow-md bg-white"
       :style="{ left: navSize.width + 'px' }"
     >
-      <div class="flex items-end border-b p-2 border-b-gray-200">
+      <div class="flex items-center space-x-2 border-b p-2 border-b-gray-200">
         <div class="flex items-center mr-auto transition-all">
           <div class="mr-4 hidden sm:flex items-center">
             <el-icon
@@ -17,14 +17,18 @@
               <Download />
             </el-icon>
           </div>
-
           <BreadCrumbs :list="breadList" />
+        </div>
+        <div class="flex-1 flex items-center flex-row-reverse">
+          <el-icon class="refresh" ref="refresh" @click="onRefresh"
+            ><Refresh
+          /></el-icon>
         </div>
         <el-popover placement="bottom">
           <template #reference>
             <div class="flex items-center gap-4 cursor-pointer group">
               <el-avatar
-                :size="50"
+                :size="40"
                 src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
               />
               <div class="items-center gap-2 transition-all hidden sm:flex">
@@ -142,6 +146,19 @@ const Cookies: any = inject('Cookies')
 const onQuit = () => {
   Cookies.remove('token')
   router.replace('/login')
+}
+
+const gsap: any = inject('gsap')
+const refresh: any = ref(null)
+const onRefresh = () => {
+  gsap.to(refresh.value.$el, {
+    rotation: '+=360',
+    duration: 0.6
+  })
+  console.log(router)
+  router.replace({
+    path: '/blank'
+  })
 }
 </script>
 

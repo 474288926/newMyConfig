@@ -102,13 +102,18 @@ const routes: Array<RouteRecordRaw> = [
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: () => import('@/views/404.vue')
+  },
+  {
+    path: '/blank',
+    name: 'blank',
+    component: () => import('@/views/blank.vue')
   }
 ]
 const router = createRouter({
   history: createWebHashHistory(),
   routes
 })
-const whites = ['/login', '/register']
+const whites = ['/login', '/register', '/blank']
 router.beforeEach((to) => {
   NProgress.start()
   const Cookies: any = inject('Cookies')
@@ -151,6 +156,9 @@ router.afterEach(async (to, from) => {
       title: `${getDayPeriod()}好!`,
       message: '欢迎登陆My Vue'
     })
+  }
+  if (to.path === '/blank') {
+    router.replace(from.path)
   }
   console.log(to, from, '跳转成功:')
 })
