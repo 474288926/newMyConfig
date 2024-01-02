@@ -19,10 +19,11 @@
           </div>
           <BreadCrumbs :list="breadList" />
         </div>
-        <div class="flex-1 flex items-center flex-row-reverse">
-          <el-icon class="refresh" ref="refresh" @click="onRefresh"
-            ><Refresh
-          /></el-icon>
+        <div class="flex-1 flex items-center gap-2 flex-row-reverse">
+          <el-icon ref="refresh" @click="onRefresh"><Refresh /></el-icon>
+          <el-icon @click="toggleFullscreen">
+            <FullScreen />
+          </el-icon>
         </div>
         <el-popover placement="bottom">
           <template #reference>
@@ -155,10 +156,39 @@ const onRefresh = () => {
     rotation: '+=360',
     duration: 0.6
   })
-  console.log(router)
   router.replace({
     path: '/blank'
   })
+}
+
+const toggleFullscreen = () => {
+  const elem = document.documentElement as HTMLElement & {
+    mozRequestFullScreen?(): Promise<void>
+    webkitRequestFullscreen?(): Promise<void>
+    msRequestFullscreen?(): Promise<void>
+    mozCancelFullScreen?(): Promise<void>
+    exitFullscreen?(): Promise<void>
+  }
+  if (!document.fullscreenElement) {
+    // 请求全屏
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen()
+    } else if (elem.mozRequestFullScreen) {
+      elem.mozRequestFullScreen()
+    } else if (elem.webkitRequestFullscreen) {
+      elem.webkitRequestFullscreen()
+    } else if (elem.msRequestFullscreen) {
+      elem.msRequestFullscreen()
+    }
+  } else {
+    // 退出全屏
+    // eslint-disable-next-line no-lonely-if
+    if (document.exitFullscreen) {
+      document.exitFullscreen()
+    } else if (elem.mozCancelFullScreen) {
+      elem.mozCancelFullScreen()
+    }
+  }
 }
 </script>
 
