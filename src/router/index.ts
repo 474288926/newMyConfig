@@ -1,10 +1,8 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import { ElNotification } from 'element-plus'
 import { inject } from 'vue'
-import NProgress from 'nprogress'
 import layout from '@/layouts/index.vue'
 import useRouterStore from '@/store/router/index'
-import 'nprogress/nprogress.css'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -113,11 +111,13 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes
 })
+
 const whites = ['/login', '/register', '/blank']
 router.beforeEach((to) => {
-  NProgress.start()
-  const Cookies: any = inject('Cookies')
-  const isToken = Cookies.get('token')
+  const nprogress: any = inject('nprogress')
+  nprogress.start()
+  const cookies: any = inject('cookies')
+  const isToken = cookies.get('token')
   if (!isToken && !whites.includes(to.path)) {
     return '/login'
   }
@@ -141,7 +141,8 @@ function getDayPeriod() {
 }
 
 router.afterEach(async (to, from) => {
-  NProgress.done()
+  const nprogress: any = inject('nprogress')
+  nprogress.done()
   if (!whites.includes(to.path) && to.name !== 'NotFound') {
     const { path, meta, matched } = to
     const { setNavList, setBreadList, setRouterList, setActiveRouteUrl } =

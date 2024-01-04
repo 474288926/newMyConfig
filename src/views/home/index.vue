@@ -2,7 +2,7 @@
   <div class="flex flex-col gap-4 relative">
     <div class="grid gap-4 xl:grid-cols-4 lg:grid-cols-2">
       <el-card
-        shadow="always"
+        shadow="never"
         :body-style="{ padding: '12px' }"
         :class="{
           'bg-gradient-to-r from-blue-300 via-blue-400 to-blue-600': index === 0

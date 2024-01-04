@@ -78,6 +78,7 @@
       <el-card
         :body-style="{ padding: '12px' }"
         class="border rounded-md text-center font-light text-sm flex-shrink-0"
+        shadow="never"
       >
         Copyright <span class="font-normal">(c)</span> 2024 My New Vue3
       </el-card>
@@ -151,9 +152,9 @@ onUnmounted(() => {
   window.removeEventListener('resize', handleResize)
 })
 
-const Cookies: any = inject('Cookies')
+const cookies: any = inject('cookies')
 const onQuit = () => {
-  Cookies.remove('token')
+  cookies.remove('token')
   router.replace('/login')
 }
 
@@ -162,7 +163,7 @@ const refresh: any = ref(null)
 const onRefresh = () => {
   gsap.to(refresh.value.$el, {
     rotation: '+=360',
-    duration: 0.6,
+    duration: 0.3,
     onComplete: () => {
       router.replace({
         path: '/blank'

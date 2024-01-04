@@ -1,9 +1,10 @@
 import { createApp } from 'vue'
 import ElementPlus from 'element-plus'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-import Cookies from 'js-cookie'
+import cookies from 'js-cookie'
 import { registerSW } from 'virtual:pwa-register'
 import { gsap } from 'gsap'
+import NProgress from 'nprogress'
 import App from '@/App.vue'
 import router from '@/router/index'
 import pinia from '@/store/index'
@@ -11,7 +12,9 @@ import '@/assets/css/index.css'
 import 'element-plus/dist/index.css'
 import '@/assets/css/index.scss'
 import importAll from '@/components/importAll'
+import 'nprogress/nprogress.css'
 
+NProgress.configure({ showSpinner: false })
 registerSW({
   onNeedRefresh() {
     console.log('检测到新版本')
@@ -40,8 +43,9 @@ registerSW({
 const app: any = createApp(App)
 // 在应用程序挂载之前调用初始化函数
 app.provide('router', router)
-app.provide('Cookies', Cookies)
+app.provide('cookies', cookies)
 app.provide('gsap', gsap)
+app.provide('nprogress', NProgress)
 // eslint-disable-next-line no-restricted-syntax
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)

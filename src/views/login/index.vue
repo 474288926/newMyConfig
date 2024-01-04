@@ -61,7 +61,7 @@ import type { FormInstance, FormRules } from 'element-plus'
 import imageSrc from '@/assets/img/left_img_1-6d-jzRvB.png'
 
 const router: any = inject('router')
-const Cookies: any = inject('Cookies')
+const cookies: any = inject('cookies')
 const captchaValue = ref('')
 const verifyCode = ref()
 const getCode = (code: string) => {
@@ -113,7 +113,7 @@ const submit = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   await formEl.validate((valid, fields) => {
     if (valid) {
-      Cookies.set('token', 'John Doe', { expires: 7 })
+      cookies.set('token', 'John Doe', { expires: 7 })
       router.replace('/')
     } else {
       console.log('error submit!', fields)
