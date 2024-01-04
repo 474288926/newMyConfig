@@ -80,7 +80,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/three',
-    redirect: '/three/vue',
+    redirect: '/three/drawline',
     meta: { title: 'three.js', icon: 'bell' },
     component: layout,
     children: [

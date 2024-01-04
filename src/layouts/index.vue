@@ -20,7 +20,7 @@
           </div>
           <BreadCrumbs :list="breadList" />
         </div>
-        <div class="flex-1 flex items-center gap-2 flex-row-reverse">
+        <div class="flex-1 flex items-center gap-4 flex-row-reverse">
           <el-icon ref="refresh" @click="onRefresh"><Refresh /></el-icon>
           <el-icon @click="toggleFullscreen">
             <FullScreen />
@@ -31,9 +31,9 @@
             :inactive-action-icon="Sunny"
           />
         </div>
-        <el-popover placement="bottom">
+        <el-popover placement="bottom" :popper-style="{ padding: 0 }">
           <template #reference>
-            <div class="flex items-center gap-4 cursor-pointer group">
+            <div class="flex items-center gap-4 cursor-pointer group px-4">
               <el-avatar
                 :size="40"
                 src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
@@ -46,9 +46,14 @@
               </div>
             </div>
           </template>
-          <div class="cursor-pointer flex items-center gap-2" @click="onQuit">
-            <el-icon><Right /></el-icon>
-            <span>{{ '退出登陆' }}</span>
+          <div class="py-1">
+            <div
+              class="cursor-pointer flex items-center px-4 gap-2 py-2 hover:bg-blue-50 hover:text-blue-700 dark:hover:bg-blue-400/10"
+              @click="onQuit"
+            >
+              <el-icon><Right /></el-icon>
+              <span class="tracking-wider">{{ '退出登陆' }}</span>
+            </div>
           </div>
         </el-popover>
       </div>
@@ -71,7 +76,7 @@
       <router-view v-slot="{ Component }">
         <transition name="slide" mode="out-in">
           <keep-alive>
-            <component :is="Component" />
+            <component class="relative" :is="Component" />
           </keep-alive>
         </transition>
       </router-view>
