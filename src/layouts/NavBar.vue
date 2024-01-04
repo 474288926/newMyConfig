@@ -5,12 +5,9 @@
   >
     <el-menu
       :default-active="router.currentRoute.value.path || ''"
-      active-text-color="#ffd04b"
       router
       :collapse="isCollapse"
-      background-color="rgb(39 39 42)"
       class="el-menu-vertical-demo"
-      text-color="#fff"
       @open="handleOpen"
       @close="handleClose"
     >

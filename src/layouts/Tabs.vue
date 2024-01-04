@@ -52,7 +52,7 @@ const removeTab = (val: any) => {
   border: none !important;
 }
 :deep().el-tabs__item {
-  border: 1px solid #e9e9e9 !important;
+  border: 0.5px solid var(--el-border-color-light) !important;
   border-radius: 4px;
   height: 34px;
 }

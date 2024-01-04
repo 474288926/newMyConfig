@@ -2,15 +2,16 @@
   <div class="relative max-w-screen min-h-screen">
     <header
       ref="header"
-      class="fixed top-0 right-0 left-52 z-10 shadow-md bg-white"
+      class="fixed top-0 right-0 left-52 z-10 bg-white dark:bg-transparent"
       :style="{ left: navSize.width + 'px' }"
     >
-      <div class="flex items-center space-x-2 border-b p-2 border-b-gray-200">
+      <div
+        class="flex items-center gap-1 p-2 border border-l-0 border-t-0 dark:border-[#58585B]"
+      >
         <div class="flex items-center mr-auto transition-all">
           <div class="mr-4 hidden sm:flex items-center">
             <el-icon
               :class="[!isCollapse ? 'rotate-90' : '-rotate-90']"
-              color="#494A4D"
               size="20"
               @click="isCollapse = !isCollapse"
             >
@@ -24,6 +25,11 @@
           <el-icon @click="toggleFullscreen">
             <FullScreen />
           </el-icon>
+          <el-switch
+            v-model="isDark"
+            :active-action-icon="Moon"
+            :inactive-action-icon="Sunny"
+          />
         </div>
         <el-popover placement="bottom">
           <template #reference>
@@ -46,20 +52,20 @@
           </div>
         </el-popover>
       </div>
-      <Tabs :list="routerList" />
+      <Tabs class="border-b border-r dark:border-[#58585B]" :list="routerList" />
     </header>
     <nav
       ref="nav"
-      class="fixed left-0 top-0 h-screen z-100 text-white text-sm bg-zinc-800 transition-all"
+      class="fixed left-0 top-0 h-screen z-50 text-white text-sm transition-all border-r dark:border-[#58585B]"
       :class="[isCollapse ? 'w-14' : 'w-52']"
     >
-      <div :style="{ height: headerSize.height + 1 + 'px' }">
+      <div :style="{ height: headerSize.height + 'px' }">
         <logo v-if="!isCollapse"></logo>
       </div>
       <NavBar :height="headerSize.height" :list="navList" :isCollapse="isCollapse" />
     </nav>
     <main
-      class="p-4 rounded-md overflow-auto absolute right-0 bg-slate-100 bottom-0 flex flex-col justify-between gap-4"
+      class="p-4 overflow-auto absolute right-0 bg-slate-100 dark:bg-transparent bottom-0 flex flex-col justify-between gap-4"
       :style="{ left: navSize.width + 'px', top: headerSize.height + 'px' }"
     >
       <router-view v-slot="{ Component }">
@@ -69,19 +75,21 @@
           </keep-alive>
         </transition>
       </router-view>
-      <footer
-        class="border border-gray-200 p-4 rounded-md bg-white text-center font-light text-sm"
+      <el-card
+        :body-style="{ padding: '12px' }"
+        class="border rounded-md text-center font-light text-sm flex-shrink-0"
       >
         Copyright <span class="font-normal">(c)</span> 2024 My New Vue3
-      </footer>
+      </el-card>
     </main>
   </div>
 </template>
 
 <script setup lang="ts">
 import { inject, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
-import { useElementSize } from '@vueuse/core'
+import { useDark, useElementSize } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
+import { Moon, Sunny } from '@element-plus/icons-vue'
 import useRouterStore from '@/store/router/index'
 import NavBar from '@/layouts/NavBar.vue'
 import Logo from '@/layouts/Logo.vue'
@@ -154,10 +162,12 @@ const refresh: any = ref(null)
 const onRefresh = () => {
   gsap.to(refresh.value.$el, {
     rotation: '+=360',
-    duration: 0.6
-  })
-  router.replace({
-    path: '/blank'
+    duration: 0.6,
+    onComplete: () => {
+      router.replace({
+        path: '/blank'
+      })
+    }
   })
 }
 
@@ -190,6 +200,8 @@ const toggleFullscreen = () => {
     }
   }
 }
+
+const isDark = useDark()
 </script>
 
 <style scoped>

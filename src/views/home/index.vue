@@ -1,47 +1,54 @@
 <template>
   <div class="flex flex-col gap-4 relative">
     <div class="grid gap-4 xl:grid-cols-4 lg:grid-cols-2">
-      <div
-        class="h-40 flex-1 border border-b-gray-200 rounded-md bg-white text-sm p-5 flex flex-col"
-        v-for="(item, index) in list"
+      <el-card
+        shadow="always"
+        :body-style="{ padding: '12px' }"
         :class="{
-          'bg-gradient-to-r from-blue-300 via-blue-400 to-blue-600 text-white':
-            index === 0
+          'bg-gradient-to-r from-blue-300 via-blue-400 to-blue-600': index === 0
         }"
+        v-for="(item, index) in list"
         :key="index"
       >
-        <span>{{ item.name }}</span>
-        <p class="flex-1 text-2xl tracking-wider flex items-center">
-          <span v-if="index === 0">¥</span> {{ item.sum }}
-        </p>
-        <div class="flex flex-row items-center">
-          <span>自上周已来</span>
-          <div
-            class="rounded-full h-4 w-4 mx-1"
-            :class="[index === 0 ? 'bg-white' : 'bg-green-200']"
-          >
-            <el-icon
-              style="padding: 2px"
-              :color="index === 0 ? 'rgb(96 165 250)' : 'rgb(94 180 55)'"
-              ><Top
-            /></el-icon>
+        <div
+          class="h-40 flex-1 rounded-md text-sm flex flex-col p-5"
+          :class="{
+            'text-white': index === 0
+          }"
+        >
+          <span>{{ item.name }}</span>
+          <p class="flex-1 text-2xl tracking-wider flex items-center">
+            <span v-if="index === 0">¥</span> {{ item.sum }}
+          </p>
+          <div class="flex flex-row items-center">
+            <span>自上周已来</span>
+            <div
+              class="rounded-full h-4 w-4 mx-1"
+              :class="[index === 0 ? 'bg-white' : 'bg-green-200']"
+            >
+              <el-icon
+                style="padding: 2px"
+                :color="index === 0 ? 'rgb(96 165 250)' : 'rgb(94 180 55)'"
+                ><Top
+              /></el-icon>
+            </div>
+            <span>{{ item.number }}%</span>
           </div>
-          <span>{{ item.number }}%</span>
         </div>
-      </div>
+      </el-card>
     </div>
     <div class="grid xl:grid-cols-2 gap-4">
       <el-card shadow="never">
         <template #header>
           <div class="flex flex-row items-center gap-1">
-            <el-icon color="blue"><Paperclip /></el-icon>
+            <el-icon color="blue" class="dark:text-blue-300"><Paperclip /></el-icon>
             <span class="font-semibold">待处理</span>
             <el-badge :value="6" :max="99"> </el-badge>
           </div>
         </template>
         <div class="flex flex-col gap-2 lg:flex-row">
           <div
-            class="flex-1 px-5 py-8 flex flex-row lg: gap-4 bg-gradient-to-r from-red-100 via-red-50 to-white rounded-md"
+            class="flex-1 px-5 py-8 flex flex-row gap-4 bg-gradient-to-r from-red-100 via-red-50/25 to-transparent dark:from-red-500/25 rounded-md"
           >
             <div class="w-3 rounded-xl bg-red-600 flex-shrink-0"></div>
             <div class="flex flex-col gap-4">
@@ -52,7 +59,9 @@
                 </p>
               </div>
               <div class="text-sm font-light">
-                <p class="whitespace-normal overflow-wrap break-all">
+                <p
+                  class="whitespace-normal overflow-wrap break-all text-gray-600 dark:text-white"
+                >
                   <el-tag class="-mt-2 mr-1">完成中</el-tag>
                   预警原因:用户投诉发货不及时
                 </p>
@@ -60,7 +69,7 @@
             </div>
           </div>
           <div
-            class="flex-1 px-5 py-8 flex flex-row gap-4 bg-gradient-to-r from-blue-100 via-blue-50 to-white rounded-md"
+            class="flex-1 px-5 py-8 flex flex-row gap-4 bg-gradient-to-r from-blue-100 via-blue-50 to-transparent dark:from-blue-500/25 rounded-md"
           >
             <div class="w-3 rounded-xl bg-blue-600 flex-shrink-0"></div>
             <div class="flex flex-col gap-4">
@@ -71,7 +80,9 @@
                 </p>
               </div>
               <div class="text-sm font-light">
-                <p class="whitespace-normal overflow-wrap break-all">
+                <p
+                  class="whitespace-normal overflow-wrap break-all text-gray-600 dark:text-white"
+                >
                   <el-tag class="-mt-2 mr-1" type="danger">未完成</el-tag>
                   订单号:202231644258421
                 </p>
@@ -83,19 +94,41 @@
       <el-card shadow="never">
         <template #header>
           <div class="flex flex-row items-center gap-1">
-            <el-icon color="blue"><Warning /></el-icon>
+            <el-icon color="blue" class="dark:text-blue-300"><Warning /></el-icon>
             <span class="font-semibold">信息</span>
           </div>
         </template>
-        <div class="overflow-auto w-full">
-          <div class="flex flex-row flex-wrap">
+        <div class="flex flex-row items-center flex-wrap overflow-y-auto">
+          <div class="flex flex-row flex-nowrap items-center border-r">
             <div
-              v-for="(value, key) in jsonData.dependencies"
+              v-for="(value, key, index) in jsonData.dependencies"
               :key="key"
-              class="flex-shrink-0 text-xs w-72 flex flex-row"
+              v-show="isEven(index)"
+              class="text-xs flex flex-row"
+            >
+              <div class="p-2 w-40 font-bold text-center flex-1 border flex-shrink-0">
+                {{
+                  key.split('/').length > 1
+                    ? key.split('/')[1].replace('@', '')
+                    : key.split('/')[0].replace('@', '')
+                }}
+              </div>
+              <div
+                class="p-2 w-10 flex-1 flex items-center border border-l-0 border-r-0"
+              >
+                {{ value.replace('^', '') }}
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-row flex-nowrap items-center border-r">
+            <div
+              v-for="(value, key, index) in jsonData.dependencies"
+              :key="key"
+              v-show="!isEven(index)"
+              class="text-xs flex flex-row"
             >
               <div
-                class="border border-slate-300 p-2 font-bold flex-1 flex items-center"
+                class="p-2 w-40 font-bold text-center flex-1 border border-t-0 flex-shrink-0"
               >
                 {{
                   key.split('/').length > 1
@@ -103,10 +136,16 @@
                     : key.split('/')[0].replace('@', '')
                 }}
               </div>
-              <div class="border border-slate-300 p-2 flex-1 flex items-center">
+              <div
+                class="p-2 w-10 flex-1 flex items-center border border-t-0 border-l-0 border-r-0"
+              >
                 {{ value.replace('^', '') }}
               </div>
             </div>
+          </div>
+          <div class="py-2">
+            <el-button type="primary" icon="Cpu">测试</el-button>
+            <el-button type="danger" icon="Cpu">测试</el-button>
           </div>
         </div>
       </el-card>
@@ -114,7 +153,7 @@
     <el-card shadow="never">
       <template #header>
         <div class="flex flex-row items-center gap-1">
-          <el-icon color="blue"><DataAnalysis /></el-icon>
+          <el-icon color="blue" class="dark:text-blue-300"><DataAnalysis /></el-icon>
           <span class="font-semibold">经营建议</span>
         </div>
       </template>
@@ -122,12 +161,12 @@
         class="grid grid-cols-2 grid-rows-4 md:grid-cols-3 md:grid-rows-3 lg:grid-cols-4 lg:grid-rows-2"
       >
         <div
-          class="h-16 flex flex-row gap-2 items-center"
+          class="h-16 flex ftw-lex-row gap-2 items-center"
           v-for="item in list1"
           :key="item.name"
         >
           <div
-            class="group bg-blue-50 w-12 h-12 rounded-md flex justify-center items-center hover:bg-blue-400"
+            class="group bg-blue-50 dark:bg-opacity-5 w-12 h-12 rounded-md flex justify-center items-center hover:bg-blue-400 dark:hover:bg-opacity-50"
           >
             <el-icon :size="28"
               ><component
@@ -148,7 +187,7 @@
       <el-card shadow="never">
         <template #header>
           <div class="flex flex-row items-center gap-1">
-            <el-icon color="blue"><DataLine /></el-icon>
+            <el-icon color="blue" class="dark:text-blue-300"><DataLine /></el-icon>
             <span class="font-semibold">流量概括</span>
           </div>
         </template>
@@ -163,7 +202,7 @@
       <el-card shadow="never">
         <template #header>
           <div class="flex flex-row items-center gap-1">
-            <el-icon color="blue"><TrendCharts /></el-icon>
+            <el-icon color="blue" class="dark:text-blue-300"><TrendCharts /></el-icon>
             <span class="font-semibold">授权数</span>
           </div>
         </template>
@@ -182,6 +221,13 @@ import * as echarts from 'echarts'
 import * as jsonData from '../../../package.json'
 
 const gsap: any = inject('gsap')
+
+const isEven = (number: number) => {
+  if (number % 2 === 0) {
+    return true
+  }
+  return false
+}
 
 const list = ref([
   {

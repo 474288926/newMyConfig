@@ -9,6 +9,7 @@ import router from '@/router/index'
 import pinia from '@/store/index'
 import '@/assets/css/index.css'
 import 'element-plus/dist/index.css'
+import '@/assets/css/index.scss'
 import importAll from '@/components/importAll'
 
 registerSW({
