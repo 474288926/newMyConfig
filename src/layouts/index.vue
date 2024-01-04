@@ -70,6 +70,7 @@
       <NavBar :height="headerSize.height" :list="navList" :isCollapse="isCollapse" />
     </nav>
     <main
+      id="scrollbar"
       class="p-4 overflow-auto absolute right-0 bg-slate-100 dark:bg-transparent bottom-0 flex flex-col justify-between gap-4"
       :style="{ left: navSize.width + 'px', top: headerSize.height + 'px' }"
     >
@@ -80,6 +81,7 @@
           </keep-alive>
         </transition>
       </router-view>
+      <el-backtop target="#scrollbar" :right="40" :bottom="100" />
       <el-card
         :body-style="{ padding: '12px' }"
         class="border rounded-md text-center font-light text-sm flex-shrink-0"

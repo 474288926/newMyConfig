@@ -5,7 +5,8 @@
         shadow="never"
         :body-style="{ padding: '12px' }"
         :class="{
-          'bg-gradient-to-r from-blue-300 via-blue-400 to-blue-600': index === 0
+          'bg-gradient-to-r from-blue-400  to-blue-700 dark:from-blue-700  dark:to-blue-400 transition-all':
+            index === 0
         }"
         v-for="(item, index) in list"
         :key="index"
