@@ -13,3 +13,7 @@ declare module '@/components/importAll' {
   // eslint-disable-next-line no-unused-vars
   export default function importAll(app: App): void
 }
+declare module 'element-plus/dist/locale/zh-cn.mjs' {
+  const zhCN: Record<string, string>
+  export default zhCN
+}

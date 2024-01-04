@@ -5,6 +5,7 @@ import cookies from 'js-cookie'
 import { registerSW } from 'virtual:pwa-register'
 import { gsap } from 'gsap'
 import NProgress from 'nprogress'
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import App from '@/App.vue'
 import router from '@/router/index'
 import pinia from '@/store/index'
@@ -51,6 +52,8 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
 
-app.use(ElementPlus)
+app.use(ElementPlus, {
+  locale: zhCn
+})
 
 app.use(router).use(pinia).use(importAll).mount('#app')
