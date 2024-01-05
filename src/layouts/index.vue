@@ -18,7 +18,7 @@
               <Download />
             </el-icon>
           </div>
-          <BreadCrumbs :list="breadList" />
+          <BreadCrumbs class="hidden sm:block" :list="breadList" />
         </div>
         <div class="flex-1 flex items-center gap-4 flex-row-reverse">
           <el-icon ref="refresh" @click="onRefresh"><Refresh /></el-icon>
