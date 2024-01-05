@@ -30,6 +30,7 @@
             :active-action-icon="Moon"
             :inactive-action-icon="Sunny"
           />
+          <el-button type="primary" size="default" @click="midTest">接口测试</el-button>
         </div>
         <el-popover placement="bottom" :popper-style="{ padding: 0 }">
           <template #reference>
@@ -103,10 +104,15 @@ import NavBar from '@/layouts/NavBar.vue'
 import Logo from '@/layouts/Logo.vue'
 import BreadCrumbs from '@/layouts/BreadCrumbs.vue'
 import Tabs from '@/layouts/Tabs.vue'
+import { apiTest } from '@/api/test'
 // 定义元素大小的类型
 interface Size {
   width: number
   height: number
+}
+const midTest = async () => {
+  const res = await apiTest()
+  console.log('接口测试', res)
 }
 
 const router: any = inject('router')

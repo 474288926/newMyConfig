@@ -14,6 +14,7 @@ import 'element-plus/dist/index.css'
 import '@/assets/css/index.scss'
 import importAll from '@/components/importAll'
 import 'nprogress/nprogress.css'
+import request from '@/api/requiest'
 
 NProgress.configure({ showSpinner: false })
 registerSW({
@@ -47,6 +48,7 @@ app.provide('router', router)
 app.provide('cookies', cookies)
 app.provide('gsap', gsap)
 app.provide('nprogress', NProgress)
+app.provide('request', request)
 // eslint-disable-next-line no-restricted-syntax
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
