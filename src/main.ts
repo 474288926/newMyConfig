@@ -42,7 +42,9 @@ registerSW({
   },
   immediate: true
 })
+
 const app: any = createApp(App)
+
 // 在应用程序挂载之前调用初始化函数
 app.provide('router', router)
 app.provide('cookies', cookies)

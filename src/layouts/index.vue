@@ -74,6 +74,7 @@
       id="scrollbar"
       class="p-4 overflow-auto absolute right-0 bg-slate-100 dark:bg-transparent bottom-0 flex flex-col justify-between gap-4"
       :style="{ left: navSize.width + 'px', top: headerSize.height + 'px' }"
+      v-loading="isLoading"
     >
       <router-view v-slot="{ Component }">
         <transition name="slide" mode="out-in">
@@ -95,7 +96,15 @@
 </template>
 
 <script setup lang="ts">
-import { inject, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
+import {
+  inject,
+  onBeforeUnmount,
+  onMounted,
+  onUnmounted,
+  reactive,
+  ref,
+  watch
+} from 'vue'
 import { useDark, useElementSize } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
 import { Moon, Sunny } from '@element-plus/icons-vue'
@@ -105,14 +114,22 @@ import Logo from '@/layouts/Logo.vue'
 import BreadCrumbs from '@/layouts/BreadCrumbs.vue'
 import Tabs from '@/layouts/Tabs.vue'
 import { apiTest } from '@/api/test'
+import useConfigStore from '@/store/config'
+
+const storeConfig = useConfigStore()
+const { isLoading } = storeToRefs(storeConfig)
 // 定义元素大小的类型
 interface Size {
   width: number
   height: number
 }
+const controller = new AbortController()
+const { signal } = controller
 const midTest = async () => {
-  const res = await apiTest()
+  storeConfig.setLoading(true)
+  const res = await apiTest(signal)
   console.log('接口测试', res)
+  storeConfig.setLoading(false)
 }
 
 const router: any = inject('router')
@@ -159,6 +176,11 @@ onMounted(() => {
   handleResize()
   window.addEventListener('resize', handleResize)
 })
+// 在组件销毁前取消请求
+onBeforeUnmount(() => {
+  controller.abort()
+  storeConfig.setLoading(false)
+})
 
 // 在组件销毁时移除窗口大小变化的监听器
 onUnmounted(() => {
@@ -173,7 +195,7 @@ const onQuit = () => {
 
 const gsap: any = inject('gsap')
 const refresh: any = ref(null)
-const onRefresh = () => {
+const onRefresh = async () => {
   gsap.to(refresh.value.$el, {
     rotation: '+=360',
     duration: 0.3,
