@@ -8,7 +8,9 @@ const useConfigStore = defineStore('config', () => {
   const setLoading = (val: boolean) => {
     isLoading.value = val
   }
-  const isCollapse = ref<boolean>(Boolean(cookies.get('isCollapse'))) // 控制nav
+  const isCollapse = ref<boolean>(
+    !!(cookies.get('isCollapse') && cookies.get('isCollapse') === 'true')
+  ) // 控制nav
   const toggleCollapse = (val?: boolean) => {
     if (val) {
       isCollapse.value = val
@@ -18,7 +20,9 @@ const useConfigStore = defineStore('config', () => {
     cookies.set('isCollapse', isCollapse.value)
   }
 
-  const isIntro = ref<boolean>(Boolean(cookies.get('isIntro')))
+  const isIntro = ref<boolean>(
+    !!(cookies.get('isIntro') && cookies.get('isIntro') === 'true')
+  )
   const setIntro = () => {
     isIntro.value = true
     cookies.set('isIntro', isIntro.value)
