@@ -4,4 +4,9 @@
 
 <script setup lang="ts"></script>
 
-<style scoped></style>
+<style>
+.dark .introjs-tooltiptext,
+.introjs-tooltip-title {
+  color: #000;
+}
+</style>

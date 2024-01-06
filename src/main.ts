@@ -6,6 +6,7 @@ import { registerSW } from 'virtual:pwa-register'
 import { gsap } from 'gsap'
 import NProgress from 'nprogress'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
+import introJs from 'intro.js'
 import App from '@/App.vue'
 import router from '@/router/index'
 import pinia from '@/store/index'
@@ -15,6 +16,7 @@ import '@/assets/css/index.scss'
 import importAll from '@/components/importAll'
 import 'nprogress/nprogress.css'
 import request from '@/api/requiest'
+import 'intro.js/introjs.css'
 
 NProgress.configure({ showSpinner: false })
 registerSW({
@@ -51,6 +53,7 @@ app.provide('cookies', cookies)
 app.provide('gsap', gsap)
 app.provide('nprogress', NProgress)
 app.provide('request', request)
+app.provide('introJs', introJs)
 // eslint-disable-next-line no-restricted-syntax
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)

@@ -5,8 +5,11 @@
       class="fixed top-0 right-0 left-52 z-10 bg-white dark:bg-transparent"
       :style="{ left: navSize.width + 'px' }"
     >
-      <y-header />
-      <Tabs class="border-b border-r dark:border-[#58585B]" :list="routerList" />
+      <y-header class="introHeader" />
+      <Tabs
+        class="border-b border-r dark:border-[#58585B] introTab"
+        :list="routerList"
+      />
     </header>
     <nav
       ref="nav"
@@ -14,13 +17,18 @@
       :class="[isCollapse ? 'w-14' : 'w-52']"
     >
       <div :style="{ height: headerSize.height + 'px' }">
-        <Logo v-if="!isCollapse"></Logo>
+        <Logo class="introLogo" v-if="!isCollapse"></Logo>
       </div>
-      <NavBar :height="headerSize.height" :list="navList" :isCollapse="isCollapse" />
+      <NavBar
+        class="introNavBar"
+        :height="headerSize.height"
+        :list="navList"
+        :isCollapse="isCollapse"
+      />
     </nav>
     <main
       id="scrollbar"
-      class="p-4 overflow-auto absolute right-0 bg-slate-100 dark:bg-transparent bottom-0 flex flex-col justify-between gap-4"
+      class="introMain p-4 overflow-auto absolute right-0 bg-slate-100 dark:bg-transparent bottom-0 flex flex-col justify-between gap-4"
       :style="{ left: navSize.width + 'px', top: headerSize.height + 'px' }"
       v-loading="isLoading"
     >
@@ -44,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, reactive, ref, watch } from 'vue'
+import { inject, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
 import { useElementSize } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
 import NavBar from '@/layouts/NavBar.vue'
@@ -54,8 +62,9 @@ import YHeader from '@/layouts/YHeader.vue'
 import useConfigStore from '@/store/config'
 import useRouterStore from '@/store/router/index'
 
+const introJs: any = inject('introJs')
 const storeConfig = useConfigStore()
-const { isLoading, isCollapse } = storeToRefs(storeConfig)
+const { isLoading, isCollapse, isIntro } = storeToRefs(storeConfig)
 // 定义元素大小的类型
 interface Size {
   width: number
@@ -101,6 +110,54 @@ function handleResize() {
 
 // 在组件挂载时添加窗口大小变化的监听器
 onMounted(() => {
+  if (!isIntro.value) {
+    introJs()
+      .setOptions({
+        disableInteraction: true,
+        steps: [
+          {
+            title: 'Welcome',
+            intro: 'Hello World! 这是一个操作引导👋',
+            label: '第一步'
+          },
+          {
+            title: '引导操作！',
+            element: document.querySelector('.introHeader'),
+            intro: '小操作：刷新、dark模式切换、折叠侧边栏、面包屑、退出登陆'
+          },
+          {
+            title: '引导操作！',
+            element: document.querySelector('.introTab'),
+            intro: '当前缓存页面'
+          },
+          {
+            title: '引导操作！',
+            element: document.querySelector('.introLogo'),
+            intro: 'logo'
+          },
+          {
+            title: '引导操作！',
+            element: document.querySelector('.introNavBar'),
+            intro: '导航栏'
+          },
+          {
+            title: '引导操作！',
+            element: document.querySelector('.introMain'),
+            intro: '主体内容'
+          }
+        ],
+        nextLabel: '下一步', // 修改下一步按钮文字
+        prevLabel: '上一步',
+        doneLabel: '完成引导'
+      })
+      .onbeforeexit(() => {
+        // 在引导结束前触发的事件
+        // 在这里保存用户状态，比如使用localStorage
+        storeConfig.setIntro()
+      })
+      .start()
+  }
+
   handleResize()
   window.addEventListener('resize', handleResize)
 })
