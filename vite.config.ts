@@ -137,6 +137,13 @@ export default defineConfig({
       '@': resolve(__dirname, 'src') // 设置 `@` 指向 `src` 目录
     }
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@use "@/assets/css/element/index.scss" as *;`
+      }
+    }
+  },
   base: './', // 设置打包路径
   build: {
     assetsDir: './',
