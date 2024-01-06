@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col gap-4 relative">
-    <div class="grid gap-4 xl:grid-cols-4 lg:grid-cols-2">
+    <div class="grid gap-4 xl:grid-cols-4 md:grid-cols-2">
       <el-card
         shadow="never"
         :body-style="{ padding: '12px' }"

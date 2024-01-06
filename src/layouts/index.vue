@@ -5,59 +5,7 @@
       class="fixed top-0 right-0 left-52 z-10 bg-white dark:bg-transparent"
       :style="{ left: navSize.width + 'px' }"
     >
-      <div
-        class="flex items-center gap-1 p-2 border border-l-0 border-t-0 dark:border-[#58585B]"
-      >
-        <div class="flex items-center mr-auto transition-all">
-          <div class="mr-4 hidden sm:flex items-center">
-            <el-icon
-              :class="[!isCollapse ? 'rotate-90' : '-rotate-90']"
-              size="20"
-              @click="isCollapse = !isCollapse"
-            >
-              <Download />
-            </el-icon>
-          </div>
-          <BreadCrumbs class="hidden sm:block" :list="breadList" />
-        </div>
-        <div class="flex-1 flex items-center gap-4 flex-row-reverse">
-          <el-icon ref="refresh" @click="onRefresh"><Refresh /></el-icon>
-          <el-icon @click="toggleFullscreen">
-            <FullScreen />
-          </el-icon>
-          <el-switch
-            v-model="isDark"
-            :active-action-icon="Moon"
-            :inactive-action-icon="Sunny"
-          />
-          <el-button type="primary" size="default" @click="midTest">接口测试</el-button>
-        </div>
-        <el-popover placement="bottom" :popper-style="{ padding: 0 }">
-          <template #reference>
-            <div class="flex items-center gap-4 cursor-pointer group px-4">
-              <el-avatar
-                :size="40"
-                src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-              />
-              <div class="items-center gap-2 transition-all hidden sm:flex">
-                <span>admin</span>
-                <el-icon class="transition-all group-hover:rotate-180" size="12">
-                  <ArrowDownBold />
-                </el-icon>
-              </div>
-            </div>
-          </template>
-          <div class="py-1">
-            <div
-              class="cursor-pointer flex items-center px-4 gap-2 py-2 hover:bg-blue-50 hover:text-blue-700 dark:hover:bg-blue-400/10"
-              @click="onQuit"
-            >
-              <el-icon><Right /></el-icon>
-              <span class="tracking-wider">{{ '退出登陆' }}</span>
-            </div>
-          </div>
-        </el-popover>
-      </div>
+      <y-header />
       <Tabs class="border-b border-r dark:border-[#58585B]" :list="routerList" />
     </header>
     <nav
@@ -66,7 +14,7 @@
       :class="[isCollapse ? 'w-14' : 'w-52']"
     >
       <div :style="{ height: headerSize.height + 'px' }">
-        <logo v-if="!isCollapse"></logo>
+        <Logo v-if="!isCollapse"></Logo>
       </div>
       <NavBar :height="headerSize.height" :list="navList" :isCollapse="isCollapse" />
     </nav>
@@ -96,43 +44,24 @@
 </template>
 
 <script setup lang="ts">
-import {
-  inject,
-  onBeforeUnmount,
-  onMounted,
-  onUnmounted,
-  reactive,
-  ref,
-  watch
-} from 'vue'
-import { useDark, useElementSize } from '@vueuse/core'
+import { onMounted, onUnmounted, reactive, ref, watch } from 'vue'
+import { useElementSize } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
-import { Moon, Sunny } from '@element-plus/icons-vue'
-import useRouterStore from '@/store/router/index'
 import NavBar from '@/layouts/NavBar.vue'
 import Logo from '@/layouts/Logo.vue'
-import BreadCrumbs from '@/layouts/BreadCrumbs.vue'
 import Tabs from '@/layouts/Tabs.vue'
-import { apiTest } from '@/api/test'
+import YHeader from '@/layouts/YHeader.vue'
 import useConfigStore from '@/store/config'
+import useRouterStore from '@/store/router/index'
 
 const storeConfig = useConfigStore()
-const { isLoading } = storeToRefs(storeConfig)
+const { isLoading, isCollapse } = storeToRefs(storeConfig)
 // 定义元素大小的类型
 interface Size {
   width: number
   height: number
 }
-const controller = new AbortController()
-const { signal } = controller
-const midTest = async () => {
-  storeConfig.setLoading(true)
-  const res = await apiTest(signal)
-  console.log('接口测试', res)
-  storeConfig.setLoading(false)
-}
 
-const router: any = inject('router')
 // 创建 refs 引用 DOM 元素
 const nav = ref(null)
 const header = ref(null)
@@ -151,8 +80,7 @@ const watchElementSize = (element: HTMLElement | null, sizeRef: Size) => {
 watch(nav, () => watchElementSize(nav.value, navSize))
 watch(header, () => watchElementSize(header.value, headerSize))
 const store = useRouterStore()
-const { navList, breadList, routerList } = storeToRefs(store)
-const isCollapse = ref<boolean>(false)
+const { navList, routerList } = storeToRefs(store)
 // 获取屏幕大小的函数
 function getScreenSize() {
   if (window.innerWidth < 640) {
@@ -167,7 +95,7 @@ function getScreenSize() {
 // 定义窗口大小变化时的处理函数
 function handleResize() {
   if (getScreenSize() === 'sm' && !isCollapse.value) {
-    isCollapse.value = true
+    storeConfig.toggleCollapse(true)
   }
 }
 
@@ -176,68 +104,11 @@ onMounted(() => {
   handleResize()
   window.addEventListener('resize', handleResize)
 })
-// 在组件销毁前取消请求
-onBeforeUnmount(() => {
-  controller.abort()
-  storeConfig.setLoading(false)
-})
 
 // 在组件销毁时移除窗口大小变化的监听器
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize)
 })
-
-const cookies: any = inject('cookies')
-const onQuit = () => {
-  cookies.remove('token')
-  router.replace('/login')
-}
-
-const gsap: any = inject('gsap')
-const refresh: any = ref(null)
-const onRefresh = async () => {
-  gsap.to(refresh.value.$el, {
-    rotation: '+=360',
-    duration: 0.3,
-    onComplete: () => {
-      router.replace({
-        path: '/blank'
-      })
-    }
-  })
-}
-
-const toggleFullscreen = () => {
-  const elem = document.documentElement as HTMLElement & {
-    mozRequestFullScreen?(): Promise<void>
-    webkitRequestFullscreen?(): Promise<void>
-    msRequestFullscreen?(): Promise<void>
-    mozCancelFullScreen?(): Promise<void>
-    exitFullscreen?(): Promise<void>
-  }
-  if (!document.fullscreenElement) {
-    // 请求全屏
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen()
-    } else if (elem.mozRequestFullScreen) {
-      elem.mozRequestFullScreen()
-    } else if (elem.webkitRequestFullscreen) {
-      elem.webkitRequestFullscreen()
-    } else if (elem.msRequestFullscreen) {
-      elem.msRequestFullscreen()
-    }
-  } else {
-    // 退出全屏
-    // eslint-disable-next-line no-lonely-if
-    if (document.exitFullscreen) {
-      document.exitFullscreen()
-    } else if (elem.mozCancelFullScreen) {
-      elem.mozCancelFullScreen()
-    }
-  }
-}
-
-const isDark = useDark()
 </script>
 
 <style scoped>
