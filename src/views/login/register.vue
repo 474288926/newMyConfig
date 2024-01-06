@@ -2,7 +2,7 @@
   <div
     class="w-full h-screen bg-gradient-to-b from-blue-300 to-blue-400 flex justify-center items-center"
   >
-    <main class="w-3/5 h-4/6 bg-white rounded-xl flex flex-row gap-2 p-8">
+    <main class="w-3/5 bg-white rounded-xl flex flex-row gap-2 p-8">
       <div class="flex-1 items-center justify-center hidden md:flex">
         <el-image :src="imageSrc" fit="fill"></el-image>
       </div>
