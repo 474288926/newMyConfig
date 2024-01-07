@@ -19,7 +19,7 @@
       <el-icon @click="toggleFullscreen">
         <FullScreen />
       </el-icon>
-      <Dark />
+      <!-- <Dark /> -->
       <el-button type="primary" size="default" @click="midTest">接口测试</el-button>
     </div>
     <el-popover placement="bottom" :popper-style="{ padding: 0 }">
@@ -57,7 +57,7 @@ import BreadCrumbs from '@/layouts/BreadCrumbs.vue'
 import { apiTest } from '@/api/test'
 import useRouterStore from '@/store/router/index'
 import useConfigStore from '@/store/config'
-import Dark from '@/layouts/Dark.vue'
+// import Dark from '@/layouts/Dark.vue'
 
 const storeConfig = useConfigStore()
 const { isCollapse } = storeToRefs(storeConfig)
