@@ -2,7 +2,7 @@
   <div class="relative max-w-screen min-h-screen">
     <header
       ref="header"
-      class="fixed top-0 right-0 left-52 z-[11] bg-white dark:bg-transparent"
+      class="fixed top-0 right-0 left-52 z-10 bg-white dark:bg-transparent"
       :style="{ left: navSize.width + 'px' }"
     >
       <y-header class="introHeader" />
@@ -13,7 +13,7 @@
     </header>
     <nav
       ref="nav"
-      class="fixed left-0 top-0 h-screen z-[11] text-white text-sm transition-all border-r dark:border-[#58585B]"
+      class="fixed left-0 top-0 h-screen text-white text-sm transition-all border-r dark:border-[#58585B]"
       :class="[isCollapse ? 'w-14' : 'w-52']"
     >
       <div :style="{ height: headerSize.height + 'px' }">
@@ -28,14 +28,18 @@
     </nav>
     <main
       id="scrollbar"
-      class="introMain p-4 z-[999] overflow-auto absolute right-0 bg-slate-100 dark:bg-transparent bottom-0 flex flex-col justify-between gap-4"
-      :style="{ left: navSize.width + 'px', top: headerSize.height + 'px' }"
+      class="introMain p-4 overflow-auto block bg-slate-100 dark:bg-transparent"
+      :style="{
+        marginLeft: navSize.width + 'px',
+        marginTop: headerSize.height + 'px',
+        minHeight: `calc(100vh - (${headerSize.height} +'px')`
+      }"
       v-loading="isLoading"
     >
       <router-view v-slot="{ Component }">
         <transition name="slide" mode="out-in">
           <keep-alive>
-            <component class="relative" :is="Component" />
+            <component class="relative h-full" :is="Component" />
           </keep-alive>
         </transition>
       </router-view>
