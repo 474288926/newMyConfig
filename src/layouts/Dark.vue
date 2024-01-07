@@ -5,14 +5,12 @@ import { ref } from 'vue'
 import { useDark, useToggle } from '@vueuse/core'
 
 const theme = localStorage.getItem('theme-appearance') || ''
-const toggleDarkModel = ref(theme === 'dark')
-
+const toggleDarkModel = ref(theme === 'auto')
+console.log(theme)
 const isDark = useDark({
   storageKey: 'theme-appearance',
   selector: 'html',
-  attribute: 'class',
-  valueDark: 'dark',
-  valueLight: ''
+  attribute: 'class'
 })
 const toggleDark = useToggle(isDark)
 
