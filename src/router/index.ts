@@ -99,11 +99,13 @@ const routes: Array<RouteRecordRaw> = [
     // 当用户访问任何未匹配的路由时，将跳转到404页面
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
+    meta: { title: '404', hidden: true },
     component: () => import('@/views/404.vue')
   },
   {
     path: '/blank',
     name: 'blank',
+    meta: { title: '空白页', hidden: true },
     component: () => import('@/views/blank.vue')
   }
 ]
