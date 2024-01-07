@@ -19,11 +19,7 @@
       <el-icon @click="toggleFullscreen">
         <FullScreen />
       </el-icon>
-      <el-switch
-        v-model="isDark"
-        :active-action-icon="Moon"
-        :inactive-action-icon="Sunny"
-      />
+      <Dark />
       <el-button type="primary" size="default" @click="midTest">接口测试</el-button>
     </div>
     <el-popover placement="bottom" :popper-style="{ padding: 0 }">
@@ -56,13 +52,12 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { Moon, Sunny } from '@element-plus/icons-vue'
 import { inject, onBeforeUnmount, ref } from 'vue'
-import { useDark } from '@vueuse/core'
 import BreadCrumbs from '@/layouts/BreadCrumbs.vue'
 import { apiTest } from '@/api/test'
 import useRouterStore from '@/store/router/index'
 import useConfigStore from '@/store/config'
+import Dark from '@/layouts/Dark.vue'
 
 const storeConfig = useConfigStore()
 const { isCollapse } = storeToRefs(storeConfig)
@@ -128,9 +123,6 @@ const toggleFullscreen = () => {
     }
   }
 }
-
-const isDark = useDark()
-
 // 在组件销毁前取消请求
 onBeforeUnmount(() => {
   controller.abort()
