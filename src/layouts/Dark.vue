@@ -247,11 +247,11 @@ const toggleTheme = (event: any) => {
   z-index: 2147483646;
 }
 
-[class='dark']::view-transition-old(root) {
+[class*='dark']::view-transition-old(root) {
   z-index: 2147483646;
 }
 
-[class='dark']::view-transition-new(root) {
+[class*='dark']::view-transition-new(root) {
   z-index: 1;
 }
 /* The switch - the box around the slider */
