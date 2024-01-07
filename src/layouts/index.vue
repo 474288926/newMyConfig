@@ -2,7 +2,7 @@
   <div class="relative max-w-screen min-h-screen">
     <header
       ref="header"
-      class="fixed top-0 right-0 left-52 bg-white dark:bg-transparent"
+      class="fixed top-0 right-0 left-52 z-10 bg-white dark:bg-transparent"
       :style="{ left: navSize.width + 'px' }"
     >
       <y-header class="introHeader" />
@@ -13,7 +13,7 @@
     </header>
     <nav
       ref="nav"
-      class="fixed left-0 top-0 h-screen text-white text-sm transition-all border-r dark:border-[#58585B]"
+      class="fixed left-0 top-0 h-screen z-50 text-white text-sm transition-all duration-[600ms] border-r dark:border-[#58585B]"
       :class="[isCollapse ? 'w-14' : 'w-52']"
     >
       <div :style="{ height: headerSize.height + 'px' }">
