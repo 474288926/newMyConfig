@@ -17,7 +17,7 @@
       :class="[isCollapse ? 'w-14' : 'w-52']"
     >
       <div :style="{ height: headerSize.height + 'px' }">
-        <Logo class="introLogo" v-if="!isCollapse"></Logo>
+        <Logo class="introLogo -top-6" v-if="!isCollapse"></Logo>
       </div>
       <NavBar
         class="introNavBar"
