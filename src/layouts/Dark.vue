@@ -15,7 +15,7 @@ const theme = localStorage.getItem('theme-appearance')
   : ''
 
 const toggleDarkModel = ref(
-  theme === 'auto' || document.documentElement.className.includes('dark')
+  theme === 'auto' || document.documentElement?.className?.includes('dark')
 )
 
 const toggleTheme = (event: any) => {
