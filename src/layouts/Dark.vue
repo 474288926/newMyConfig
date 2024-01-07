@@ -1,18 +1,22 @@
-<!-- eslint-disable max-len -->
 <!-- eslint-disable no-restricted-globals -->
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useDark, useToggle } from '@vueuse/core'
 
-const theme = localStorage.getItem('theme-appearance') || ''
-const toggleDarkModel = ref(theme === 'auto')
-console.log(theme)
 const isDark = useDark({
   storageKey: 'theme-appearance',
   selector: 'html',
   attribute: 'class'
 })
 const toggleDark = useToggle(isDark)
+
+const theme = localStorage.getItem('theme-appearance')
+  ? localStorage.getItem('theme-appearance')
+  : ''
+
+const toggleDarkModel = ref(
+  theme === 'auto' || document.documentElement.className.includes('dark')
+)
 
 const toggleTheme = (event: any) => {
   const x = event.clientX
