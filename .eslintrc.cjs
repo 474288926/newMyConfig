@@ -30,7 +30,7 @@ module.exports = {
   rules: {
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'prettier/prettier': 'error',
-    'max-len': ['error', { code: 200 }],
+    'max-len': ['error', { code: 600 }],
     'no-console': 'off', // 关闭 no-console 规则
     'comma-dangle': ['error', 'never'],
     semi: ['error', 'never'],
