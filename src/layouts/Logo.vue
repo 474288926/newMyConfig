@@ -1,5 +1,5 @@
 <template>
-  <div class="glitch-container"></div>
+  <div class="glitch-container overflow-hidden"></div>
 </template>
 
 <script setup lang="ts"></script>
