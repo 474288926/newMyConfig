@@ -227,7 +227,7 @@ const toggleTheme = (event: any) => {
 [class=''] {
 }
 
-[class='dark'] {
+[class*='dark'] {
   body {
     background-color: #000;
   }
