@@ -9,4 +9,7 @@
 .introjs-tooltip-title {
   color: #000;
 }
+body {
+  overflow: hidden;
+}
 </style>

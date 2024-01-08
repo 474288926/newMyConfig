@@ -1,6 +1,6 @@
 <template>
   <div
-    class="shadow-md overflow-auto"
+    class="shadow-md overflow-y-auto overflow-x-hidden"
     :style="{ height: `calc(100vh - ${height + 1}px)` }"
   >
     <el-menu

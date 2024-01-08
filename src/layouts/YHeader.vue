@@ -22,7 +22,7 @@
       <Dark />
       <el-button type="primary" size="default" @click="midTest">接口测试</el-button>
     </div>
-    <el-popover placement="bottom" :popper-style="{ padding: 0 }">
+    <el-popover placement="bottom-end" :popper-style="{ padding: 0 }">
       <template #reference>
         <div class="flex items-center gap-4 cursor-pointer group px-4">
           <el-avatar
