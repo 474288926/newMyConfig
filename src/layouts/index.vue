@@ -14,7 +14,7 @@
     <nav
       ref="nav"
       class="fixed left-0 top-0 h-screen z-50 transition-all duration-[600ms] border-r dark:border-[#58585B]"
-      :class="[isCollapse ? 'w-14' : 'w-52']"
+      :class="[isCollapse ? 'w-[64px]' : 'w-52']"
     >
       <div :style="{ height: headerSize.height + 'px' }">
         <Logo class="introLogo -top-6" v-if="!isCollapse"></Logo>

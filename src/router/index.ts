@@ -91,7 +91,7 @@ const routes: Array<RouteRecordRaw> = [
           title: 'drawline',
           icon: 'Lock'
         },
-        component: () => import('@/views/three/drawline.vue')
+        component: () => import('@/views/three/practice.vue')
       }
     ]
   },
