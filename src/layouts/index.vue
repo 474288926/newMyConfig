@@ -28,7 +28,7 @@
     </nav>
     <main
       id="scrollbar"
-      class="introMain p-4 overflow-auto absolute right-0 bg-slate-100 dark:bg-transparent bottom-0 flex flex-col justify-between gap-4"
+      class="introMain p-4 overflow-auto fixed right-0 bg-slate-100 dark:bg-transparent bottom-0 flex flex-col justify-between gap-4"
       :style="{ left: navSize.width + 'px', top: headerSize.height + 'px' }"
       v-loading="isLoading"
     >
