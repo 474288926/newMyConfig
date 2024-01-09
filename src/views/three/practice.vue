@@ -1,12 +1,6 @@
 <template>
-  <div ref="container" class="flex-1 overflow-hidden">
-    <div ref="canvsRef" class="w-full h-full"></div>
-    <div v-if="container" class="absolute top-0 left-0">
-      <el-button type="primary" @click="toggleFullscreen(container)">全屏</el-button>
-      <el-button type="primary" @click="toggleFullscreen(container)"
-        >退出全屏</el-button
-      >
-    </div>
+  <div class="flex-1 overflow-hidden">
+    <div ref="canvsRef" class="h-full"></div>
   </div>
 </template>
 
@@ -14,9 +8,9 @@
 import { onMounted, ref, nextTick } from 'vue'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
+import GUI from 'lil-gui'
 import { toggleFullscreen } from '@/utils/toggleFullscreen'
 
-const container = ref<HTMLElement | null>(null)
 const canvsRef = ref<HTMLElement | null>(null)
 
 const scene = new THREE.Scene()
@@ -36,6 +30,7 @@ const geometry = new THREE.BoxGeometry(1, 1, 1)
 // 设置基础材质不受光
 const material = new THREE.MeshBasicMaterial({ color: 0xffff00 })
 const parentMaterial = new THREE.MeshBasicMaterial({ color: 0x0fff00 })
+parentMaterial.wireframe = true
 // 设置网格 模型加材质
 const parent = new THREE.Mesh(geometry, parentMaterial)
 const cube = new THREE.Mesh(geometry, material)
@@ -48,6 +43,46 @@ cube.rotation.x = Math.PI / 4
 // 设置相机位置 x y z
 camera.position.set(2, 2, 10)
 camera.lookAt(0, 0, 0)
+
+const gui = new GUI()
+gui.title('控制器')
+const guiElement = gui.domElement
+guiElement.style.top = '140px'
+guiElement.style.right = '32px'
+const myObject = {
+  toggleFullscreen: () => {
+    if (canvsRef.value) {
+      toggleFullscreen(canvsRef.value)
+    }
+  }
+}
+gui.add(myObject, 'toggleFullscreen').name('全屏切换')
+const folder = gui.addFolder('立方体位置')
+folder
+  .add(cube.position, 'x', -5, 5)
+  .step(1)
+  .name('立方体x轴位置')
+  .onChange((event: number) => {
+    console.log(event)
+  })
+folder
+  .add(cube.position, 'y', -5, 5)
+  .step(1)
+  .name('立方体y轴位置')
+  .onFinishChange((event: number) => {
+    console.log(event)
+  })
+folder.add(cube.position, 'z', -5, 5).step(1).name('立方体z轴位置')
+gui.add(parentMaterial, 'wireframe').name('父元素线框模式')
+const colorParams = {
+  cubecolor: '#0ff000'
+}
+gui
+  .addColor(colorParams, 'cubecolor')
+  .name('立方体颜色')
+  .onChange((val: string) => {
+    cube.material.color.set(val)
+  })
 const animation = () => {
   controls.update()
   requestAnimationFrame(animation)
@@ -60,12 +95,16 @@ const updateSize = () => {
     camera.aspect = canvsRef.value.offsetWidth / canvsRef.value.offsetHeight
     camera.updateProjectionMatrix()
     renderer.setSize(canvsRef.value.clientWidth, canvsRef.value.clientHeight)
+    console.log(canvsRef.value.clientWidth, canvsRef.value.clientHeight)
     canvsRef.value.appendChild(renderer.domElement)
   }
 }
 // 在 onMounted 钩子中进行初始化和操作
 onMounted(async () => {
   await nextTick()
+  if (canvsRef.value) {
+    canvsRef.value.appendChild(guiElement)
+  }
   updateSize()
   scene.add(parent)
   animation()
