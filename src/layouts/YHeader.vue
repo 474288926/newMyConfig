@@ -16,7 +16,7 @@
     </div>
     <div class="flex-1 flex items-center gap-4 flex-row-reverse">
       <el-icon ref="refresh" @click="onRefresh"><Refresh /></el-icon>
-      <el-icon @click="toggleFullscreen">
+      <el-icon @click="toggleFullscreen()">
         <FullScreen />
       </el-icon>
       <Dark />
@@ -58,6 +58,7 @@ import { apiTest } from '@/api/test'
 import useRouterStore from '@/store/router/index'
 import useConfigStore from '@/store/config'
 import Dark from '@/layouts/Dark.vue'
+import { toggleFullscreen } from '@/utils/toggleFullscreen'
 
 const storeConfig = useConfigStore()
 const { isCollapse } = storeToRefs(storeConfig)
@@ -94,35 +95,6 @@ const onRefresh = async () => {
   })
 }
 
-const toggleFullscreen = () => {
-  const elem = document.documentElement as HTMLElement & {
-    mozRequestFullScreen?(): Promise<void>
-    webkitRequestFullscreen?(): Promise<void>
-    msRequestFullscreen?(): Promise<void>
-    mozCancelFullScreen?(): Promise<void>
-    exitFullscreen?(): Promise<void>
-  }
-  if (!document.fullscreenElement) {
-    // 请求全屏
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen()
-    } else if (elem.mozRequestFullScreen) {
-      elem.mozRequestFullScreen()
-    } else if (elem.webkitRequestFullscreen) {
-      elem.webkitRequestFullscreen()
-    } else if (elem.msRequestFullscreen) {
-      elem.msRequestFullscreen()
-    }
-  } else {
-    // 退出全屏
-    // eslint-disable-next-line no-lonely-if
-    if (document.exitFullscreen) {
-      document.exitFullscreen()
-    } else if (elem.mozCancelFullScreen) {
-      elem.mozCancelFullScreen()
-    }
-  }
-}
 // 在组件销毁前取消请求
 onBeforeUnmount(() => {
   controller.abort()
