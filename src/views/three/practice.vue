@@ -1,13 +1,23 @@
 <template>
-  <div ref="threeContainer" class="flex-1"></div>
+  <div ref="container" class="flex-1 overflow-hidden">
+    <div ref="canvsRef" class="w-full h-full"></div>
+    <div v-if="container" class="absolute top-0 left-0">
+      <el-button type="primary" @click="toggleFullscreen(container)">全屏</el-button>
+      <el-button type="primary" @click="toggleFullscreen(container)"
+        >退出全屏</el-button
+      >
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, nextTick } from 'vue'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
+import { toggleFullscreen } from '@/utils/toggleFullscreen'
 
-const threeContainer = ref<HTMLElement | null>(null)
+const container = ref<HTMLElement | null>(null)
+const canvsRef = ref<HTMLElement | null>(null)
 
 const scene = new THREE.Scene()
 const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000)
@@ -30,36 +40,38 @@ const parentMaterial = new THREE.MeshBasicMaterial({ color: 0x0fff00 })
 const parent = new THREE.Mesh(geometry, parentMaterial)
 const cube = new THREE.Mesh(geometry, material)
 parent.add(cube)
-parent.position.set(-2, 0, 0)
-cube.position.set(2, 0, 0)
+parent.position.set(-4, 0, 0)
+// parent.scale.set(4, 4, 4)
+cube.position.set(4, 0, 0)
+// cube.scale.set(2, 2, 2)
+cube.rotation.x = Math.PI / 4
 // 设置相机位置 x y z
 camera.position.set(2, 2, 10)
 camera.lookAt(0, 0, 0)
 const animation = () => {
   controls.update()
   requestAnimationFrame(animation)
-  cube.rotation.x += 0.01
-  cube.rotation.y += 0.01
+  // cube.rotation.x += 0.01
+  // cube.rotation.y += 0.01
   renderer.render(scene, camera)
 }
-// 在 onMounted 钩子中进行初始化和操作
-onMounted(() => {
-  if (threeContainer.value) {
-    camera.aspect = threeContainer.value.offsetWidth / threeContainer.value.offsetHeight
+const updateSize = () => {
+  if (canvsRef.value) {
+    camera.aspect = canvsRef.value.offsetWidth / canvsRef.value.offsetHeight
     camera.updateProjectionMatrix()
-    renderer.setSize(
-      threeContainer.value.clientWidth - 55,
-      threeContainer.value.clientHeight
-    )
-    console.log(
-      threeContainer,
-      threeContainer.value.offsetWidth,
-      threeContainer.value.clientWidth
-    )
-    threeContainer.value.appendChild(renderer.domElement)
+    renderer.setSize(canvsRef.value.clientWidth, canvsRef.value.clientHeight)
+    canvsRef.value.appendChild(renderer.domElement)
   }
+}
+// 在 onMounted 钩子中进行初始化和操作
+onMounted(async () => {
+  await nextTick()
+  updateSize()
   scene.add(parent)
   animation()
+  window.addEventListener('resize', () => {
+    updateSize()
+  })
 })
 </script>
 
