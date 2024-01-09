@@ -1,8 +1,19 @@
 <template>
   <router-view> </router-view>
+  <Loading v-if="loading"></Loading>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const loading = ref(true)
+const loadData = async () => {
+  window.onload = () => {
+    loading.value = true
+  }
+}
+loadData()
+</script>
 
 <style>
 .dark .introjs-tooltiptext,
