@@ -10,6 +10,7 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import GUI from 'lil-gui'
 import { toggleFullscreen } from '@/utils/toggleFullscreen'
+import { updateSize } from '@/utils/three/updateSize'
 
 const canvsRef = ref<HTMLElement | null>(null)
 
@@ -90,26 +91,20 @@ const animation = () => {
   // cube.rotation.y += 0.01
   renderer.render(scene, camera)
 }
-const updateSize = () => {
-  if (canvsRef.value) {
-    camera.aspect = canvsRef.value.offsetWidth / canvsRef.value.offsetHeight
-    camera.updateProjectionMatrix()
-    renderer.setSize(canvsRef.value.clientWidth, canvsRef.value.clientHeight)
-    console.log(canvsRef.value.clientWidth, canvsRef.value.clientHeight)
-    canvsRef.value.appendChild(renderer.domElement)
-  }
-}
 // 在 onMounted 钩子中进行初始化和操作
 onMounted(async () => {
   await nextTick()
   if (canvsRef.value) {
     canvsRef.value.appendChild(guiElement)
+    updateSize(canvsRef.value, camera, renderer)
+    canvsRef.value.appendChild(renderer.domElement)
   }
-  updateSize()
   scene.add(parent)
   animation()
   window.addEventListener('resize', () => {
-    updateSize()
+    if (canvsRef.value) {
+      updateSize(canvsRef.value, camera, renderer)
+    }
   })
 })
 </script>

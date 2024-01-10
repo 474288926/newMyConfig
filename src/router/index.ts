@@ -92,6 +92,15 @@ const routes: Array<RouteRecordRaw> = [
           icon: 'Lock'
         },
         component: () => import('@/views/three/practice.vue')
+      },
+      {
+        path: '/three/point',
+        name: 'point',
+        meta: {
+          title: 'point',
+          icon: 'Lock'
+        },
+        component: () => import('@/views/three/point.vue')
       }
     ]
   },
