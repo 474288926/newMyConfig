@@ -17,8 +17,8 @@
 /* 样式可以根据你的需求自定义 */
 .app-loading {
   display: flex;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   justify-content: center;
   align-items: center;
   flex-direction: column;

@@ -1,5 +1,5 @@
 <template>
-  <router-view> </router-view>
+  <router-view v-if="!loading"> </router-view>
   <Loading v-if="loading"></Loading>
 </template>
 
