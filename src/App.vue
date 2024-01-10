@@ -9,7 +9,7 @@ import { ref } from 'vue'
 const loading = ref(true)
 const loadData = async () => {
   window.onload = () => {
-    loading.value = true
+    loading.value = false
   }
 }
 loadData()
