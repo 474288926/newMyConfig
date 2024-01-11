@@ -80,15 +80,15 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/three',
-    redirect: '/three/drawline',
+    redirect: '/three/practice',
     meta: { title: 'three.js', icon: 'bell' },
     component: layout,
     children: [
       {
-        path: '/three/drawline',
+        path: '/three/practice',
         name: 'vue',
         meta: {
-          title: 'drawline',
+          title: 'practice',
           icon: 'Lock'
         },
         component: () => import('@/views/three/practice.vue')

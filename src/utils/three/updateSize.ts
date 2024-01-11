@@ -3,7 +3,7 @@ import * as THREE from 'three'
 export const updateSize = (
   dom: HTMLElement,
   camera: THREE.PerspectiveCamera,
-  renderer: THREE.WebGL1Renderer
+  renderer: THREE.WebGLRenderer
 ) => {
   if (dom) {
     // eslint-disable-next-line no-param-reassign

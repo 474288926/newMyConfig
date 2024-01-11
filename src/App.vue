@@ -1,6 +1,6 @@
 <template>
   <router-view v-if="!loading"> </router-view>
-  <Loading v-if="loading"></Loading>
+  <GlobalLoading v-if="loading"></GlobalLoading>
 </template>
 
 <script setup lang="ts">
