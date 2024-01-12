@@ -11,7 +11,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
 import { ref, nextTick, onMounted } from 'vue'
 
-console.log(PUBLIC_DIR)
+console.log('PUBLIC_DIR:', PUBLIC_DIR)
 const canvasRef = ref<HTMLElement | null>(null)
 const scene = new THREE.Scene()
 const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000)
