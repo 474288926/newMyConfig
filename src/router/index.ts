@@ -80,10 +80,19 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/three',
-    redirect: '/three/practice',
+    redirect: '/three/stickers',
     meta: { title: 'three.js', icon: 'bell' },
     component: layout,
     children: [
+      {
+        path: '/three/stickers',
+        name: 'stickers',
+        meta: {
+          title: 'stickers',
+          icon: 'Lock'
+        },
+        component: () => import('@/views/three/stickers.vue')
+      },
       {
         path: '/three/practice',
         name: 'vue',
@@ -101,15 +110,6 @@ const routes: Array<RouteRecordRaw> = [
           icon: 'Lock'
         },
         component: () => import('@/views/three/point.vue')
-      },
-      {
-        path: '/three/stickers',
-        name: 'stickers',
-        meta: {
-          title: 'stickers',
-          icon: 'Lock'
-        },
-        component: () => import('@/views/three/stickers.vue')
       }
     ]
   },

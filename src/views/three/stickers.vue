@@ -28,7 +28,7 @@ guiElement.style.right = '32px'
 // 创建纹理加载器
 const textureLoader = new THREE.TextureLoader()
 // 加载纹理
-const texture = textureLoader.load('/three/stickers/color.jpg')
+const texture = textureLoader.load('./three/stickers/color.jpg')
 // 设置srgb色彩空间
 texture.colorSpace = THREE.SRGBColorSpace
 // 设置线性srgb色彩空间
@@ -36,13 +36,13 @@ texture.colorSpace = THREE.SRGBColorSpace
 // 不设置 默认线性srgb色彩空间
 // texture.colorSpace = THREE.NoColorSpace
 // 加载ao贴图 环境光遮罩贴图
-const aoMap = textureLoader.load('/three/stickers/ambientOcclusion.jpg')
+const aoMap = textureLoader.load('./three/stickers/ambientOcclusion.jpg')
 // 加载透明度贴图
 // const alphaMap = textureLoader.load('/three/stickers/height.jpg')
 // 添加光照贴图
 // const lightMap = textureLoader.load('/three/minecraft.png')
 // 添加高光贴图
-const specularMap = textureLoader.load('/three/stickers/roughness.jpg')
+const specularMap = textureLoader.load('./three/stickers/roughness.jpg')
 
 const plane = new THREE.PlaneGeometry(1, 2)
 const planeMaterial = new THREE.MeshBasicMaterial({
@@ -62,7 +62,7 @@ const planeMaterial = new THREE.MeshBasicMaterial({
   reflectivity: 0.3
 })
 const rgbeLoader = new RGBELoader()
-rgbeLoader.load('/three/hdr/003.hdr', (envMap) => {
+rgbeLoader.load('./three/hdr/003.hdr', (envMap) => {
   // 设置球形贴图
   Object.assign(envMap, { mapping: THREE.EquirectangularReflectionMapping })
   // 设置场景背景
