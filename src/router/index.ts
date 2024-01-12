@@ -101,6 +101,15 @@ const routes: Array<RouteRecordRaw> = [
           icon: 'Lock'
         },
         component: () => import('@/views/three/point.vue')
+      },
+      {
+        path: '/three/stickers',
+        name: 'stickers',
+        meta: {
+          title: 'stickers',
+          icon: 'Lock'
+        },
+        component: () => import('@/views/three/stickers.vue')
       }
     ]
   },
