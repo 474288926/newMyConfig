@@ -4,6 +4,9 @@ module.exports = {
     es2021: true,
     node: true
   },
+  globals: {
+    PUBLIC_DIR: 'readonly'
+  },
   extends: [
     'airbnb-base',
     'plugin:vue/vue3-essential',

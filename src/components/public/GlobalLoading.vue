@@ -2,7 +2,7 @@
   <div class="app-loading">
     <div class="app-loading-wrap">
       <div class="app-loading-title">
-        <img src="/vite.svg" class="app-loading-logo" alt="Logo" />
+        <img :src="staticImg" class="app-loading-logo" alt="Logo" />
         <div class="app-loading-title">loading...</div>
       </div>
       <div class="app-loading-item">
@@ -12,6 +12,9 @@
     </div>
   </div>
 </template>
+<script setup lang="ts">
+const staticImg = `${PUBLIC_DIR}vite.svg`
+</script>
 
 <style scoped>
 /* 样式可以根据你的需求自定义 */

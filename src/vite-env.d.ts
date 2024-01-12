@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /// <reference types="vite/client" />
 
 declare module 'vue-verify-code' {
@@ -17,3 +18,5 @@ declare module 'element-plus/dist/locale/zh-cn.mjs' {
   const zhCN: Record<string, string>
   export default zhCN
 }
+
+declare const PUBLIC_DIR: string

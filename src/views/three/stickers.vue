@@ -11,6 +11,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
 import { ref, nextTick, onMounted } from 'vue'
 
+console.log(PUBLIC_DIR)
 const canvasRef = ref<HTMLElement | null>(null)
 const scene = new THREE.Scene()
 const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000)
@@ -28,7 +29,7 @@ guiElement.style.right = '32px'
 // 创建纹理加载器
 const textureLoader = new THREE.TextureLoader()
 // 加载纹理
-const texture = textureLoader.load('/newMyConfig/three/stickers/color.jpg')
+const texture = textureLoader.load(`${PUBLIC_DIR}three/stickers/color.jpg`)
 // 设置srgb色彩空间
 texture.colorSpace = THREE.SRGBColorSpace
 // 设置线性srgb色彩空间
@@ -36,13 +37,13 @@ texture.colorSpace = THREE.SRGBColorSpace
 // 不设置 默认线性srgb色彩空间
 // texture.colorSpace = THREE.NoColorSpace
 // 加载ao贴图 环境光遮罩贴图
-const aoMap = textureLoader.load('/newMyConfig/three/stickers/ambientOcclusion.jpg')
+const aoMap = textureLoader.load(`${PUBLIC_DIR}three/stickers/ambientOcclusion.jpg`)
 // 加载透明度贴图
-// const alphaMap = textureLoader.load('/three/stickers/height.jpg')
+// const alphaMap = textureLoader.load(`${PUBLIC_DIR}three/stickers/height.jpg`)
 // 添加光照贴图
-// const lightMap = textureLoader.load('/three/minecraft.png')
+// const lightMap = textureLoader.load(`${PUBLIC_DIR}three/minecraft.png`)
 // 添加高光贴图
-const specularMap = textureLoader.load('/newMyConfig/three/stickers/roughness.jpg')
+const specularMap = textureLoader.load(`${PUBLIC_DIR}three/stickers/roughness.jpg`)
 
 const plane = new THREE.PlaneGeometry(1, 2)
 const planeMaterial = new THREE.MeshBasicMaterial({
@@ -62,7 +63,7 @@ const planeMaterial = new THREE.MeshBasicMaterial({
   reflectivity: 0.3
 })
 const rgbeLoader = new RGBELoader()
-rgbeLoader.load('/newMyConfig/three/hdr/003.hdr', (envMap) => {
+rgbeLoader.load(`${PUBLIC_DIR}three/hdr/003.hdr`, (envMap) => {
   // 设置球形贴图
   Object.assign(envMap, { mapping: THREE.EquirectangularReflectionMapping })
   // 设置场景背景
