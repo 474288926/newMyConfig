@@ -2,7 +2,7 @@
   <div class="app-loading">
     <div class="app-loading-wrap">
       <div class="app-loading-title">
-        <img src="/newMyConfig/vite.svg" class="app-loading-logo" alt="Logo" />
+        <img src="/vite.svg" class="app-loading-logo" alt="Logo" />
         <div class="app-loading-title">loading...</div>
       </div>
       <div class="app-loading-item">
