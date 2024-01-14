@@ -8,6 +8,7 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { ref, nextTick, onMounted } from 'vue'
+import { updateSize } from '@/utils/three/updateSize'
 
 const canvasRef = ref<HTMLElement | null>(null)
 const scene = new THREE.Scene()
@@ -54,7 +55,7 @@ const animation = () => {
 onMounted(async () => {
   await nextTick()
   if (canvasRef.value) {
-    renderer.setSize(canvasRef.value?.clientWidth, canvasRef.value?.clientHeight)
+    updateSize(canvasRef.value, camera, renderer)
     canvasRef.value?.appendChild(renderer.domElement)
   }
   scene.add(mesh)

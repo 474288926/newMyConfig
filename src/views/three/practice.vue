@@ -1,6 +1,6 @@
 <template>
   <div class="flex-1 overflow-hidden">
-    <div ref="canvsRef" class="h-full"></div>
+    <div ref="canvasRef" class="h-full"></div>
   </div>
 </template>
 
@@ -12,7 +12,7 @@ import GUI from 'lil-gui'
 import { toggleFullscreen } from '@/utils/toggleFullscreen'
 import { updateSize } from '@/utils/three/updateSize'
 
-const canvsRef = ref<HTMLElement | null>(null)
+const canvasRef = ref<HTMLElement | null>(null)
 
 const scene = new THREE.Scene()
 const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000)
@@ -63,8 +63,8 @@ guiElement.style.top = '140px'
 guiElement.style.right = '32px'
 const myObject = {
   toggleFullscreen: () => {
-    if (canvsRef.value) {
-      toggleFullscreen(canvsRef.value)
+    if (canvasRef.value) {
+      toggleFullscreen(canvasRef.value)
     }
   }
 }
@@ -105,16 +105,16 @@ const animation = () => {
 // 在 onMounted 钩子中进行初始化和操作
 onMounted(async () => {
   await nextTick()
-  if (canvsRef.value) {
-    canvsRef.value.appendChild(guiElement)
-    updateSize(canvsRef.value, camera, renderer)
-    canvsRef.value.appendChild(renderer.domElement)
+  if (canvasRef.value) {
+    canvasRef.value.appendChild(guiElement)
+    updateSize(canvasRef.value, camera, renderer)
+    canvasRef.value.appendChild(renderer.domElement)
   }
   scene.add(parent)
   animation()
   window.addEventListener('resize', () => {
-    if (canvsRef.value) {
-      updateSize(canvsRef.value, camera, renderer)
+    if (canvasRef.value) {
+      updateSize(canvasRef.value, camera, renderer)
     }
   })
 })

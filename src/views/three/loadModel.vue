@@ -11,8 +11,9 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 // 导入压缩的gltf加载器
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js'
-import { ref, nextTick, onMounted } from 'vue'
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
+import { ref, nextTick, onMounted } from 'vue'
+import { updateSize } from '@/utils/three/updateSize'
 
 const canvasRef = ref<HTMLElement | null>(null)
 const scene = new THREE.Scene()
@@ -67,7 +68,7 @@ const animation = () => {
 onMounted(async () => {
   await nextTick()
   if (canvasRef.value) {
-    renderer.setSize(canvasRef.value?.clientWidth, canvasRef.value?.clientHeight)
+    updateSize(canvasRef.value, camera, renderer)
     canvasRef.value?.appendChild(renderer.domElement)
   }
   controls.update()

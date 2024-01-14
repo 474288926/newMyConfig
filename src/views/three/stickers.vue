@@ -10,6 +10,7 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
 import { ref, nextTick, onMounted } from 'vue'
+import { updateSize } from '@/utils/three/updateSize'
 
 console.log('PUBLIC_DIR:', PUBLIC_DIR)
 const canvasRef = ref<HTMLElement | null>(null)
@@ -100,7 +101,7 @@ onMounted(async () => {
   await nextTick()
   if (canvasRef.value) {
     canvasRef.value.appendChild(guiElement)
-    renderer.setSize(canvasRef.value?.clientWidth, canvasRef.value?.clientHeight)
+    updateSize(canvasRef.value, camera, renderer)
     canvasRef.value?.appendChild(renderer.domElement)
   }
   scene.add(mesh)

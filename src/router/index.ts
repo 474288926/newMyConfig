@@ -115,7 +115,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/three/practice',
         name: 'vue',
         meta: {
-          title: '点、面',
+          title: '方块',
           icon: 'Lock'
         },
         component: () => import('@/views/three/practice.vue')
@@ -124,7 +124,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/three/point',
         name: 'point',
         meta: {
-          title: '方块',
+          title: '点、面',
           icon: 'Lock'
         },
         component: () => import('@/views/three/point.vue')
