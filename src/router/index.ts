@@ -85,10 +85,19 @@ const routes: Array<RouteRecordRaw> = [
     component: layout,
     children: [
       {
+        path: '/three/loadModel',
+        name: 'loadModel',
+        meta: {
+          title: '加载模型',
+          icon: 'Lock'
+        },
+        component: () => import('@/views/three/loadModel.vue')
+      },
+      {
         path: '/three/fog',
         name: 'fog',
         meta: {
-          title: 'fog',
+          title: '雾',
           icon: 'Lock'
         },
         component: () => import('@/views/three/fog.vue')
@@ -97,7 +106,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/three/stickers',
         name: 'stickers',
         meta: {
-          title: 'stickers',
+          title: '贴图',
           icon: 'Lock'
         },
         component: () => import('@/views/three/stickers.vue')
@@ -106,7 +115,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/three/practice',
         name: 'vue',
         meta: {
-          title: 'practice',
+          title: '点、面',
           icon: 'Lock'
         },
         component: () => import('@/views/three/practice.vue')
@@ -115,7 +124,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/three/point',
         name: 'point',
         meta: {
-          title: 'point',
+          title: '方块',
           icon: 'Lock'
         },
         component: () => import('@/views/three/point.vue')
