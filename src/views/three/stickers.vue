@@ -63,7 +63,7 @@ const planeMaterial = new THREE.MeshBasicMaterial({
   reflectivity: 0.3
 })
 const rgbeLoader = new RGBELoader()
-rgbeLoader.load(`${PUBLIC_DIR}three/hdr/003.hdr`, (envMap) => {
+rgbeLoader.load(`${PUBLIC_DIR}three/hdr/012.hdr`, (envMap) => {
   // 设置球形贴图
   Object.assign(envMap, { mapping: THREE.EquirectangularReflectionMapping })
   // 设置场景背景

@@ -48,7 +48,7 @@ gltfLoader.load(`${PUBLIC_DIR}three/model/bigcity.glb`, (gltf) => {
 })
 // 加载环境贴图
 const rgbeLoader = new RGBELoader()
-rgbeLoader.load(`${PUBLIC_DIR}three/hdr/002.hdr`, (envMap) => {
+rgbeLoader.load(`${PUBLIC_DIR}three/hdr/012.hdr`, (envMap) => {
   Object.assign(envMap, { mapping: THREE.EquirectangularReflectionMapping })
   scene.environment = envMap
 })
