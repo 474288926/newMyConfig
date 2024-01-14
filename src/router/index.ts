@@ -85,6 +85,15 @@ const routes: Array<RouteRecordRaw> = [
     component: layout,
     children: [
       {
+        path: '/three/fog',
+        name: 'fog',
+        meta: {
+          title: 'fog',
+          icon: 'Lock'
+        },
+        component: () => import('@/views/three/fog.vue')
+      },
+      {
         path: '/three/stickers',
         name: 'stickers',
         meta: {
