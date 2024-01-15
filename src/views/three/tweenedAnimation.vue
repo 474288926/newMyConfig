@@ -78,7 +78,6 @@ tween.start()
 
 const animation = () => {
   controls.update()
-  requestAnimationFrame(animation)
   // 更新动画
   TWEEN.update()
   renderer.render(scene, camera)
@@ -92,7 +91,7 @@ onMounted(async () => {
   }
   scene.add(sphere)
   controls.update()
-  animation()
+  renderer.setAnimationLoop(animation)
 })
 </script>
 

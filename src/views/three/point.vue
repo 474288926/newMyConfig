@@ -47,9 +47,6 @@ const mesh = new THREE.Mesh(geometry, [material, material1])
 
 const animation = () => {
   controls.update()
-  requestAnimationFrame(animation)
-  // cube.rotation.x += 0.01
-  // cube.rotation.y += 0.01
   renderer.render(scene, camera)
 }
 onMounted(async () => {
@@ -59,8 +56,7 @@ onMounted(async () => {
     canvasRef.value?.appendChild(renderer.domElement)
   }
   scene.add(mesh)
-  controls.update()
-  animation()
+  renderer.setAnimationLoop(animation)
 })
 </script>
 

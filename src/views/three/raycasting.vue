@@ -74,9 +74,6 @@ const onPointerMove = (event: any) => {
 }
 const animation = () => {
   controls.update()
-  requestAnimationFrame(animation)
-  // cube.rotation.x += 0.01
-  // cube.rotation.y += 0.01
   renderer.render(scene, camera)
 }
 onMounted(async () => {
@@ -87,7 +84,7 @@ onMounted(async () => {
 
     window.addEventListener('click', onPointerMove)
   }
-  animation()
+  renderer.setAnimationLoop(animation)
 })
 </script>
 
