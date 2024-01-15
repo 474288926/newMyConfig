@@ -85,6 +85,15 @@ const routes: Array<RouteRecordRaw> = [
     component: layout,
     children: [
       {
+        path: '/three/tweenedAnimation',
+        name: 'tweenedAnimation',
+        meta: {
+          title: '补间动画',
+          icon: 'Lock'
+        },
+        component: () => import('@/views/three/tweenedAnimation.vue')
+      },
+      {
         path: '/three/raycasting',
         name: 'raycasting',
         meta: {
