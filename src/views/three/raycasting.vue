@@ -8,8 +8,12 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { ref, nextTick, onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
 import { updateSize } from '@/utils/three/updateSize'
+import useConfigStore from '@/store/config'
 
+const store = useConfigStore()
+const { isCollapse } = storeToRefs(store)
 const canvasRef = ref<HTMLElement | null>(null)
 const scene = new THREE.Scene()
 const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000)
@@ -59,7 +63,11 @@ const render = () => {
 const onPointerMove = (event: any) => {
   // 将鼠标位置归一化为设备坐标。x 和 y 方向的取值范围是 (-1 to +1)
   if (canvasRef.value) {
-    pointer.x = ((event.clientX - 223) / (canvasRef.value?.clientWidth || 0)) * 2 - 1
+    pointer.x =
+      ((event.clientX - (!isCollapse ? 223 : 72)) /
+        (canvasRef.value?.clientWidth || 0)) *
+        2 -
+      1
     pointer.y = -((event.clientY - 130) / (canvasRef.value?.clientHeight || 0)) * 2 + 1
   }
   render()
