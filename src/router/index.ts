@@ -85,6 +85,15 @@ const routes: Array<RouteRecordRaw> = [
     component: layout,
     children: [
       {
+        path: '/three/raycasting',
+        name: 'raycasting',
+        meta: {
+          title: '光线投射交互',
+          icon: 'Lock'
+        },
+        component: () => import('@/views/three/raycasting.vue')
+      },
+      {
         path: '/three/loadModel',
         name: 'loadModel',
         meta: {
