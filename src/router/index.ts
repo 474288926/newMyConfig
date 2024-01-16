@@ -85,6 +85,15 @@ const routes: Array<RouteRecordRaw> = [
     component: layout,
     children: [
       {
+        path: '/three/solarSystem',
+        name: 'solarSystem',
+        meta: {
+          title: '太阳系模拟',
+          icon: 'Lock'
+        },
+        component: () => import('@/views/three/solarSystem.vue')
+      },
+      {
         path: '/three/tweenedAnimation',
         name: 'tweenedAnimation',
         meta: {
