@@ -44,6 +44,7 @@ const material1 = new THREE.MeshBasicMaterial({
 })
 
 const mesh = new THREE.Mesh(geometry, [material, material1])
+console.log('mesh:', mesh)
 
 const animation = () => {
   controls.update()

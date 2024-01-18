@@ -85,6 +85,15 @@ const routes: Array<RouteRecordRaw> = [
     component: layout,
     children: [
       {
+        path: '/three/particleEffects',
+        name: 'particleEffects',
+        meta: {
+          title: '粒子特效',
+          icon: 'Lock'
+        },
+        component: () => import('@/views/three/particleEffects.vue')
+      },
+      {
         path: '/three/solarSystem',
         name: 'solarSystem',
         meta: {

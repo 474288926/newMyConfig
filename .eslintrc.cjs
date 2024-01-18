@@ -31,6 +31,7 @@ module.exports = {
   },
   plugins: ['vue', '@typescript-eslint', 'prettier'],
   rules: {
+    'no-underscore-dangle': 'off',
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'prettier/prettier': 'error',
     'max-len': ['error', { code: 600 }],
