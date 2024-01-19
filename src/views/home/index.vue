@@ -218,10 +218,10 @@
 
 <script setup lang="ts">
 import { inject, onMounted, onUnmounted, ref } from 'vue'
-import * as echarts from 'echarts'
 import * as jsonData from '../../../package.json'
 
 const gsap: any = inject('gsap')
+const echarts: any = inject('echarts')
 
 const isEven = (number: number) => {
   if (number % 2 === 0) {
@@ -295,8 +295,6 @@ const list1 = ref<Array<any>>([
   }
 ])
 
-type EChartsOption = echarts.EChartsOption
-
 const areaChart: any = ref(null)
 const areaChart1 = ref(null)
 const resizeObserver: any = ref(null)
@@ -309,20 +307,66 @@ onMounted(() => {
   })
   const myChart = echarts.init(areaChart.value)
 
-  const option: EChartsOption = {
+  const option = {
+    legend: {
+      data: ['Email', 'Video Ads'],
+      textStyle: {
+        // color: 'black' // 设置图例文字颜色
+      }
+    },
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'cross',
+        label: {
+          backgroundColor: '#6a7985'
+        }
+      }
+    },
     xAxis: {
       type: 'category',
       boundaryGap: false,
       data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
     },
-    yAxis: {
-      type: 'value'
-    },
+    yAxis: [
+      {
+        type: 'value'
+      }
+    ],
     series: [
       {
+        name: 'Email',
         data: [120, 932, 601, 1234, 870, 1330, 1889],
         type: 'line',
         smooth: true,
+        stack: 'Total',
+        emphasis: {
+          focus: 'series'
+        },
+        areaStyle: {
+          color: {
+            type: 'linear', // 设置为线性渐变
+            x: 0, // 渐变起始点
+            y: 0, // 渐变起始点
+            x2: 1, // 渐变结束点
+            y2: 0, // 渐变结束点
+            colorStops: [
+              { offset: 0, color: 'rgba(167, 217, 245, 0.7)' }, // 渐变起始颜色
+              { offset: 0.8, color: 'rgba(94, 191, 248, 0.7)' }, // 渐变中间颜色
+              { offset: 1, color: 'rgba(44, 172, 245, 0.7)' }
+            ]
+          }
+        }
+      },
+      {
+        name: 'Video Ads',
+        data: [3120, 1932, 2601, 1234, 170, 330, 1289],
+        type: 'line',
+        smooth: true,
+        stack: 'Total',
+        emphasis: {
+          focus: 'series'
+        },
         areaStyle: {
           color: {
             type: 'linear', // 设置为线性渐变
@@ -344,17 +388,36 @@ onMounted(() => {
 
   const myChart1 = echarts.init(areaChart1.value)
 
-  const option1: EChartsOption = {
+  const option1 = {
+    legend: {
+      textStyle: {
+        // color: 'black' // 设置图例文字颜色
+      }
+    },
+    tooltip: {},
+    dataset: {
+      source: [
+        ['product', '2015', '2016', '2017'],
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+      ]
+    },
     xAxis: {
-      type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      type: 'category'
     },
     yAxis: {
       type: 'value'
     },
     series: [
       {
-        data: [120, 200, 150, 80, 70, 110, 130],
+        type: 'bar'
+      },
+      {
+        type: 'bar'
+      },
+      {
         type: 'bar'
       }
     ]

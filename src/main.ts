@@ -17,6 +17,7 @@ import importAll from '@/components/importAll'
 import 'nprogress/nprogress.css'
 import request from '@/api/requiest'
 import 'intro.js/introjs.css'
+import echarts from '@/plugin/echarts'
 
 NProgress.configure({ showSpinner: false })
 registerSW({
@@ -54,6 +55,7 @@ app.provide('gsap', gsap)
 app.provide('nprogress', NProgress)
 app.provide('request', request)
 app.provide('introJs', introJs)
+app.provide('echarts', echarts)
 // eslint-disable-next-line no-restricted-syntax
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
