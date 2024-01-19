@@ -1,9 +1,13 @@
 <template>
   <div class="flex-1 overflow-hidden">
-    <div class="absolute top-0 left-0 flex gap-8 flex-col">
-      <div class="cursor-pointer" @click="updateGeometry(boxGeo, 80)">方形</div>
-      <div class="cursor-pointer" @click="updateGeometry(sphereGeo, -80)">圆形</div>
-    </div>
+    <!-- <div class="absolute top-8 left-8 flex gap-8 flex-col">
+      <div class="cursor-pointer text-white" @click="updateGeometry(boxGeo, 80)">
+        方形
+      </div>
+      <div class="cursor-pointer text-white" @click="updateGeometry(sphereGeo, -80)">
+        圆形
+      </div>
+    </div> -->
     <div ref="canvasRef" class="h-full"></div>
   </div>
 </template>
@@ -27,19 +31,19 @@ renderer.setPixelRatio(window.devicePixelRatio)
 // scene.add(axesHelper)
 const controls = new OrbitControls(camera, renderer.domElement)
 
-const MAX = 1000
+const MAX = 1500
 const geo: any = new THREE.BufferGeometry()
 const aroundGeo = new THREE.BufferGeometry()
 const positions = new Float32Array(MAX * 3)
-const aroundPositions = new Float32Array(200 * 3)
+const aroundPositions = new Float32Array(500 * 3)
 for (let i = 0, s = MAX, j = 0; i < s; i += 1, j += 3) {
   positions[j] = Math.random() * 800 - 400
   positions[j + 1] = Math.random() * 800 - 400
   positions[j + 2] = Math.random() * 800 - 400
-  if (i < 200) {
-    aroundPositions[j] = Math.random() * 800 - 400
-    aroundPositions[j + 1] = Math.random() * 800 - 400
-    aroundPositions[j + 2] = Math.random() * 800 - 400
+  if (i < 500) {
+    aroundPositions[j] = Math.random() * 600 - 400
+    aroundPositions[j + 1] = Math.random() * 600 - 400
+    aroundPositions[j + 2] = Math.random() * 600 - 400
   }
 }
 geo.setAttribute('position', new THREE.BufferAttribute(positions, 3))
@@ -64,11 +68,12 @@ scene.add(points)
 scene.add(aroundPoints)
 const pos = geo.getAttribute('position')
 
-const boxGeo = new THREE.BoxGeometry(100, 100, 100, 10, 10, 10).getAttribute('position')
+const boxGeo = new THREE.BoxGeometry(100, 100, 100, 8, 8, 8).getAttribute('position')
 const sphereGeo = new THREE.SphereGeometry(100, 20, 20).getAttribute('position')
 const maxCount = ref(0)
-
+const toggle = ref(false)
 const updateGeometry = (geometry: any, n: any) => {
+  toggle.value = !toggle.value
   const { array, count } = geometry
   maxCount.value = maxCount.value > count ? maxCount.value : count
   for (let i = 0; i < maxCount.value; i += 1) {
@@ -108,7 +113,8 @@ const updateGeometry = (geometry: any, n: any) => {
 
 const animation = () => {
   controls.update()
-  aroundPoints.rotateX(Math.PI / 1000)
+  aroundPoints.rotation.x += Math.PI / 1000
+  aroundPoints.rotation.y -= Math.PI / 1000
   TWEEN.update()
   camera.lookAt(scene.position)
   renderer.render(scene, camera)
@@ -119,6 +125,14 @@ onMounted(async () => {
     updateSize(canvasRef.value, camera, renderer)
     canvasRef.value?.appendChild(renderer.domElement)
   }
+  setInterval(() => {
+    if (toggle.value) {
+      updateGeometry(boxGeo, 80)
+    } else {
+      updateGeometry(sphereGeo, -80)
+    }
+  }, 5000)
+
   renderer.setAnimationLoop(animation)
 })
 </script>
