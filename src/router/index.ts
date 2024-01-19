@@ -103,15 +103,6 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/three/solarSystem.vue')
       },
       {
-        path: '/three/tweenedAnimation',
-        name: 'tweenedAnimation',
-        meta: {
-          title: '补间动画',
-          icon: 'Lock'
-        },
-        component: () => import('@/views/three/tweenedAnimation.vue')
-      },
-      {
         path: '/three/raycasting',
         name: 'raycasting',
         meta: {
@@ -130,15 +121,6 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/three/loadModel.vue')
       },
       {
-        path: '/three/fog',
-        name: 'fog',
-        meta: {
-          title: '雾',
-          icon: 'Lock'
-        },
-        component: () => import('@/views/three/fog.vue')
-      },
-      {
         path: '/three/stickers',
         name: 'stickers',
         meta: {
@@ -146,24 +128,6 @@ const routes: Array<RouteRecordRaw> = [
           icon: 'Lock'
         },
         component: () => import('@/views/three/stickers.vue')
-      },
-      {
-        path: '/three/practice',
-        name: 'vue',
-        meta: {
-          title: '方块',
-          icon: 'Lock'
-        },
-        component: () => import('@/views/three/practice.vue')
-      },
-      {
-        path: '/three/point',
-        name: 'point',
-        meta: {
-          title: '点、面',
-          icon: 'Lock'
-        },
-        component: () => import('@/views/three/point.vue')
       }
     ]
   },
