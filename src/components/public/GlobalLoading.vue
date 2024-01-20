@@ -2,8 +2,8 @@
   <div class="app-loading">
     <div class="app-loading-wrap">
       <div class="app-loading-title">
-        <img :src="staticImg" class="app-loading-logo" alt="Logo" />
-        <div class="app-loading-title">loading...</div>
+        <!-- <img :src="staticImg" class="app-loading-logo" alt="Logo" /> -->
+        <!-- <div class="app-loading-title">loading...</div> -->
       </div>
       <div class="app-loading-item">
         <div class="app-loading-outter"></div>
@@ -13,7 +13,7 @@
   </div>
 </template>
 <script setup lang="ts">
-const staticImg = `${PUBLIC_DIR}vite.svg`
+// const staticImg = `${PUBLIC_DIR}vite.svg`
 </script>
 
 <style scoped>
