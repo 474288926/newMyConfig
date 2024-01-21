@@ -1,13 +1,5 @@
 <template>
   <div class="flex-1 overflow-hidden">
-    <!-- <div class="absolute top-8 left-8 flex gap-8 flex-col">
-      <div class="cursor-pointer text-white" @click="updateGeometry(boxGeo, 80)">
-        方形
-      </div>
-      <div class="cursor-pointer text-white" @click="updateGeometry(sphereGeo, -80)">
-        圆形
-      </div>
-    </div> -->
     <div ref="canvasRef" class="h-full"></div>
   </div>
 </template>
@@ -27,8 +19,6 @@ const camera = new THREE.PerspectiveCamera(60, 1, 100, 10000)
 camera.position.set(90, 140, 200)
 const renderer = new THREE.WebGLRenderer()
 renderer.setPixelRatio(window.devicePixelRatio)
-// const axesHelper = new THREE.AxesHelper(5)
-// scene.add(axesHelper)
 const controls = new OrbitControls(camera, renderer.domElement)
 
 const MAX = 1500
@@ -131,7 +121,7 @@ onMounted(async () => {
     } else {
       updateGeometry(sphereGeo, -80)
     }
-  }, 5000)
+  }, 2000)
 
   renderer.setAnimationLoop(animation)
 })

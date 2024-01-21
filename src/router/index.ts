@@ -103,24 +103,6 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/three/solarSystem.vue')
       },
       {
-        path: '/three/raycasting',
-        name: 'raycasting',
-        meta: {
-          title: '光线投射交互',
-          icon: 'Lock'
-        },
-        component: () => import('@/views/three/raycasting.vue')
-      },
-      {
-        path: '/three/loadModel',
-        name: 'loadModel',
-        meta: {
-          title: '加载模型',
-          icon: 'Lock'
-        },
-        component: () => import('@/views/three/loadModel.vue')
-      },
-      {
         path: '/three/stickers',
         name: 'stickers',
         meta: {
