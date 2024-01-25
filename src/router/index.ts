@@ -92,24 +92,6 @@ const routes: Array<RouteRecordRaw> = [
           icon: 'Lock'
         },
         component: () => import('@/views/three/particleEffects.vue')
-      },
-      {
-        path: '/three/solarSystem',
-        name: 'solarSystem',
-        meta: {
-          title: '太阳系模拟',
-          icon: 'Lock'
-        },
-        component: () => import('@/views/three/solarSystem.vue')
-      },
-      {
-        path: '/three/stickers',
-        name: 'stickers',
-        meta: {
-          title: '贴图',
-          icon: 'Lock'
-        },
-        component: () => import('@/views/three/stickers.vue')
       }
     ]
   },
