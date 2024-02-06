@@ -48,6 +48,15 @@ const routes: Array<RouteRecordRaw> = [
           icon: 'house'
         },
         component: () => import('@/views/form/index.vue')
+      },
+      {
+        path: '/form/steps',
+        name: 'steps',
+        meta: {
+          title: '分步表单',
+          icon: 'house'
+        },
+        component: () => import('@/views/form/steps.vue')
       }
     ]
   },
