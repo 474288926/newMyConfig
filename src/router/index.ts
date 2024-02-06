@@ -35,6 +35,23 @@ const routes: Array<RouteRecordRaw> = [
     ]
   },
   {
+    path: '/form',
+    redirect: '/form/index',
+    meta: { title: '表单', icon: 'house' },
+    component: layout,
+    children: [
+      {
+        path: '/form/index',
+        name: 'form',
+        meta: {
+          title: '综合表单',
+          icon: 'house'
+        },
+        component: () => import('@/views/form/index.vue')
+      }
+    ]
+  },
+  {
     path: '/iframe',
     redirect: '/iframe/vue',
     meta: { title: '内嵌网页', icon: 'bell' },
