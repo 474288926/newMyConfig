@@ -37,15 +37,14 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/table',
     redirect: '/table/index',
-    meta: { title: '表格', icon: 'house' },
+    meta: { title: '表格', icon: 'Memo' },
     component: layout,
     children: [
       {
         path: '/table/index',
         name: 'table',
         meta: {
-          title: '弹框编辑表格',
-          icon: 'house'
+          title: '弹框编辑表格'
         },
         component: () => import('@/views/table/index.vue')
       },
@@ -53,8 +52,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/table/dbClickTable',
         name: 'dbClickTable',
         meta: {
-          title: '双击编辑表格',
-          icon: 'house'
+          title: '双击编辑表格'
         },
         component: () => import('@/views/table/dbClickTable.vue')
       },
@@ -62,8 +60,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/table/dataValidation',
         name: 'dataValidation',
         meta: {
-          title: '数据校验+单元格表格',
-          icon: 'house'
+          title: '数据校验+单元格表格'
         },
         component: () => import('@/views/table/dataValidation.vue')
       }
@@ -72,15 +69,14 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/form',
     redirect: '/form/index',
-    meta: { title: '表单', icon: 'house' },
+    meta: { title: '表单', icon: 'Finished' },
     component: layout,
     children: [
       {
         path: '/form/index',
         name: 'form',
         meta: {
-          title: '综合表单',
-          icon: 'house'
+          title: '综合表单'
         },
         component: () => import('@/views/form/index.vue')
       },
@@ -88,8 +84,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/form/steps',
         name: 'steps',
         meta: {
-          title: '分步表单',
-          icon: 'house'
+          title: '分步表单'
         },
         component: () => import('@/views/form/steps.vue')
       }
@@ -105,8 +100,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/iframe/vue',
         name: 'v-u-e',
         meta: {
-          title: 'vue',
-          icon: 'Lock'
+          title: 'vue'
         },
         component: () => import('@/views/iframe/vue.vue')
       },
@@ -114,8 +108,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/iframe/pinia',
         name: 'pinia',
         meta: {
-          title: 'pinia',
-          icon: 'Lock'
+          title: 'pinia'
         },
         component: () => import('@/views/iframe/pinia.vue')
       },
@@ -123,8 +116,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/iframe/router',
         name: 'router',
         meta: {
-          title: 'router',
-          icon: 'Lock'
+          title: 'router'
         },
         component: () => import('@/views/iframe/router.vue')
       },
@@ -132,8 +124,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/iframe/element',
         name: 'element',
         meta: {
-          title: 'element',
-          icon: 'Lock'
+          title: 'element'
         },
         component: () => import('@/views/iframe/element.vue')
       }
@@ -142,7 +133,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/three',
     redirect: '/three/stickers',
-    meta: { title: 'three.js', icon: 'bell' },
+    meta: { title: 'three.js', icon: 'PictureRounded' },
     component: layout,
     children: [
       {
@@ -150,7 +141,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'particleEffects',
         meta: {
           title: '粒子特效',
-          icon: 'Lock'
+          icon: 'PictureRounded'
         },
         component: () => import('@/views/three/particleEffects.vue')
       }
