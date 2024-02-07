@@ -7,6 +7,8 @@ import { gsap } from 'gsap'
 import NProgress from 'nprogress'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import introJs from 'intro.js'
+import VXETable from 'vxe-table'
+import 'vxe-table/lib/style.css'
 import App from '@/App.vue'
 import router from '@/router/index'
 import pinia from '@/store/index'
@@ -65,4 +67,4 @@ app.use(ElementPlus, {
   locale: zhCn
 })
 
-app.use(router).use(pinia).use(importAll).mount('#app')
+app.use(router).use(pinia).use(importAll).use(VXETable).mount('#app')

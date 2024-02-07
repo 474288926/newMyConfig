@@ -28,7 +28,8 @@
     "rollup": "^4.9.0",
     "vite": "^5.0.8",
     "vue": "^3.3.11",
-    "vue-router": "^4.2.5"
+    "vue-router": "^4.2.5",
+    "vxe-table": "^4.5.18"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.1",
