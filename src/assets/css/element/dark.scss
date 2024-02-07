@@ -64,5 +64,6 @@ html.dark {
   --vxe-checkbox-indeterminate-icon-background-color: lighten($selected-bg-color, 15%);
   --vxe-textarea-background-color: $border-color;
   --vxe-toolbar-background-color: #{$bg-color};
+  --vxe-table-validate-error-background-color: #{$bg-color};
 }
 
