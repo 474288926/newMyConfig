@@ -35,6 +35,41 @@ const routes: Array<RouteRecordRaw> = [
     ]
   },
   {
+    path: '/table',
+    redirect: '/table/index',
+    meta: { title: '表格', icon: 'house' },
+    component: layout,
+    children: [
+      {
+        path: '/table/index',
+        name: 'table',
+        meta: {
+          title: '弹框编辑表格',
+          icon: 'house'
+        },
+        component: () => import('@/views/table/index.vue')
+      },
+      {
+        path: '/table/dbClickTable',
+        name: 'dbClickTable',
+        meta: {
+          title: '双击编辑表格',
+          icon: 'house'
+        },
+        component: () => import('@/views/table/dbClickTable.vue')
+      },
+      {
+        path: '/table/dataValidation',
+        name: 'dataValidation',
+        meta: {
+          title: '数据校验+单元格表格',
+          icon: 'house'
+        },
+        component: () => import('@/views/table/dataValidation.vue')
+      }
+    ]
+  },
+  {
     path: '/form',
     redirect: '/form/index',
     meta: { title: '表单', icon: 'house' },
