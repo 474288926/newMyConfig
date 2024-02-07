@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="bg-white">
+    <p>
       <vxe-button @click="insertEvent">新增</vxe-button>
       <vxe-button @click="removeSelectEvent()">删除选中</vxe-button>
       <vxe-button @click="validEvent">快速校验变动数据</vxe-button>

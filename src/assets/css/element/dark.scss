@@ -9,3 +9,60 @@ $--colors: (
 @forward "element-plus/theme-chalk/src/dark/var.scss" with (
   $colors: $--colors
 );
+
+//vxe-table的黑暗模式配置
+html.dark {
+  $bg-color: #151515;
+  $tooltip-bg-color: #303133;
+  $text-color: #c9d1d9;
+  $border-color: #4e4a4a;
+  $selected-bg-color: #262626;
+  $striped-bg-color: #2b2929;
+
+  --vxe-form-background-color: #{$bg-color};
+  --vxe-pager-background-color: #{$bg-color};
+  --vxe-button-default-background-color: lighten($bg-color, 15%);
+  --vxe-table-header-background-color: lighten($bg-color, 5%);
+  --vxe-font-color: darken($text-color, 12%);
+  --vxe-table-header-font-color: #{$text-color};
+  --vxe-table-footer-font-color: #{$text-color};
+  --vxe-table-body-background-color: #{$bg-color};
+  --vxe-table-footer-background-color: #{$bg-color};
+  --vxe-table-row-striped-background-color: #{$striped-bg-color};
+  --vxe-table-border-color: #{$border-color};
+  --vxe-table-row-hover-background-color: lighten($bg-color, 10%);
+  --vxe-table-row-hover-striped-background-color: lighten($striped-bg-color, 10%);
+  --vxe-table-row-current-background-color: rgba($primary-color-hover, 0.2); // 这里需要你提供 primary-color-hover 变量值
+  --vxe-table-row-hover-current-background-color: rgba($primary-color-hover, 0.2); // 这里需要你提供 primary-color-hover 变量值
+  --vxe-table-column-hover-background-color: rgba($primary-color-hover, 0.2); // 这里需要你提供 primary-color-hover 变量值
+  --vxe-table-column-current-background-color: rgba($primary-color-hover, 0.2); // 这里需要你提供 primary-color-hover 变量值
+  --vxe-table-row-checkbox-checked-background-color: rgba($warning-color-active, 0.15); // 这里需要你提供 warning-color-active 变量值
+  --vxe-table-row-hover-checkbox-checked-background-color: rgba($warning-color-active, 0.2); // 这里需要你提供 warning-color-active 变量值
+  --vxe-table-menu-background-color: lighten($tooltip-bg-color, 10%);
+  --vxe-table-filter-panel-background-color: lighten($bg-color, 5%);
+  --vxe-grid-maximize-background-color: #{$bg-color};
+  --vxe-pager-perfect-background-color: #{$bg-color};
+  --vxe-pager-perfect-button-background-color: lighten($bg-color, 15%);
+  --vxe-input-background-color: #{$bg-color};
+  --vxe-input-border-color: #{$border-color};
+  --vxe-select-panel-background-color: #{$bg-color};
+  --vxe-table-popup-border-color: #{$border-color};
+  --vxe-select-option-hover-background-color: lighten($selected-bg-color, 15%);
+  --vxe-pulldown-panel-background-color: #{$bg-color};
+  --vxe-table-fixed-left-scrolling-box-shadow: 8px 0px 10px -5px rgba(255, 255, 255, 0.12);
+  --vxe-table-fixed-right-scrolling-box-shadow: -8px 0px 10px -5px rgba(255, 255, 255, 0.12);
+  --vxe-loading-background-color: rgba(0, 0, 0, 0.5);
+  --vxe-tooltip-dark-background-color: lighten($tooltip-bg-color, 25%);
+  --vxe-modal-header-background-color: #{$selected-bg-color};
+  --vxe-modal-body-background-color: #{$tooltip-bg-color};
+  --vxe-modal-border-color: #{$border-color};
+  --vxe-toolbar-panel-background-color: #{$bg-color};
+  --vxe-input-disabled-color: lighten($striped-bg-color, 20%);
+  --vxe-input-disabled-background-color: lighten($striped-bg-color, 25%);
+  --vxe-checkbox-icon-background-color: lighten($selected-bg-color, 15%);
+  --vxe-checkbox-checked-icon-border-color: #{$border-color};
+  --vxe-checkbox-indeterminate-icon-background-color: lighten($selected-bg-color, 15%);
+  --vxe-textarea-background-color: $border-color;
+  --vxe-toolbar-background-color: #{$bg-color};
+}
+
