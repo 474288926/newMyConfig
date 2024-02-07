@@ -1,0 +1,1 @@
+import{_ as r,c as e,g as s,e as t}from"./index-qzWf-KaY.js";const a={},i={class:"grid grid-cols-1 h-full"},l=[t("iframe",{src:"https://element-plus.org/zh-CN/",width:"100%",height:"100%",frameborder:"0"},null,-1)];const n=r(a,[["render",function(r,t){return s(),e("div",i,l)}]]);export{n as default};
