@@ -5,7 +5,6 @@
   >
     <el-menu
       :default-active="router.currentRoute.value.path || ''"
-      router
       :collapse="isCollapse"
       class="el-menu-vertical-demo"
       @open="handleOpen"

@@ -107,7 +107,7 @@
               v-show="isEven(index)"
               class="text-xs flex flex-row"
             >
-              <div class="p-2 w-40 font-bold text-center flex-1 border flex-shrink-0">
+              <div class="p-2 w-48 font-bold text-center flex-1 border flex-shrink-0">
                 {{
                   key.split('/').length > 1
                     ? key.split('/')[1].replace('@', '')
@@ -129,7 +129,7 @@
               class="text-xs flex flex-row"
             >
               <div
-                class="p-2 w-40 font-bold text-center flex-1 border border-t-0 flex-shrink-0"
+                class="p-2 w-48 font-bold text-center flex-1 border border-t-0 flex-shrink-0"
               >
                 {{
                   key.split('/').length > 1

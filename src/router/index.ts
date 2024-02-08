@@ -148,6 +148,23 @@ const routes: Array<RouteRecordRaw> = [
     ]
   },
   {
+    path: '/DataBigScreen',
+    redirect: '/DataBigScreen/index',
+    meta: { title: '数据大屏', icon: 'DataLine' },
+    // component: layout,
+    children: [
+      {
+        path: '/DataBigScreen/index',
+        name: 'DataBigScreen',
+        meta: {
+          title: '大屏适配方案',
+          icon: 'DataLine'
+        },
+        component: () => import('@/views/DataBigScreen/index.vue')
+      }
+    ]
+  },
+  {
     // 当用户访问任何未匹配的路由时，将跳转到404页面
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
