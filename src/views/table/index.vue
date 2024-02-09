@@ -46,6 +46,7 @@
       :loading="submitLoading"
       resize
       destroy-on-close
+      mask-closable
     >
       <template #default>
         <vxe-form
