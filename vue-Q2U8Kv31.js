@@ -1,0 +1,1 @@
+import{_ as r,c as s,g as e,e as t}from"./index-0B7EaQ6s.js";const a={},i={class:"grid grid-cols-1 h-full"},n=[t("iframe",{src:"https://cn.vuejs.org/",width:"100%",height:"100%",frameborder:"0"},null,-1)];const o=r(a,[["render",function(r,t){return e(),s("div",i,n)}]]);export{o as default};
