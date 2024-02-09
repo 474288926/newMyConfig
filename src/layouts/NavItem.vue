@@ -44,6 +44,9 @@ const onPath = (path: string) => {
   console.log('path:', path)
   if (path.lastIndexOf('/DataBigScreen') === 0) {
     window.open(`#${path}`, '_blank') // 大屏打开新标签
+    router.replace({
+      path: '/blank'
+    })
   } else {
     router.push(path)
   }
