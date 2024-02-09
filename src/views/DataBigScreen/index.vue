@@ -1,13 +1,30 @@
 <template>
   <div>
     <v-scale-screen>
-      <img src="@/assets/img/charts.png" alt="" />
+      <header class="text-center text-white text-4xl">数据大屏适配方案</header>
+      <main class="flex flex-row">
+        <aside class="w-2/6">
+          <lineEchart />
+          <barEchart />
+          <lineEchart />
+          <barEchart />
+        </aside>
+        <section class="flex-1"></section>
+        <aside class="w-2/6">
+          <lineEchart />
+          <barEchart />
+          <lineEchart />
+          <barEchart />
+        </aside>
+      </main>
     </v-scale-screen>
   </div>
 </template>
 
 <script setup lang="ts">
 import VScaleScreen from 'v-scale-screen'
+import lineEchart from './common/line.vue'
+import barEchart from './common/bar.vue'
 </script>
 
 <style scoped>
