@@ -1,1 +1,0 @@
-import{_ as r,c as s,g as e,e as i}from"./index-nU5EJaTi.js";const t={},a={class:"grid grid-cols-1 h-full"},n=[i("iframe",{src:"https://pinia.vuejs.org/zh/",width:"100%",height:"100%",frameborder:"0"},null,-1)];const o=r(t,[["render",function(r,i){return e(),s("div",a,n)}]]);export{o as default};
