@@ -40,7 +40,7 @@ const convertToLineData = (val: any, end: any) => {
 const api = async () => {
   myChart.value = echarts.init(chart.value)
   try {
-    const response = await fetch('/src/assets/mapjson/100000.json')
+    const response = await fetch(`${PUBLIC_DIR}mapjson/100000.json`)
     const geoJson = await response.json()
     echarts.registerMap('china', geoJson)
     console.log('geoJson:', geoJson)
