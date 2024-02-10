@@ -1,30 +1,31 @@
 <template>
-  <div>
-    <v-scale-screen>
-      <header class="text-center text-white text-4xl">数据大屏适配方案</header>
-      <main class="flex flex-row">
-        <aside class="w-2/6">
-          <lineEchart />
-          <barEchart />
-          <lineEchart />
-          <barEchart />
-        </aside>
-        <section class="flex-1"></section>
-        <aside class="w-2/6">
-          <lineEchart />
-          <barEchart />
-          <lineEchart />
-          <barEchart />
-        </aside>
-      </main>
-    </v-scale-screen>
-  </div>
+  <v-scale-screen :boxStyle="{ background: 'black' }">
+    <header class="text-center text-white text-4xl">数据大屏适配方案</header>
+    <main class="flex flex-row">
+      <aside class="w-3/12">
+        <lineEchart />
+        <barEchart />
+        <lineEchart />
+        <barEchart />
+      </aside>
+      <section class="w-6/12">
+        <geoEchart />
+      </section>
+      <aside class="w-3/12">
+        <lineEchart />
+        <barEchart />
+        <lineEchart />
+        <barEchart />
+      </aside>
+    </main>
+  </v-scale-screen>
 </template>
 
 <script setup lang="ts">
 import VScaleScreen from 'v-scale-screen'
 import lineEchart from './common/line.vue'
 import barEchart from './common/bar.vue'
+import geoEchart from './common/geo.vue'
 </script>
 
 <style scoped>
