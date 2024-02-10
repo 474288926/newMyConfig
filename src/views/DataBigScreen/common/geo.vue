@@ -104,17 +104,24 @@ const api = async () => {
       },
       series: [
         {
-          name: 'scatter', // 散点系列的名称
-          type: 'scatter', // 系列类型为散点
+          name: 'effectScatter', // 散点系列的名称
+          type: 'effectScatter', // 系列类型为散点
           coordinateSystem: 'geo', // 使用地理坐标系
           data: convertData(geoJson),
-          symbolSize: 10, // 散点的大小
+          symbolSize: 12, // 散点的大小
           label: {
             // 标签配置
             show: true, // 显示标签
             formatter: '{b}', // 标签内容，这里使用 name
             position: 'right', // 标签位置，可以根据需要调整
             color: 'white' // 标签文字颜色
+          },
+          // 添加水波动画配置
+          rippleEffect: {
+            period: 4,
+            scale: 4,
+            brushType: 'stroke',
+            color: 'rgba(255, 0, 0, 0.6)'
           },
           itemStyle: {
             // 散点样式配置
