@@ -20,16 +20,17 @@
 </template>
 
 <script setup lang="ts">
-import { inject, toRefs } from 'vue'
+import { toRefs } from 'vue'
 import { storeToRefs } from 'pinia'
 import useRouterStore from '@/store/router/index'
 import { BreadCrumbsTypes } from '@/layouts/BreadCrumbs.vue'
+import { useInject } from '@/composables/useInject'
 
 const props = defineProps<{
   list: Array<BreadCrumbsTypes>
 }>()
 const { list } = toRefs(props)
-const router: any = inject('router')
+const { router } = useInject()
 const store = useRouterStore()
 const { activeRouteUrl } = storeToRefs(store)
 const changeTab = (val: any) => {

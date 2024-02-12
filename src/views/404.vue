@@ -24,10 +24,10 @@
 </template>
 
 <script setup lang="ts">
-import { inject } from 'vue'
 import imageSrc from '@/assets/img/404.png'
+import { useInject } from '@/composables/useInject'
 
-const router: any = inject('router')
+const { router } = useInject()
 </script>
 
 <style scoped></style>

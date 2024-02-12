@@ -16,15 +16,17 @@
 </template>
 
 <script setup lang="ts">
-import { inject, toRefs } from 'vue'
+import { toRefs } from 'vue'
 import NavItem, { NavItemTypes } from '@/layouts/NavItem.vue'
+import { useInject } from '@/composables/useInject'
 
 const props = defineProps<{
   list: Array<NavItemTypes>
   height: number
   isCollapse: boolean
 }>()
-const router: any = inject('router')
+
+const { router } = useInject()
 const { list, height, isCollapse } = toRefs(props)
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)

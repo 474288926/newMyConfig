@@ -217,11 +217,11 @@
 </template>
 
 <script setup lang="ts">
-import { inject, onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import * as jsonData from '../../../package.json'
+import { useInject } from '@/composables/useInject'
 
-const gsap: any = inject('gsap')
-const echarts: any = inject('echarts')
+const { echarts, gsap } = useInject()
 
 const isEven = (number: number) => {
   if (number % 2 === 0) {

@@ -52,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-import { inject, onMounted, onUnmounted, reactive, ref, watch, nextTick } from 'vue'
+import { onMounted, onUnmounted, reactive, ref, watch, nextTick } from 'vue'
 import { useElementSize } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
 import NavBar from '@/layouts/NavBar.vue'
@@ -61,8 +61,9 @@ import Tabs from '@/layouts/Tabs.vue'
 import YHeader from '@/layouts/YHeader.vue'
 import useConfigStore from '@/store/config'
 import useRouterStore from '@/store/router/index'
+import { useInject } from '@/composables/useInject'
 
-const introJs: any = inject('introJs')
+const { introJs } = useInject()
 const storeConfig = useConfigStore()
 const { isLoading, isCollapse, isIntro } = storeToRefs(storeConfig)
 // 定义元素大小的类型

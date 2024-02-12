@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
-import { inject, ref } from 'vue'
+import { ref } from 'vue'
 import { NavItemTypes } from '@/layouts/NavItem.vue'
+import { useInject } from '@/composables/useInject'
 
 const refactoringArrays = <T>(
   list: Array<T>,
@@ -44,7 +45,7 @@ const refactoringArrays = <T>(
   }, [])
 
 const useRouterStore = defineStore('router', () => {
-  const router: any = inject('router')
+  const { router } = useInject()
   const navList = ref<Array<NavItemTypes>>(
     refactoringArrays(router.options.routes, router.currentRoute.value.path)
   )

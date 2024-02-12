@@ -21,7 +21,8 @@
 </template>
 
 <script setup lang="ts">
-import { inject, toRefs } from 'vue'
+import { toRefs } from 'vue'
+import { useInject } from '@/composables/useInject'
 import NavItem from '@/layouts/NavItem.vue'
 
 export interface NavItemTypes {
@@ -38,7 +39,7 @@ const props = defineProps<{
 }>()
 const { list } = toRefs(props)
 
-const router: any = inject('router')
+const { router } = useInject()
 
 const onPath = (path: string) => {
   console.log('path:', path)

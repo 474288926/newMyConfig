@@ -52,13 +52,14 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { inject, onBeforeUnmount, ref } from 'vue'
+import { onBeforeUnmount, ref } from 'vue'
 import BreadCrumbs from '@/layouts/BreadCrumbs.vue'
 import { apiTest } from '@/api/test'
 import useRouterStore from '@/store/router/index'
 import useConfigStore from '@/store/config'
 import Dark from '@/layouts/Dark.vue'
 import { toggleFullscreen } from '@/utils/toggleFullscreen'
+import { useInject } from '@/composables/useInject'
 
 const storeConfig = useConfigStore()
 const { isCollapse } = storeToRefs(storeConfig)
@@ -74,14 +75,13 @@ const midTest = async () => {
 const store = useRouterStore()
 const { breadList } = storeToRefs(store)
 
-const router: any = inject('router')
-const cookies: any = inject('cookies')
+const { router, cookies, gsap } = useInject()
+
 const onQuit = () => {
   cookies.remove('token')
   router.replace('/login')
 }
 
-const gsap: any = inject('gsap')
 const refresh: any = ref(null)
 const onRefresh = async () => {
   gsap.to(refresh.value.$el, {

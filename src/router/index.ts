@@ -1,8 +1,8 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import { ElNotification } from 'element-plus'
-import { inject } from 'vue'
 import layout from '@/layouts/index.vue'
 import useRouterStore from '@/store/router/index'
+import { useInject } from '@/composables/useInject'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -185,9 +185,8 @@ const router = createRouter({
 
 const whites = ['/login', '/register', '/blank']
 router.beforeEach((to) => {
-  const nprogress: any = inject('nprogress')
+  const { nprogress, cookies } = useInject()
   nprogress.start()
-  const cookies: any = inject('cookies')
   const isToken = cookies.get('token')
   if (!isToken && !whites.includes(to.path)) {
     return '/login'
@@ -212,7 +211,7 @@ function getDayPeriod() {
 }
 
 router.afterEach(async (to, from) => {
-  const nprogress: any = inject('nprogress')
+  const { nprogress } = useInject()
   nprogress.done()
   if (!whites.includes(to.path) && to.name !== 'NotFound') {
     const { path, meta, matched } = to

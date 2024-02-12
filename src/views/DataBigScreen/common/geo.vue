@@ -3,11 +3,12 @@
 </template>
 
 <script setup lang="ts">
-import { inject, onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
+import { useInject } from '@/composables/useInject'
 
 const resizeObserver: any = ref(null)
 
-const echarts: any = inject('echarts')
+const { echarts } = useInject()
 const chart: any = ref(null)
 const myChart: any = ref(null)
 

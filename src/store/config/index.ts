@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia'
-import { inject, ref } from 'vue'
+import { ref } from 'vue'
+import { useInject } from '@/composables/useInject'
 
 const useConfigStore = defineStore('config', () => {
-  const cookies: any = inject('cookies')
+  const { cookies } = useInject()
   const isLoading = ref(false) // 全局loading
 
   const setLoading = (val: boolean) => {
