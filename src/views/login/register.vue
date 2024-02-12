@@ -9,44 +9,23 @@
       <div class="flex-1 text-gray-500">
         <span class="text-6xl font-light tracking-wide">hello !</span>
         <p class="text-3xl mt-4">账号注册</p>
-        <el-form
-          :model="registerForm"
+        <y-form
           ref="formRef"
+          :source="registerForm"
           :rules="rules"
+          :config="config"
+          label-width="0px"
           size="large"
-          class="py-4"
+          @sourceUpdate="sourceUpdate"
         >
-          <el-form-item label="" prop="username">
-            <el-input
-              v-model="registerForm.username"
-              clearable
-              prefix-icon="User"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="" prop="phone">
-            <el-input
-              v-model="registerForm.phone"
-              clearable
-              prefix-icon="Phone"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="" prop="code">
+          <template #code>
             <el-input v-model="registerForm.code" clearable prefix-icon="Key">
               <template #append>
                 <el-button type="primary" size="default">获取验证码</el-button>
               </template>
             </el-input>
-          </el-form-item>
-          <el-form-item label="" prop="password">
-            <el-input
-              v-model="registerForm.password"
-              clearable
-              prefix-icon="Lock"
-              type="password"
-              show-password
-            ></el-input>
-          </el-form-item>
-          <el-form-item>
+          </template>
+          <template #btn>
             <div class="flex flex-col gap-2 w-full">
               <el-button type="primary" @click="onRegister(formRef)">注册</el-button>
               <div>
@@ -55,8 +34,8 @@
                 >
               </div>
             </div>
-          </el-form-item>
-        </el-form>
+          </template>
+        </y-form>
       </div>
     </main>
   </div>
@@ -73,7 +52,55 @@ const { router } = useInject()
 
 const formRef = ref<FormInstance>()
 
+const config = [
+  {
+    key: 'username',
+    label: '',
+    component: 'el-input',
+    props: {
+      clearable: true,
+      'prefix-icon': 'User'
+    }
+  },
+  {
+    key: 'phone',
+    label: '',
+    component: 'el-input',
+    props: {
+      clearable: true,
+      'prefix-icon': 'Phone'
+    }
+  },
+  {
+    key: 'code',
+    label: '',
+    component: 'slot',
+    slotName: 'code'
+  },
+  {
+    key: 'password',
+    label: '',
+    component: 'el-input',
+    props: {
+      clearable: true,
+      'prefix-icon': 'Lock',
+      type: 'password',
+      'show-password': true
+    }
+  },
+  {
+    key: '',
+    label: '',
+    component: 'slot',
+    slotName: 'btn'
+  }
+]
+
 const { registerForm, rules, onRegister } = useRegister()
+
+const sourceUpdate = (val: any) => {
+  registerForm.value = val
+}
 
 const onLogin = () => {
   router.replace('/login')

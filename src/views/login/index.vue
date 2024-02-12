@@ -11,30 +11,16 @@
       <div class="flex-1 text-gray-500">
         <span class="text-6xl font-light tracking-wide">hello !</span>
         <p class="text-3xl mt-4">欢迎来到My Vue</p>
-        <el-form
-          :model="loginForm"
+        <y-form
           ref="formRef"
+          :source="loginForm"
           :rules="rules"
+          :config="config"
+          label-width="0px"
           size="large"
-          class="py-4"
+          @sourceUpdate="sourceUpdate"
         >
-          <el-form-item label="" prop="username">
-            <el-input
-              v-model="loginForm.username"
-              clearable
-              prefix-icon="User"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="" prop="password">
-            <el-input
-              v-model="loginForm.password"
-              clearable
-              prefix-icon="Lock"
-              type="password"
-              show-password
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="" prop="code">
+          <template #code>
             <el-input v-model="loginForm.code" clearable prefix-icon="Key">
               <template #append>
                 <vue-verify-code
@@ -44,8 +30,8 @@
                 ></vue-verify-code>
               </template>
             </el-input>
-          </el-form-item>
-          <el-form-item>
+          </template>
+          <template #btn>
             <div class="flex flex-col gap-2 w-full">
               <el-button type="primary" @click="onLogin(formRef)">登陆</el-button>
               <div>
@@ -58,8 +44,8 @@
                 >
               </div>
             </div>
-          </el-form-item>
-        </el-form>
+          </template>
+        </y-form>
       </div>
     </main>
   </div>
@@ -78,8 +64,46 @@ const verifyCode = ref()
 
 const formRef = ref<FormInstance>()
 
+const config = [
+  {
+    key: 'username',
+    label: '',
+    component: 'el-input',
+    props: {
+      clearable: true,
+      'prefix-icon': 'User'
+    }
+  },
+  {
+    key: 'password',
+    label: '',
+    component: 'el-input',
+    props: {
+      clearable: true,
+      'prefix-icon': 'Lock',
+      type: 'password',
+      'show-password': true
+    }
+  },
+  {
+    key: 'code',
+    label: '',
+    component: 'slot',
+    slotName: 'code'
+  },
+  {
+    key: '',
+    label: '',
+    component: 'slot',
+    slotName: 'btn'
+  }
+]
+
 const { loginForm, rules, captchaValue, onLogin, getRefResh, getCode } = useLogin()
 
+const sourceUpdate = (val: any) => {
+  loginForm.value = val
+}
 const onRegister = () => {
   router.push('/register')
 }

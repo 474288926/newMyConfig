@@ -65,14 +65,14 @@ export const useLogin = () => {
   })
   const onLogin = async (formEl: FormInstance | undefined) => {
     if (!formEl) return
-    await formEl.validate((valid: any, fields: any) => {
-      if (valid) {
-        cookies.set('token', 'John Doe', { expires: 7 })
-        router.replace('/')
-      } else {
-        console.log('error submit!', fields)
-      }
-    })
+    const is = await formEl.validate()
+    console.log(is)
+    if (is) {
+      cookies.set('token', 'John Doe', { expires: 7 })
+      router.replace('/')
+    } else {
+      console.log('error submit!')
+    }
   }
   return {
     loginForm,
@@ -108,13 +108,12 @@ export const useRegister = () => {
 
   const onRegister = async (formEl: FormInstance | undefined) => {
     if (!formEl) return
-    await formEl.validate((valid, fields) => {
-      if (valid) {
-        router.replace('/login')
-      } else {
-        console.log('error submit!', fields)
-      }
-    })
+    const is = await formEl.validate()
+    if (is) {
+      router.replace('/login')
+    } else {
+      console.log('error submit!')
+    }
   }
   return {
     registerForm,
